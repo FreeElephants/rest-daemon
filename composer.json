@@ -1,0 +1,36 @@
+{
+    "name": "free-elephants/rest-daemon",
+    "require": {
+        "cboden/ratchet": "^0.3.5",
+        "monolog/monolog": "^1.21",
+        "symfony/routing": "^3.1",
+        "free-elephants/di": "dev-master"
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.2"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FreeElephants\\RestDaemon\\": "tests/FreeElephants/RestDaemon/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@bitbucket.org:FreeElephants/di.git"
+        }
+    ],
+    "license": "BSD-2",
+    "authors": [
+        {
+            "name": "samizdam",
+            "email": "samizdam@inbox.ru"
+        }
+    ]
+}

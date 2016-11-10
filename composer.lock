@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb26a65d2bedbd2734ec962bd9517ec2",
-    "content-hash": "5c5115b985ee5ba808a0ea032324e387",
+    "hash": "5db0481b59d3c0791cf68e5d63af6525",
+    "content-hash": "9bc7a2acf9353bbf83bba43f000e3ba1",
     "packages": [
         {
             "name": "cboden/ratchet",
-            "version": "v0.3.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ratchetphp/Ratchet.git",
-                "reference": "b5ccecad9390db85d2c8df7cbeb047292fbbf4b8"
+                "url": "https://github.com/FreeElephants/Ratchet.git",
+                "reference": "5eb1dfa98db73f7b6c40abf705c19ba472f9f369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ratchetphp/Ratchet/zipball/b5ccecad9390db85d2c8df7cbeb047292fbbf4b8",
-                "reference": "b5ccecad9390db85d2c8df7cbeb047292fbbf4b8",
+                "url": "https://api.github.com/repos/FreeElephants/Ratchet/zipball/5eb1dfa98db73f7b6c40abf705c19ba472f9f369",
+                "reference": "5eb1dfa98db73f7b6c40abf705c19ba472f9f369",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,6 @@
                     "Ratchet\\": "src/Ratchet"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -49,11 +48,17 @@
             "homepage": "http://socketo.me",
             "keywords": [
                 "Ratchet",
-                "WebSockets",
-                "server",
-                "sockets"
+                "Server",
+                "Sockets",
+                "WebSockets"
             ],
-            "time": "2016-05-25 12:55:03"
+            "support": {
+                "forum": "https://groups.google.com/forum/#!forum/ratchet-php",
+                "issues": "https://github.com/ratchetphp/Ratchet/issues",
+                "irc": "irc://irc.freenode.org/reactphp",
+                "source": "https://github.com/FreeElephants/Ratchet/tree/master"
+            },
+            "time": "2016-11-10 18:05:00"
         },
         {
             "name": "evenement/evenement",
@@ -2896,6 +2901,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "cboden/ratchet": 20,
         "free-elephants/di": 20
     },
     "prefer-stable": false,

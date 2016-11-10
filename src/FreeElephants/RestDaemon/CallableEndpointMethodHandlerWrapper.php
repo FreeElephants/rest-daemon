@@ -8,7 +8,7 @@ use Guzzle\Http\Message\Response;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class CallableMethodHandlerWrapper implements MethodHandlerInterface
+class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInterface
 {
     /**
      * @var callable
@@ -20,7 +20,7 @@ class CallableMethodHandlerWrapper implements MethodHandlerInterface
         $this->func = $func;
     }
 
-    public function handle(RequestInterface $request = null): Response
+    public function handle(RequestInterface $request): Response
     {
         return call_user_func($this->func, $request);
     }

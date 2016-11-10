@@ -2,34 +2,31 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\ExceptionHandler\ExceptionHandlerInterface;
 use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Http\Message\Response;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class HttpServerAdapter implements HttpServerInterface
+class BaseHttpServer implements HttpServerInterface
 {
 
     /**
-     * @var MethodHandlerInterface
+     * @var EndpointMethodHandlerInterface
      */
     private $handler;
+    /**
+     * @var ExceptionHandlerInterface
+     */
+    private $exceptionHandler;
 
-    public function __construct(MethodHandlerInterface $handler)
+    public function __construct(EndpointMethodHandlerInterface $handler, ExceptionHandlerInterface $exceptionHandler)
     {
         $this->handler = $handler;
-    }
-
-    /**
-     * This is called before or after a socket is closed (depends on how it's closed).  SendMessage to $conn will not result in an error if it has already been closed.
-     * @param  ConnectionInterface $conn The socket/connection that is closing/closed
-     * @throws \Exception
-     */
-    function onClose(ConnectionInterface $conn)
-    {
-        // TODO: Implement onClose() method.
+        $this->exceptionHandler = $exceptionHandler;
     }
 
     /**
@@ -41,7 +38,9 @@ class HttpServerAdapter implements HttpServerInterface
      */
     function onError(ConnectionInterface $conn, \Exception $e)
     {
-        // TODO: Implement onError() method.
+        $response = $this->exceptionHandler->handleError($e);
+        $conn->send($response);
+        $conn->close();
     }
 
     /**
@@ -51,10 +50,19 @@ class HttpServerAdapter implements HttpServerInterface
      */
     public function onOpen(ConnectionInterface $conn, RequestInterface $request = null)
     {
-        var_dump("foooooooooooo");
         $response = $this->handler->handle($request);
         $conn->send($response);
         $conn->close();
+    }
+
+    /**
+     * This is called before or after a socket is closed (depends on how it's closed).  SendMessage to $conn will not result in an error if it has already been closed.
+     * @param  ConnectionInterface $conn The socket/connection that is closing/closed
+     * @throws \Exception
+     */
+    function onClose(ConnectionInterface $conn)
+    {
+        // called after success request handling
     }
 
     /**
@@ -65,6 +73,6 @@ class HttpServerAdapter implements HttpServerInterface
      */
     function onMessage(ConnectionInterface $from, $msg)
     {
-        // TODO: Implement onMessage() method.
+        // not used in rest server
     }
 }

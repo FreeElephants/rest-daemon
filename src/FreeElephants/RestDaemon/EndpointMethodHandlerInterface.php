@@ -8,8 +8,8 @@ use Guzzle\Http\Message\Response;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-interface MethodHandlerInterface
+interface EndpointMethodHandlerInterface
 {
 
-    public function handle(RequestInterface $request = null): Response;
+    public function handle(RequestInterface $request): Response;
 }

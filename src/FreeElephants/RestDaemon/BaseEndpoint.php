@@ -20,7 +20,7 @@ class BaseEndpoint implements EndpointInterface
     /**
      * Array of handlers for http methods in this endpoint, indexed by method name.
      *
-     * @var array|MethodHandlerInterface[]
+     * @var array|EndpointMethodHandlerInterface[]
      */
     private $handlers = [];
 
@@ -40,13 +40,13 @@ class BaseEndpoint implements EndpointInterface
         return $this->name;
     }
 
-    public function setMethodHandler(string $method, MethodHandlerInterface $handler)
+    public function setMethodHandler(string $method, EndpointMethodHandlerInterface $handler)
     {
         $this->handlers[$method] = $handler;
     }
 
     /**
-     * @param array|MethodHandlerInterface[] $handlers
+     * @param array|EndpointMethodHandlerInterface[] $handlers
      */
     public function setMethodHandlers(array $handlers)
     {
@@ -54,7 +54,7 @@ class BaseEndpoint implements EndpointInterface
     }
 
     /**
-     * @return array|MethodHandlerInterface[]
+     * @return array|EndpointMethodHandlerInterface[]
      */
     public function getMethodHandlers(): array
     {

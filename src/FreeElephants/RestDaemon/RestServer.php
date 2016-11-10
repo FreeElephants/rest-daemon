@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\ExceptionHandler\ExceptionHandlerInterface;
 use Ratchet\App;
 use Symfony\Component\Routing\Route;
 
@@ -32,6 +33,11 @@ class RestServer
      */
     private $endpoints = [];
 
+    /**
+     * @var ExceptionHandlerInterface
+     */
+    private $exceptionHandler;
+
     public function __construct(
         string $httpHost = '127.0.0.1',
         int $port = 8080,
@@ -58,14 +64,21 @@ class RestServer
         foreach ($this->endpoints as $endpoint) {
             foreach ($endpoint->getMethodHandlers() as $method => $handler) {
                 $path = $endpoint->getPath();
-                $controller = new HttpServerAdapter($handler);
+                $controller = new BaseHttpServer($handler, $this->exceptionHandler);
                 $defaults = ['_controller' => $controller];
                 $requirements = ['Origin' => $this->httpHost];
+                $options = [];
                 $allowedMethods = [$method];
-                $route = new Route($path, $defaults, $requirements, $allowedMethods, $this->httpHost);
+                $route = new Route($path, $defaults, $requirements, $options, $this->httpHost, $schemes = [],
+                    $allowedMethods);
                 $ratchetApp->routes->add($endpoint->getName(), $route);
             }
         }
         $ratchetApp->run();
+    }
+
+    public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
+    {
+        $this->exceptionHandler = $exceptionHandler;
     }
 }

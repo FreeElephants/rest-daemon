@@ -11,7 +11,7 @@ class BaseEndpointTest extends \PHPUnit_Framework_TestCase
     public function testGetMethodHandlers()
     {
         $endpoint = new BaseEndpoint('foo');
-        $expected = $this->createMock(MethodHandlerInterface::class);
+        $expected = $this->createMock(EndpointMethodHandlerInterface::class);
         $endpoint->setMethodHandler('GET', $expected);
         $actual = $endpoint->getMethodHandlers();
         self::assertArrayHasKey('GET', $actual);
@@ -23,7 +23,7 @@ class BaseEndpointTest extends \PHPUnit_Framework_TestCase
         $endpoint = new BaseEndpoint('foo');
         $endpoint->setMethodHandlers(
             [
-                'GET' => $this->createMock(MethodHandlerInterface::class),
+                'GET' => $this->createMock(EndpointMethodHandlerInterface::class),
             ]
         );
         self::assertTrue($endpoint->hasMethod('GET'));

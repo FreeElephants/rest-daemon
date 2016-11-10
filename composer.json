@@ -1,7 +1,7 @@
 {
     "name": "free-elephants/rest-daemon",
     "require": {
-        "cboden/ratchet": "^0.3.5",
+        "cboden/ratchet": "dev-master",
         "monolog/monolog": "^1.21",
         "symfony/routing": "^3.1",
         "free-elephants/di": "dev-master"
@@ -24,6 +24,10 @@
         {
             "type": "vcs",
             "url": "git@bitbucket.org:FreeElephants/di.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:FreeElephants/Ratchet.git"
         }
     ],
     "license": "BSD-2",

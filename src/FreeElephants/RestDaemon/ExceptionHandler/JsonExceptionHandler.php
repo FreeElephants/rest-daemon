@@ -6,6 +6,8 @@ use Guzzle\Http\Message\Response;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
+ *
+ * TODO: implement as middleware
  */
 class JsonExceptionHandler implements ExceptionHandlerInterface
 {
@@ -14,7 +16,8 @@ class JsonExceptionHandler implements ExceptionHandlerInterface
     {
         $response = new Response(500);
         $data = json_encode([
-            'message' => $exception->getMessage()
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage(),
         ]);
         $response->setBody($data);
         return $response;

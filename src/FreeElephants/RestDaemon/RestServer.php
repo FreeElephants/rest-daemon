@@ -79,6 +79,10 @@ class RestServer
         $ratchetApp->run();
     }
 
+    /**
+     * @deprecated use middleware
+     * @param ExceptionHandlerInterface $exceptionHandler
+     */
     public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
     {
         $this->exceptionHandler = $exceptionHandler;

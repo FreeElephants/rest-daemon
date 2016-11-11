@@ -17,6 +17,13 @@ class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInter
     private $func;
     private $middlewareStack = [];
 
+    /**
+     * CallableEndpointMethodHandlerWrapper constructor.
+     * function(RequestInterface $request, ResponseInterface $response): ResponseInterface {
+     *      // your logic
+     * }
+     * @param callable $func
+     */
     public function __construct(callable $func)
     {
         $this->func = $func;

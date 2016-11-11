@@ -5,8 +5,6 @@ use FreeElephants\RestDaemon\BaseEndpoint;
 use FreeElephants\RestDaemon\CallableEndpointMethodHandlerWrapper;
 use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
 use FreeElephants\RestDaemon\RestServer;
-use Guzzle\Http\Message\RequestInterface as GuzzleRequest;
-use Guzzle\Http\Message\Response;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

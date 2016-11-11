@@ -5,25 +5,31 @@ use FreeElephants\RestDaemon\BaseEndpoint;
 use FreeElephants\RestDaemon\CallableEndpointMethodHandlerWrapper;
 use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
 use FreeElephants\RestDaemon\RestServer;
-use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Http\Message\RequestInterface as GuzzleRequest;
 use Guzzle\Http\Message\Response;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 $server = new RestServer();
 $server->setExceptionHandler(new JsonExceptionHandler());
-
+$server->setMiddlewareStack([
+    function (RequestInterface $request, ResponseInterface $response, $next): ResponseInterface {
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+]);
 $indexEndpoint = new BaseEndpoint('/', 'Index Endpoint');
 $indexEndpoint->setMethodHandler('GET',
-    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request): Response {
-        $response = new Response(200);
+    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request, ResponseInterface $response): ResponseInterface {
+        $response = $response->withStatus(200);
         return $response;
     }));
 
 $greetingEndpoint = new BaseEndpoint('/greeting', 'Root Resource');
 $greetingEndpoint->setMethodHandler('GET',
-    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request) {
-        $response = new Response(200);
-        $name = $request->getQuery()->get('name') ?: 'World';
-        $response->setBody('{
+    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request, ResponseInterface $response) {
+        parse_str($request->getUri()->getQuery(), $params);
+        $name = array_key_exists('name', $params) ? $params['name'] : 'World';
+        $response->getBody()->write('{
             "hello": "' . $name . '!",
             "is_root_resource": true
         }');
@@ -33,7 +39,7 @@ $greetingEndpoint->setMethodHandler('GET',
 
 $exceptionThrowsEndpoint = new BaseEndpoint('/exception');
 $exceptionThrowsEndpoint->setMethodHandler('GET',
-    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request) {
+    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request, ResponseInterface $response) {
         throw new \LogicException("Logic exception");
     })
 );

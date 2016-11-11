@@ -3,10 +3,12 @@
 namespace FreeElephants\RestDaemon;
 
 use FreeElephants\RestDaemon\ExceptionHandler\ExceptionHandlerInterface;
-use Guzzle\Http\Message\RequestInterface;
+use Guzzle\Http\Message\RequestInterface as GuzzleRequestInterface;
+use Guzzle\Http\Message\Response as GuzzleResponse;
 use Guzzle\Http\Message\Response;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
+use Zend\Diactoros\Request;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -48,10 +50,10 @@ class BaseHttpServer implements HttpServerInterface
      * @param \Guzzle\Http\Message\RequestInterface $request null is default because PHP won't let me overload; don't pass null!!!
      * @throws \UnexpectedValueException if a RequestInterface is not passed
      */
-    public function onOpen(ConnectionInterface $conn, RequestInterface $request = null)
+    public function onOpen(ConnectionInterface $conn, GuzzleRequestInterface $request = null)
     {
-        $response = $this->handler->handle($request);
-        $conn->send($response);
+        $response = $this->handler->handle(new Request());
+        $conn->send(new Response($response->getStatusCode(), $response->getHeaders(), $response->getBody()));
         $conn->close();
     }
 

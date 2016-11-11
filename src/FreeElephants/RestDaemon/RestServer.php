@@ -37,6 +37,7 @@ class RestServer
      * @var ExceptionHandlerInterface
      */
     private $exceptionHandler;
+    private $middlewareStack;
 
     public function __construct(
         string $httpHost = '127.0.0.1',
@@ -63,6 +64,7 @@ class RestServer
         $ratchetApp = new App($this->httpHost, $this->port, $this->address);
         foreach ($this->endpoints as $endpoint) {
             foreach ($endpoint->getMethodHandlers() as $method => $handler) {
+                $handler->setMiddlewareStack($this->middlewareStack);
                 $path = $endpoint->getPath();
                 $controller = new BaseHttpServer($handler, $this->exceptionHandler);
                 $defaults = ['_controller' => $controller];
@@ -80,5 +82,10 @@ class RestServer
     public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
     {
         $this->exceptionHandler = $exceptionHandler;
+    }
+
+    public function setMiddlewareStack(array $middlewareStack)
+    {
+        $this->middlewareStack = $middlewareStack;
     }
 }

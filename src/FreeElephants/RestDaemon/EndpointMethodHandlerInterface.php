@@ -2,8 +2,8 @@
 
 namespace FreeElephants\RestDaemon;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -11,5 +11,7 @@ use Guzzle\Http\Message\Response;
 interface EndpointMethodHandlerInterface
 {
 
-    public function handle(RequestInterface $request): Response;
+    public function handle(RequestInterface $request): ResponseInterface;
+
+    public function setMiddlewareStack(array $middlewareStack);
 }

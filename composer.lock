@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3738e9d7ab17df7c8bab1ccf17dee626",
-    "content-hash": "34e6823912d9cafa7d4b736fc721e6ef",
+    "hash": "89486c93c8d85c81b4d17cb7fe8a90bc",
+    "content-hash": "cbc27bdf2834ea2f739ef8a776022eb4",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -645,6 +645,85 @@
                 "stream"
             ],
             "time": "2016-08-22 09:51:07"
+        },
+        {
+            "name": "relay/middleware",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/relayphp/Relay.Middleware.git",
+                "reference": "d19b93b5b468b9a1eb266cc08bef84df2b2be8fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/relayphp/Relay.Middleware/zipball/d19b93b5b468b9a1eb266cc08bef84df2b2be8fa",
+                "reference": "d19b93b5b468b9a1eb266cc08bef84df2b2be8fa",
+                "shasum": ""
+            },
+            "require": {
+                "psr/http-message": "~1.0"
+            },
+            "require-dev": {
+                "zendframework/zend-diactoros": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Relay\\Middleware\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Relay-compatible middleware decorators.",
+            "homepage": "https://github.com/relayphp/Relay.Middleware",
+            "time": "2016-05-14 15:48:34"
+        },
+        {
+            "name": "relay/relay",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/relayphp/Relay.Relay.git",
+                "reference": "e835fc45351b7a92a6fdf2a36be7bd59ef56c8ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/relayphp/Relay.Relay/zipball/e835fc45351b7a92a6fdf2a36be7bd59ef56c8ae",
+                "reference": "e835fc45351b7a92a6fdf2a36be7bd59ef56c8ae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "psr/http-message": "~1.0"
+            },
+            "require-dev": {
+                "zendframework/zend-diactoros": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Relay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Relay.Relay Contributors",
+                    "homepage": "https://github.com/relayphp/Relay.Relay/contributors"
+                }
+            ],
+            "description": "A PSR-7 middleware dispatcher.",
+            "homepage": "https://github.com/relayphp/Relay.Relay",
+            "keywords": [
+                "middleware",
+                "psr-7"
+            ],
+            "time": "2015-12-17 18:18:30"
         },
         {
             "name": "symfony/event-dispatcher",

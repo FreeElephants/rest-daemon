@@ -2,24 +2,22 @@
 
 namespace FreeElephants\RestDaemon\ExceptionHandler;
 
-use Guzzle\Http\Message\Response;
+use Psr\Http\Message\ResponseInterface;
+use Zend\Diactoros\Response;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
- *
- * TODO: implement as middleware
  */
 class JsonExceptionHandler implements ExceptionHandlerInterface
 {
 
-    public function handleError(\Exception $exception): Response
+    public function handleException(\Exception $e): ResponseInterface
     {
-        $response = new Response(500);
-        $data = json_encode([
-            'code' => $exception->getCode(),
-            'message' => $exception->getMessage(),
-        ]);
-        $response->setBody($data);
+        $response = new Response('php://memory', 500);
+        $data = [
+            'message' => $e->getMessage()
+        ];
+        $response->getBody()->write(json_encode($data));
         return $response;
     }
 }

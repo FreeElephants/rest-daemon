@@ -3,21 +3,28 @@ require __DIR__ . '/vendor/autoload.php';
 
 use FreeElephants\RestDaemon\BaseEndpoint;
 use FreeElephants\RestDaemon\CallableEndpointMethodHandlerWrapper;
-use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
+use FreeElephants\RestDaemon\Middleware\JsonErrorHandler;
 use FreeElephants\RestDaemon\RestServer;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 $server = new RestServer();
-$server->setExceptionHandler(new JsonExceptionHandler());
-$server->setMiddlewareStack([
+$before = [
     function (RequestInterface $request, ResponseInterface $response, $next): ResponseInterface {
-        return $response->withHeader('Content-Type', 'application/json');
-    }
-]);
+        return $next($request, $response->withHeader('Content-Type', 'application/json'));
+    },
+    new JsonErrorHandler(),
+];
+$after = [
+
+];
+$server->setMiddlewareStack($before, $after);
 $indexEndpoint = new BaseEndpoint('/', 'Index Endpoint');
 $indexEndpoint->setMethodHandler('GET',
-    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request, ResponseInterface $response): ResponseInterface {
+    new CallableEndpointMethodHandlerWrapper(function (
+        RequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         $response = $response->withStatus(200);
         return $response;
     }));
@@ -38,6 +45,7 @@ $greetingEndpoint->setMethodHandler('GET',
 $exceptionThrowsEndpoint = new BaseEndpoint('/exception');
 $exceptionThrowsEndpoint->setMethodHandler('GET',
     new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request, ResponseInterface $response) {
+        var_dump("endpoint");
         throw new \LogicException("Logic exception");
     })
 );

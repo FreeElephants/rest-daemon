@@ -2,13 +2,14 @@
 
 namespace FreeElephants\RestDaemon;
 
-use FreeElephants\RestDaemon\ExceptionHandler\ExceptionHandlerInterface;
+use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
 use Guzzle\Http\Message\RequestInterface as GuzzleRequestInterface;
 use Guzzle\Http\Message\Response as GuzzleResponse;
-use Guzzle\Http\Message\Response;
+use Psr\Http\Message\ResponseInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
 use Zend\Diactoros\Request;
+use Zend\Diactoros\ServerRequest;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -20,15 +21,12 @@ class BaseHttpServer implements HttpServerInterface
      * @var EndpointMethodHandlerInterface
      */
     private $handler;
-    /**
-     * @var ExceptionHandlerInterface
-     */
     private $exceptionHandler;
 
-    public function __construct(EndpointMethodHandlerInterface $handler, ExceptionHandlerInterface $exceptionHandler)
+    public function __construct(EndpointMethodHandlerInterface $handler)
     {
         $this->handler = $handler;
-        $this->exceptionHandler = $exceptionHandler;
+        $this->exceptionHandler = new JsonExceptionHandler();
     }
 
     /**
@@ -40,8 +38,8 @@ class BaseHttpServer implements HttpServerInterface
      */
     function onError(ConnectionInterface $conn, \Exception $e)
     {
-        $response = $this->exceptionHandler->handleError($e);
-        $conn->send($response);
+        $response = $this->exceptionHandler->handleException($e);
+        $conn->send($this->mapPsrResponseToGuzzle($response));
         $conn->close();
     }
 
@@ -52,9 +50,14 @@ class BaseHttpServer implements HttpServerInterface
      */
     public function onOpen(ConnectionInterface $conn, GuzzleRequestInterface $request = null)
     {
-        $response = $this->handler->handle(new Request());
-        $conn->send(new Response($response->getStatusCode(), $response->getHeaders(), $response->getBody()));
+        $response = $this->handler->handle(new ServerRequest());
+        $conn->send($this->mapPsrResponseToGuzzle($response));
         $conn->close();
+    }
+
+    protected function mapPsrResponseToGuzzle(ResponseInterface $response): GuzzleResponse
+    {
+        return new GuzzleResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
     }
 
     /**

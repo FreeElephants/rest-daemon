@@ -13,5 +13,5 @@ interface EndpointMethodHandlerInterface
 
     public function handle(RequestInterface $request): ResponseInterface;
 
-    public function setMiddlewareStack(array $middlewareStack);
+    public function setMiddleware($middleware, $after = []);
 }

@@ -2,13 +2,12 @@
 
 namespace FreeElephants\RestDaemon\ExceptionHandler;
 
-use Guzzle\Http\Message\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
 interface ExceptionHandlerInterface
 {
-
-    public function handleError(\Exception $exception): Response;
+    public function handleException(\Exception $e): ResponseInterface;
 }

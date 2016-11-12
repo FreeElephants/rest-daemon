@@ -4,6 +4,8 @@ namespace FreeElephants\RestDaemon;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Relay\Relay;
+use Relay\RelayBuilder;
 use Zend\Diactoros\Response;
 
 /**
@@ -15,7 +17,12 @@ class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInter
      * @var callable
      */
     private $func;
-    private $middlewareStack = [];
+
+    private $middleware;
+    /**
+     * @var Relay
+     */
+    private $relay;
 
     /**
      * CallableEndpointMethodHandlerWrapper constructor.
@@ -31,22 +38,13 @@ class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInter
 
     public function handle(RequestInterface $request): ResponseInterface
     {
-        $response = new Response();
-        $middlewareStack = $this->middlewareStack;
-        if(count($this->middlewareStack)) {
-            while ($middleware = array_pop($middlewareStack)) {
-                $next = count($middlewareStack) ? $middlewareStack[0] : function() use ($response) {
-                    return $response;
-                };
-                $response = $middleware($request, $response, $next);
-            }
-        }
-
-        return call_user_func($this->func, $request, $response);
+        return $this->relay->__invoke($request, new Response());
     }
 
-    public function setMiddlewareStack(array $middlewareStack)
+    public function setMiddleware($before, $after = [])
     {
-        $this->middlewareStack = $middlewareStack;
+        $middleware = array_merge($before, [$this->func], $after);
+        $relayBuilder = new RelayBuilder();
+        $this->relay = $relayBuilder->newInstance($middleware);
     }
 }

@@ -4,6 +4,8 @@ namespace FreeElephants\RestDaemon;
 
 use FreeElephants\RestDaemon\ExceptionHandler\ExceptionHandlerInterface;
 use Ratchet\App;
+use Relay\Relay;
+use Relay\RelayBuilder;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -33,11 +35,8 @@ class RestServer
      */
     private $endpoints = [];
 
-    /**
-     * @var ExceptionHandlerInterface
-     */
-    private $exceptionHandler;
-    private $middlewareStack;
+    private $middlewareStack = [];
+    private $afterEndpointMiddleware = [];
 
     public function __construct(
         string $httpHost = '127.0.0.1',
@@ -62,11 +61,13 @@ class RestServer
     public function run()
     {
         $ratchetApp = new App($this->httpHost, $this->port, $this->address);
+        $relay = new RelayBuilder();
+        $dispatcher = $relay->newInstance($this->middlewareStack);
         foreach ($this->endpoints as $endpoint) {
             foreach ($endpoint->getMethodHandlers() as $method => $handler) {
-                $handler->setMiddlewareStack($this->middlewareStack);
+                $handler->setMiddleware($this->middlewareStack, $this->afterEndpointMiddleware);
                 $path = $endpoint->getPath();
-                $controller = new BaseHttpServer($handler, $this->exceptionHandler);
+                $controller = new BaseHttpServer($handler);
                 $defaults = ['_controller' => $controller];
                 $requirements = ['Origin' => $this->httpHost];
                 $options = [];
@@ -79,17 +80,9 @@ class RestServer
         $ratchetApp->run();
     }
 
-    /**
-     * @deprecated use middleware
-     * @param ExceptionHandlerInterface $exceptionHandler
-     */
-    public function setExceptionHandler(ExceptionHandlerInterface $exceptionHandler)
-    {
-        $this->exceptionHandler = $exceptionHandler;
-    }
-
-    public function setMiddlewareStack(array $middlewareStack)
+    public function setMiddlewareStack($middlewareStack, $afterEndpoint = [])
     {
         $this->middlewareStack = $middlewareStack;
+        $this->afterEndpointMiddleware = $afterEndpoint;
     }
 }

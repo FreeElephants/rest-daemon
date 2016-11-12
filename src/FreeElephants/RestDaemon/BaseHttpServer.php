@@ -6,6 +6,7 @@ use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
 use Guzzle\Http\Message\RequestInterface as GuzzleRequestInterface;
 use Guzzle\Http\Message\Response as GuzzleResponse;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
 use Zend\Diactoros\Request;

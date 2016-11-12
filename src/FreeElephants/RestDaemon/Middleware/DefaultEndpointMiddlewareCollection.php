@@ -14,10 +14,10 @@ class DefaultEndpointMiddlewareCollection implements EndpointMiddlewareCollectio
 
     protected $after;
 
-    public function __construct()
+    public function __construct(array $before = [], array $after = [])
     {
-        $this->before = new DefaultBeforeMiddlewareCollection();
-        $this->after = new DefaultAfterMiddlewareCollection();
+        $this->before = new DefaultBeforeMiddlewareCollection($before);
+        $this->after = new DefaultAfterMiddlewareCollection($after);
     }
 
     public function getBefore(): MiddlewareCollectionInterface

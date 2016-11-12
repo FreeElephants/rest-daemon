@@ -9,6 +9,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 $server = new RestServer();
 $accessLogger = new Logger('access', [new StreamHandler('php://stdout')]);
@@ -41,7 +42,17 @@ $greetingEndpoint->setMethodHandler('GET',
         parse_str($request->getUri()->getQuery(), $params);
         $name = array_key_exists('name', $params) ? $params['name'] : 'World';
         $response->getBody()->write('{
-            "hello": "' . $name . '!",
+            "hello": "' . $name . '!"
+        }');
+        return $next($request, $response);
+    })
+);
+$greetingEndpoint->setMethodHandler('POST',
+    new CallableEndpointMethodHandlerWrapper(function (ServerRequestInterface $request, ResponseInterface $response, $next) {
+        parse_str($request->getBody()->getContents(), $params);
+        $name = array_key_exists('name', $params) ? $params['name'] : 'World';
+        $response->getBody()->write('{
+            "hello": "' . $name . '!"
         }');
         return $next($request, $response);
     })

@@ -73,7 +73,7 @@ class RestServer
                 $allowedMethods = [$method];
                 $route = new Route($path, $defaults, $requirements, $options, $this->httpHost, $schemes = [],
                     $allowedMethods);
-                $ratchetApp->routes->add($endpoint->getName(), $route);
+                $ratchetApp->routes->add($endpoint->getName() . $method, $route);
             }
         }
         $ratchetApp->run();

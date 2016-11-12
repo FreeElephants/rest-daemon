@@ -2,10 +2,9 @@
 
 namespace FreeElephants\RestDaemon;
 
-use FreeElephants\RestDaemon\ExceptionHandler\ExceptionHandlerInterface;
+use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
+use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 use Ratchet\App;
-use Relay\Relay;
-use Relay\RelayBuilder;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -35,8 +34,10 @@ class RestServer
      */
     private $endpoints = [];
 
-    private $middlewareStack = [];
-    private $afterEndpointMiddleware = [];
+    /**
+     * @var EndpointMiddlewareCollectionInterface
+     */
+    private $middlewareCollection;
 
     public function __construct(
         string $httpHost = '127.0.0.1',
@@ -61,11 +62,9 @@ class RestServer
     public function run()
     {
         $ratchetApp = new App($this->httpHost, $this->port, $this->address);
-        $relay = new RelayBuilder();
-        $dispatcher = $relay->newInstance($this->middlewareStack);
         foreach ($this->endpoints as $endpoint) {
             foreach ($endpoint->getMethodHandlers() as $method => $handler) {
-                $handler->setMiddleware($this->middlewareStack, $this->afterEndpointMiddleware);
+                $handler->setMiddlewareCollection($this->getMiddlewareCollection());
                 $path = $endpoint->getPath();
                 $controller = new BaseHttpServer($handler);
                 $defaults = ['_controller' => $controller];
@@ -80,9 +79,16 @@ class RestServer
         $ratchetApp->run();
     }
 
-    public function setMiddlewareStack($middlewareStack, $afterEndpoint = [])
+    public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $middlewareCollection)
     {
-        $this->middlewareStack = $middlewareStack;
-        $this->afterEndpointMiddleware = $afterEndpoint;
+        $this->middlewareCollection = $middlewareCollection;
+    }
+
+    /**
+     * @return EndpointMiddlewareCollectionInterface
+     */
+    public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
+    {
+        return $this->middlewareCollection ?: $this->middlewareCollection = new DefaultEndpointMiddlewareCollection();
     }
 }

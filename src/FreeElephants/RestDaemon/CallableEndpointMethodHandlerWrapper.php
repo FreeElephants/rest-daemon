@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Relay\Relay;
@@ -18,7 +19,6 @@ class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInter
      */
     private $func;
 
-    private $middleware;
     /**
      * @var Relay
      */
@@ -41,10 +41,9 @@ class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInter
         return $this->relay->__invoke($request, new Response());
     }
 
-    public function setMiddleware($before, $after = [])
+    public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $endpointMiddlewareCollection)
     {
-        $middleware = array_merge($before, [$this->func], $after);
         $relayBuilder = new RelayBuilder();
-        $this->relay = $relayBuilder->newInstance($middleware);
+        $this->relay = $relayBuilder->newInstance($endpointMiddlewareCollection->wrapInto($this->func));
     }
 }

@@ -4,15 +4,14 @@ namespace FreeElephants\RestDaemon\Middleware;
 
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Relay\MiddlewareInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class JsonErrorHandler implements MiddlewareInterface
+class JsonErrorHandler
 {
-    
-    public function __invoke(Request $request, Response $response, callable $next = null)
+
+    public function __invoke(Request $request, Response $response, callable $next)
     {
         try {
             $response = $next($request, $response);

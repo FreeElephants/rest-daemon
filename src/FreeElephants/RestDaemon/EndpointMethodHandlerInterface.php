@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -13,5 +14,5 @@ interface EndpointMethodHandlerInterface
 
     public function handle(RequestInterface $request): ResponseInterface;
 
-    public function setMiddleware($middleware, $after = []);
+    public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $endpointMiddlewareCollection);
 }

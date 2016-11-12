@@ -52,7 +52,9 @@ class BaseHttpServer implements HttpServerInterface
      */
     public function onOpen(ConnectionInterface $conn, GuzzleRequestInterface $request = null)
     {
-        $response = $this->handler->handle($this->mapGuzzleRequestToPsr($request));
+        /**@var $request EntityEnclosingRequest */
+        $psrRequest = $this->mapGuzzleRequestToPsr($request);
+        $response = $this->handler->handle($psrRequest);
         $conn->send($this->mapPsrResponseToGuzzle($response));
         $conn->close();
     }
@@ -83,6 +85,10 @@ class BaseHttpServer implements HttpServerInterface
         // not used in rest server
     }
 
+    /**
+     * @param EntityEnclosingRequest $request
+     * @return ServerRequestInterface
+     */
     private function mapGuzzleRequestToPsr(EntityEnclosingRequest $request): ServerRequestInterface
     {
         $serverParams = $_SERVER;
@@ -92,7 +98,6 @@ class BaseHttpServer implements HttpServerInterface
         $body = $request->getBody()->getStream();
         if ($request instanceof EntityEnclosingRequest) {
             $parsedBody = [];
-
         } else {
             $parsedBody = [];
         }
@@ -101,7 +106,8 @@ class BaseHttpServer implements HttpServerInterface
         $queryParams = $request->getQuery()->getAll();
         $protocol = $request->getProtocolVersion();
 
-        $psrServerRequest = new ServerRequest($serverParams, $uploadedFiles, $uri, $method, $body, $headers, $cookies, $queryParams, $parsedBody, $protocol);
+        $psrServerRequest = new ServerRequest($serverParams, $uploadedFiles, $uri, $method, $body, $headers, $cookies,
+            $queryParams, $parsedBody, $protocol);
         return $psrServerRequest;
     }
 }

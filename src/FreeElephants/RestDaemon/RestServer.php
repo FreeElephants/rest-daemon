@@ -6,6 +6,7 @@ use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 use Ratchet\App;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -62,20 +63,8 @@ class RestServer
     public function run()
     {
         $ratchetApp = new App($this->httpHost, $this->port, $this->address);
-        foreach ($this->endpoints as $endpoint) {
-            foreach ($endpoint->getMethodHandlers() as $method => $handler) {
-                $handler->setMiddlewareCollection($this->getMiddlewareCollection());
-                $path = $endpoint->getPath();
-                $controller = new BaseHttpServer($handler);
-                $defaults = ['_controller' => $controller];
-                $requirements = ['Origin' => $this->httpHost];
-                $options = [];
-                $allowedMethods = [$method];
-                $route = new Route($path, $defaults, $requirements, $options, $this->httpHost, $schemes = [],
-                    $allowedMethods);
-                $ratchetApp->routes->add($endpoint->getName() . $method, $route);
-            }
-        }
+        $routeCollection = $this->buildEndpointsRouteCollection();
+        $ratchetApp->routes->addCollection($routeCollection);
         $ratchetApp->run();
     }
 
@@ -90,5 +79,28 @@ class RestServer
     public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
     {
         return $this->middlewareCollection ?: $this->middlewareCollection = new DefaultEndpointMiddlewareCollection();
+    }
+
+    private function buildEndpointsRouteCollection(): RouteCollection
+    {
+        $routeCollection = new RouteCollection();
+        foreach ($this->endpoints as $endpoint) {
+            foreach ($endpoint->getMethodHandlers() as $method => $handler) {
+                $handler->setMiddlewareCollection($this->getMiddlewareCollection());
+                $path = $endpoint->getPath();
+                $controller = new BaseHttpServer($handler);
+                $defaults = ['_controller' => $controller];
+                $requirements = ['Origin' => $this->httpHost];
+                $options = [];
+                $schemes = [];
+                $httpHost = $this->httpHost;
+                $allowedMethods = [$method];
+                $route = new Route($path, $defaults, $requirements, $options, $httpHost, $schemes, $allowedMethods);
+                $routeName = $method . ':' . $endpoint->getName();
+                $routeCollection->add($routeName, $route);
+            }
+        }
+
+        return $routeCollection;
     }
 }

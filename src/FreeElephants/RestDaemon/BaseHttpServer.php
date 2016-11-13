@@ -3,15 +3,12 @@
 namespace FreeElephants\RestDaemon;
 
 use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
+use FreeElephants\RestDaemon\HttpAdapter\Guzzle2Zend\ServerRequest;
+use FreeElephants\RestDaemon\HttpAdapter\Psr2Guzzle\Response;
 use Guzzle\Http\Message\EntityEnclosingRequest;
 use Guzzle\Http\Message\RequestInterface as GuzzleRequestInterface;
-use Guzzle\Http\Message\Response as GuzzleResponse;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Uri;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -41,7 +38,7 @@ class BaseHttpServer implements HttpServerInterface
     function onError(ConnectionInterface $conn, \Exception $e)
     {
         $response = $this->exceptionHandler->handleException($e);
-        $conn->send($this->mapPsrResponseToGuzzle($response));
+        $conn->send(new Response($response));
         $conn->close();
     }
 
@@ -53,15 +50,10 @@ class BaseHttpServer implements HttpServerInterface
     public function onOpen(ConnectionInterface $conn, GuzzleRequestInterface $request = null)
     {
         /**@var $request EntityEnclosingRequest */
-        $psrRequest = $this->mapGuzzleRequestToPsr($request);
+        $psrRequest = new ServerRequest($request);
         $response = $this->handler->handle($psrRequest);
-        $conn->send($this->mapPsrResponseToGuzzle($response));
+        $conn->send(new Response($response));
         $conn->close();
-    }
-
-    protected function mapPsrResponseToGuzzle(ResponseInterface $response): GuzzleResponse
-    {
-        return new GuzzleResponse($response->getStatusCode(), $response->getHeaders(), $response->getBody());
     }
 
     /**
@@ -83,31 +75,5 @@ class BaseHttpServer implements HttpServerInterface
     function onMessage(ConnectionInterface $from, $msg)
     {
         // not used in rest server
-    }
-
-    /**
-     * @param EntityEnclosingRequest $request
-     * @return ServerRequestInterface
-     */
-    private function mapGuzzleRequestToPsr(EntityEnclosingRequest $request): ServerRequestInterface
-    {
-        $serverParams = $_SERVER;
-        $uploadedFiles = [];
-        $uri = new Uri($request->getUrl());
-        $method = $request->getMethod();
-        $body = $request->getBody()->getStream();
-        if ($request instanceof EntityEnclosingRequest) {
-            $parsedBody = [];
-        } else {
-            $parsedBody = [];
-        }
-        $headers = [];
-        $cookies = [];
-        $queryParams = $request->getQuery()->getAll();
-        $protocol = $request->getProtocolVersion();
-
-        $psrServerRequest = new ServerRequest($serverParams, $uploadedFiles, $uri, $method, $body, $headers, $cookies,
-            $queryParams, $parsedBody, $protocol);
-        return $psrServerRequest;
     }
 }

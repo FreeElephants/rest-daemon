@@ -3,6 +3,7 @@
 namespace FreeElephants\RestDaemon\HttpAdapter\Guzzle2Zend;
 
 use Guzzle\Http\Message\EntityEnclosingRequest;
+use Guzzle\Http\Message\Header;
 use Zend\Diactoros\ServerRequest as ZendServerRequest;
 use Zend\Diactoros\Uri;
 
@@ -20,6 +21,10 @@ class ServerRequest extends ZendServerRequest
         $body = $request->getBody()->getStream();
         $parsedBody = [];
         $headers = [];
+        /**@var $header Header*/
+        foreach ($request->getHeaders()->getAll() as $header) {
+            $headers[$header->getName()] = $header->toArray();
+        }
         $cookies = [];
         $queryParams = $request->getQuery()->getAll();
         $protocol = $request->getProtocolVersion();

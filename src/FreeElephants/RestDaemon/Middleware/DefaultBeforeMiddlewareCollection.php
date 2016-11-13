@@ -13,6 +13,7 @@ class DefaultBeforeMiddlewareCollection extends AbstractMiddlewareCollection
         return $this->defaultBeforeMiddlewareMap ?: $this->defaultBeforeMiddlewareMap = [
             MiddlewareRole::CONTENT_TYPE_SETTER => new ContentTypeSetter('application/json'),
             MiddlewareRole::ERROR_HANDLER => new JsonErrorHandler(),
+            MiddlewareRole::ACCEPT_TYPE_CHECKER => new AcceptHeaderChecker('application/json'),
         ];
     }
 }

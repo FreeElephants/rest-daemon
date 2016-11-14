@@ -15,7 +15,7 @@ interface EndpointInterface
     public function setMethodHandler(string $method, EndpointMethodHandlerInterface $handler);
 
     /**
-     * @param array|EndpointMethodHandlerInterface[] $handlers
+     * @param array|callable[] $handlers
      */
     public function setMethodHandlers(array $handlers);
 

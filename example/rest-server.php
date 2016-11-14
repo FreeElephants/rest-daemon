@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use FreeElephants\RestDaemon\BaseEndpoint;
 use FreeElephants\RestDaemon\CallableEndpointMethodHandlerWrapper;

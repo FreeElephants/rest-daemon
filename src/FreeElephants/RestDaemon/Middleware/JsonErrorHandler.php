@@ -20,8 +20,10 @@ class JsonErrorHandler
             $data = [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
             ];
-            $response->getBody()->write(json_encode($data));
+            $response->getBody()->write(json_encode($data, JSON_PRETTY_PRINT));
         }
         return $response;
     }

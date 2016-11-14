@@ -9,7 +9,8 @@
         "relay/relay": "~1.0",
         "relay/middleware": "^1.1",
         "oscarotero/psr7-middlewares": "^3.18",
-        "zendframework/zend-http": "^2.5"
+        "zendframework/zend-http": "^2.5",
+        "amphp/aerys": "^0.4.3"
     },
     "require-dev": {
         "codeception/codeception": "^2.2"

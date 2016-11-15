@@ -2,34 +2,20 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\Exception\InvalidArgumentException;
+use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
+use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
+use FreeElephants\RestDaemon\HttpDriver\Ratchet;
 use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
-use Ratchet\App;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
 class RestServer
 {
+    const DEFAULT_HTTP_DRIVER = Ratchet::class;
 
-    /**
-     * @var string
-     */
-    private $httpHost;
-    /**
-     * @var int
-     */
-    private $port;
-    /**
-     * @var string
-     */
-    private $address;
-    /**
-     * @var array
-     */
-    private $allowedOrigins;
     /**
      * @var array|EndpointInterface[]
      */
@@ -39,17 +25,24 @@ class RestServer
      * @var EndpointMiddlewareCollectionInterface
      */
     private $middlewareCollection;
+    /**
+     * @var HttpDriverInterface
+     */
+    private $httpDriver;
+    /**
+     * @var HttpServerConfig
+     */
+    private $config;
 
     public function __construct(
-        string $httpHost = '127.0.0.1',
-        int $port = 8080,
-        string $address = '0.0.0.0',
-        $allowedOrigins = ['*']
+        string $httpHost = HttpServerConfig::DEFAULT_HTTP_HOST,
+        int $port = HttpServerConfig::DEFAULT_HTTP_PORT,
+        string $address = HttpServerConfig::DEFAULT_ADDRESS,
+        $allowedOrigins = HttpServerConfig::DEFAULT_ALLOWED_ORIGINS,
+        string $httpDriverClass = self::DEFAULT_HTTP_DRIVER
     ) {
-        $this->httpHost = $httpHost;
-        $this->port = $port;
-        $this->address = $address;
-        $this->allowedOrigins = $allowedOrigins;
+        $this->config = new HttpServerConfig($httpHost, $port, $address, $allowedOrigins);
+        $this->httpDriver = $this->buildHttpDriver($httpDriverClass);
     }
 
     public function addEndpoint(EndpointInterface $endpoint)
@@ -57,15 +50,19 @@ class RestServer
         $this->endpoints[] = $endpoint;
     }
 
-    /**
-     *
-     */
     public function run()
     {
-        $ratchetApp = new App($this->httpHost, $this->port, $this->address);
-        $routeCollection = $this->buildEndpointsRouteCollection();
-        $ratchetApp->routes->addCollection($routeCollection);
-        $ratchetApp->run();
+        $this->httpDriver->configure($this->config, $this->endpoints, $this->getMiddlewareCollection());
+        cli_set_process_title('rest-deamon');
+        $this->httpDriver->run();
+    }
+
+    protected function buildHttpDriver(string $httpDriverClass): HttpDriverInterface
+    {
+        if (!class_exists($httpDriverClass)) {
+            throw new InvalidArgumentException();
+        }
+        return new $httpDriverClass;
     }
 
     public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $middlewareCollection)
@@ -73,34 +70,8 @@ class RestServer
         $this->middlewareCollection = $middlewareCollection;
     }
 
-    /**
-     * @return EndpointMiddlewareCollectionInterface
-     */
     public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
     {
         return $this->middlewareCollection ?: $this->middlewareCollection = new DefaultEndpointMiddlewareCollection();
-    }
-
-    private function buildEndpointsRouteCollection(): RouteCollection
-    {
-        $routeCollection = new RouteCollection();
-        foreach ($this->endpoints as $endpoint) {
-            foreach ($endpoint->getMethodHandlers() as $method => $handler) {
-                $handler->setMiddlewareCollection($this->getMiddlewareCollection());
-                $path = $endpoint->getPath();
-                $controller = new BaseHttpServer($handler);
-                $defaults = ['_controller' => $controller];
-                $requirements = ['Origin' => $this->httpHost];
-                $options = [];
-                $schemes = [];
-                $httpHost = $this->httpHost;
-                $allowedMethods = [$method];
-                $route = new Route($path, $defaults, $requirements, $options, $httpHost, $schemes, $allowedMethods);
-                $routeName = $method . ':' . $endpoint->getName();
-                $routeCollection->add($routeName, $route);
-            }
-        }
-
-        return $routeCollection;
     }
 }

@@ -8,6 +8,9 @@ class_name: RestTester
 modules:
     enabled:
         - REST:
-            url: http://127.0.0.1:8080
             depends: PhpBrowser
             part: Json
+        - PhpBrowser:
+            url: http://127.0.0.1:8080
+            curl:
+              CURLOPT_TIMEOUT: 1

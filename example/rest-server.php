@@ -11,7 +11,8 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-$server = new RestServer();
+$httpDriverClass = \FreeElephants\RestDaemon\HttpDriver\Aerys::class;
+$server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*']);
 $accessLogger = new Logger('access', [new StreamHandler('php://stdout')]);
 $server->setMiddlewareCollection(new DefaultEndpointMiddlewareCollection([], [
     function (

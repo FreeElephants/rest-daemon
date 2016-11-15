@@ -70,4 +70,8 @@ $server->addEndpoint($exceptionThrowsEndpoint);
 /**
  * Note: after server will be run, php script going to loop and code after this line not be executed.
  */
+const AERYS_OPTIONS = [
+    'sendServerToken' => true,
+    'maxConnections' => 1000,
+    ];
 $server->run();

@@ -1,40 +1,46 @@
 {
-    "name": "free-elephants/rest-daemon",
-    "require": {
-        "cboden/ratchet": "dev-master",
-        "monolog/monolog": "^1.21",
-        "symfony/routing": "^3.1",
-        "zendframework/zend-diactoros": "^1.3",
-        "relay/relay": "~1.0",
-        "relay/middleware": "^1.1",
-        "oscarotero/psr7-middlewares": "^3.18",
-        "zendframework/zend-http": "^2.5"
+  "name": "free-elephants/rest-daemon",
+  "require": {
+    "cboden/ratchet": "dev-master",
+    "monolog/monolog": "^1.21",
+    "symfony/routing": "^3.1",
+    "free-elephants/di": "dev-master",
+    "zendframework/zend-diactoros": "^1.3",
+    "relay/relay": "~1.0",
+    "relay/middleware": "^1.1",
+    "oscarotero/psr7-middlewares": "^3.18",
+    "zendframework/zend-http": "^2.5",
+    "amphp/aerys": "^0.4.3"
+  },
+  "require-dev": {
+    "codeception/codeception": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "FreeElephants\\RestDaemon\\": "tests/FreeElephants/RestDaemon/",
+      "RestDeamon\\Example\\": "example/src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@bitbucket.org:FreeElephants/di.git"
     },
-    "require-dev": {
-        "codeception/codeception": "^2.2"
-    },
-
-    "autoload": {
-        "psr-4": {
-            "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "FreeElephants\\RestDaemon\\": "tests/FreeElephants/RestDaemon/"
-        }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:FreeElephants/Ratchet.git"
-        }
-    ],
-    "license": "BSD-2",
-    "authors": [
-        {
-            "name": "samizdam",
-            "email": "samizdam@inbox.ru"
-        }
-    ]
+    {
+      "type": "vcs",
+      "url": "git@github.com:FreeElephants/Ratchet.git"
+    }
+  ],
+  "license": "BSD-2",
+  "authors": [
+    {
+      "name": "samizdam",
+      "email": "samizdam@inbox.ru"
+    }
+  ]
 }

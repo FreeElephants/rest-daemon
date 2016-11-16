@@ -1,6 +1,6 @@
 <?php
 
-namespace RestDeamon\Example\Endpoint\Index;
+namespace RestDeamon\Example\Endpoint\Greeting;
 
 use FreeElephants\RestDaemon\Endpoint\AbstractEndpointMethodHandler;
 use Psr\Http\Message\ResponseInterface;
@@ -14,7 +14,11 @@ class GetHandler extends AbstractEndpointMethodHandler
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
-        $response = $response->withStatus(200);
+        parse_str($request->getUri()->getQuery(), $params);
+        $name = array_key_exists('name', $params) ? $params['name'] : 'World';
+        $response->getBody()->write('{
+            "hello": "' . $name . '!"
+        }');
         return $next($request, $response);
     }
 }

@@ -9,7 +9,9 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use RestDeamon\Example\Endpoint\Greeting\GetHandler as GreetingGetHandler;
+use RestDeamon\Example\Endpoint\Greeting\PostHandler;
+use RestDeamon\Example\Endpoint\Index\GetHandler;
 
 $httpDriverClass = \FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver::class;
 $server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*']);
@@ -27,37 +29,11 @@ $server->setMiddlewareCollection(new DefaultEndpointMiddlewareCollection([], [
 ]));
 
 $indexEndpoint = new BaseEndpoint('/', 'Index Endpoint');
-$indexEndpoint->setMethodHandler('GET',
-    new CallableEndpointMethodHandlerWrapper(function (
-        RequestInterface $request,
-        ResponseInterface $response,
-        callable $next
-    ): ResponseInterface {
-        $response = $response->withStatus(200);
-        return $next($request, $response);
-    }));
+$indexEndpoint->setMethodHandler('GET', new GetHandler());
 
 $greetingEndpoint = new BaseEndpoint('/greeting', 'Some Resource');
-$greetingEndpoint->setMethodHandler('GET',
-    new CallableEndpointMethodHandlerWrapper(function (RequestInterface $request, ResponseInterface $response, $next) {
-        parse_str($request->getUri()->getQuery(), $params);
-        $name = array_key_exists('name', $params) ? $params['name'] : 'World';
-        $response->getBody()->write('{
-            "hello": "' . $name . '!"
-        }');
-        return $next($request, $response);
-    })
-);
-$greetingEndpoint->setMethodHandler('POST',
-    new CallableEndpointMethodHandlerWrapper(function (ServerRequestInterface $request, ResponseInterface $response, $next) {
-        parse_str($request->getBody()->getContents(), $params);
-        $name = array_key_exists('name', $params) ? $params['name'] : 'World';
-        $response->getBody()->write('{
-            "hello": "' . $name . '!"
-        }');
-        return $next($request, $response);
-    })
-);
+$greetingEndpoint->setMethodHandler('GET', new GreetingGetHandler());
+$greetingEndpoint->setMethodHandler('POST', new PostHandler());
 
 $exceptionThrowsEndpoint = new BaseEndpoint('/exception');
 $exceptionThrowsEndpoint->setMethodHandler('GET',

@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 class GetHandler implements EndpointMethodHandlerInterface
 {
 
-    public function handle(RequestInterface $request): ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         // TODO: Implement handle() method.
     }

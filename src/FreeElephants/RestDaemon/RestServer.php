@@ -5,7 +5,7 @@ namespace FreeElephants\RestDaemon;
 use FreeElephants\RestDaemon\Exception\InvalidArgumentException;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
-use FreeElephants\RestDaemon\HttpDriver\Ratchet;
+use FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver;
 use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 
@@ -14,7 +14,7 @@ use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
  */
 class RestServer
 {
-    const DEFAULT_HTTP_DRIVER = Ratchet::class;
+    const DEFAULT_HTTP_DRIVER = RatchetDriver::class;
 
     /**
      * @var array|EndpointInterface[]

@@ -1,6 +1,6 @@
 <?php
 
-namespace FreeElephants\RestDaemon\HttpDriver;
+namespace FreeElephants\RestDaemon\HttpDriver\Aerys;
 
 use Aerys\Host;
 use Aerys\Request;
@@ -8,12 +8,14 @@ use Aerys\Response;
 use Aerys\Router;
 use FreeElephants\RestDaemon\EndpointInterface;
 use FreeElephants\RestDaemon\HttpAdapter\Aerys2Zend\ServerRequest;
+use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
+use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class Aerys implements HttpDriverInterface
+class AerysDriver implements HttpDriverInterface
 {
     private $aerysHost;
 

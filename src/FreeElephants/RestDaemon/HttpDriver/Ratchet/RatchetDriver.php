@@ -1,9 +1,10 @@
 <?php
 
-namespace FreeElephants\RestDaemon\HttpDriver;
+namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 
-use FreeElephants\RestDaemon\BaseHttpServer;
 use FreeElephants\RestDaemon\EndpointInterface;
+use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
+use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 use Ratchet\App;
 use Symfony\Component\Routing\Route;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\RouteCollection;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class Ratchet implements HttpDriverInterface
+class RatchetDriver implements HttpDriverInterface
 {
 
     /**

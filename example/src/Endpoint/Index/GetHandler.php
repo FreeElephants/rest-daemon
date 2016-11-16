@@ -2,7 +2,7 @@
 
 namespace RestDeamon\Example\Endpoint\Index;
 
-use FreeElephants\RestDaemon\EndpointMethodHandlerInterface;
+use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;

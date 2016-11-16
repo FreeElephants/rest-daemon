@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\Exception\InvalidArgumentException;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;

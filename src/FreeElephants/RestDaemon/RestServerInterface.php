@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon;
 
+use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 
 /**

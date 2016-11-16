@@ -1,9 +1,9 @@
 <?php
 
-use FreeElephants\RestDaemon\BaseEndpoint;
-use FreeElephants\RestDaemon\CallableEndpointMethodHandlerWrapper;
-use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\AerysRestServer;
+use FreeElephants\RestDaemon\Endpoint\BaseEndpoint;
+use FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper;
+use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Http\Message\RequestInterface;

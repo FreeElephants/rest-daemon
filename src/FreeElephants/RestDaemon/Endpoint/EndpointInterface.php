@@ -1,6 +1,6 @@
 <?php
 
-namespace FreeElephants\RestDaemon;
+namespace FreeElephants\RestDaemon\Endpoint;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

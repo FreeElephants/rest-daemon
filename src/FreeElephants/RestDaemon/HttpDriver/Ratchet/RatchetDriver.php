@@ -2,7 +2,7 @@
 
 namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 
-use FreeElephants\RestDaemon\EndpointInterface;
+use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;

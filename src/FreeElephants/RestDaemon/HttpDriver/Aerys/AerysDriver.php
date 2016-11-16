@@ -6,7 +6,7 @@ use Aerys\Host;
 use Aerys\Request;
 use Aerys\Response;
 use Aerys\Router;
-use FreeElephants\RestDaemon\EndpointInterface;
+use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\HttpAdapter\Aerys2Zend\ServerRequest;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;

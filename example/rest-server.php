@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use FreeElephants\RestDaemon\BaseEndpoint;
-use FreeElephants\RestDaemon\CallableEndpointMethodHandlerWrapper;
+use FreeElephants\RestDaemon\Endpoint\BaseEndpoint;
+use FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper;
 use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\RestServer;
 use Monolog\Handler\StreamHandler;
@@ -11,7 +11,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-$httpDriverClass = \FreeElephants\RestDaemon\HttpDriver\Aerys::class;
+$httpDriverClass = \FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver::class;
 $server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*']);
 $accessLogger = new Logger('access', [new StreamHandler('php://stdout')]);
 $server->setMiddlewareCollection(new DefaultEndpointMiddlewareCollection([], [

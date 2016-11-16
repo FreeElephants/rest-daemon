@@ -2,7 +2,7 @@
 
 namespace FreeElephants\RestDaemon\HttpDriver;
 
-use FreeElephants\RestDaemon\EndpointInterface;
+use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
 
 /**

@@ -2,8 +2,6 @@
 
 namespace FreeElephants\RestDaemon\Middleware;
 
-use FreeElephants\RestDaemon\EndpointMethodHandlerInterface;
-
 /**
  * @author samizdam <samizdam@inbox.ru>
  */

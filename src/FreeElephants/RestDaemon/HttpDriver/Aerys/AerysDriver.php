@@ -3,11 +3,8 @@
 namespace FreeElephants\RestDaemon\HttpDriver\Aerys;
 
 use Aerys\Host;
-use Aerys\Request;
-use Aerys\Response;
 use Aerys\Router;
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
-use FreeElephants\RestDaemon\HttpAdapter\Aerys2Zend\ServerRequest;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
@@ -35,17 +32,10 @@ class AerysDriver implements HttpDriverInterface
 
     public function run()
     {
-
         \Amp\run(function () {
             $arrayOfAerysHostInstances = [$this->aerysHost]; // see Aerys\Host documentation
             $arrayOfAerysOptions = []; // see Aerys\Options documentation
-            $logger = new class extends \Aerys\Logger
-            {
-                protected function output(string $message)
-                {
-                    print "$message\n"; // log to stdout
-                }
-            };
+            $logger = new StdoutLogger();
             $server = (new \Aerys\Bootstrapper(function () use ($arrayOfAerysHostInstances) {
                 return $arrayOfAerysHostInstances;
             }))->init($logger, $arrayOfAerysOptions);
@@ -65,25 +55,11 @@ class AerysDriver implements HttpDriverInterface
         foreach ($endpoints as $endpoint) {
             foreach ($endpoint->getMethodHandlers() as $method => $handler) {
                 $handler->setMiddlewareCollection($middlewareCollection);
-                $router->route($method, $endpoint->getPath(),
-                    function (Request $req, Response $resp) use ($handler) {
-                        $request = new ServerRequest($req);
-                        $requestBody = yield $req->getBody();
-                        $request->getBody()->write($requestBody);
-                        $request->getBody()->rewind();
-                        $response = $handler->handle($request);
-                        $resp->setStatus($response->getStatusCode());
-                        $resp->setReason($response->getReasonPhrase());
-                        foreach ($response->getHeaders() as $name => $values) {
-                            foreach ($values as $value) {
-                                $resp->addHeader($name, $value);
-                            }
-                        }
-                        $response->getBody()->rewind();
-                        $resp->end($response->getBody()->getContents());
-                    });
+                $handlerWrapper = new HandlerWrapper($handler);
+                $router->route($method, $endpoint->getPath(), $handlerWrapper);
             }
         }
+
         return $router;
     }
 }

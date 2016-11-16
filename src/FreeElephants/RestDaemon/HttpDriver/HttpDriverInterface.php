@@ -3,7 +3,7 @@
 namespace FreeElephants\RestDaemon\HttpDriver;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
-use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
+use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

@@ -3,6 +3,7 @@ $I = new RestTester($scenario);
 
 $I->wantToTest('get params handling. ');
 
+$I->haveHttpHeader('Content-Type', 'application/x-www-form-urlencoded');
 $I->sendPOST('/greeting', [
     'name' => 'Post Foobarchik'
 ]);

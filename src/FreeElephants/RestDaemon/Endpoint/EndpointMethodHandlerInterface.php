@@ -2,7 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
-use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
+use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

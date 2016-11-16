@@ -14,8 +14,7 @@ class PostHandler extends AbstractEndpointMethodHandler
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
-        parse_str($request->getBody()->getContents(), $params);
-        $name = array_key_exists('name', $params) ? $params['name'] : 'World';
+        $name = $request->getParsedBody()->get('name', 'World');
         $response->getBody()->write('{
             "hello": "' . $name . '!"
         }');

@@ -2,9 +2,9 @@
 
 namespace FreeElephants\RestDaemon\Middleware;
 
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
-use Zend\Http\Header\Accept;
+use FreeElephants\RestDaemon\Util\AcceptMediaTypeMatcher;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -21,7 +21,7 @@ class AcceptHeaderChecker
         $this->acceptedType = $acceptedType;
     }
 
-    public function __invoke(Request $request, Response $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         if ($this->isAccepted($request)) {
             return $next($request, $response);
@@ -30,13 +30,12 @@ class AcceptHeaderChecker
         return $response->withStatus(406);
     }
 
-    private function isAccepted(Request $request): bool
+    private function isAccepted(ServerRequestInterface $request): bool
     {
         $requestAcceptStrings = $request->hasHeader('Accept') ? $request->getHeader('Accept') : ['*/*'];
-        $allowedAcceptHeader = Accept::fromString($this->acceptedType);
         $accept = false;
         foreach ($requestAcceptStrings as $value) {
-            if ($allowedAcceptHeader->match($value)) {
+            if (AcceptMediaTypeMatcher::match($this->acceptedType, $value)) {
                 $accept = true;
                 break;
             }

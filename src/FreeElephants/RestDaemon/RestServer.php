@@ -7,8 +7,8 @@ use FreeElephants\RestDaemon\Exception\InvalidArgumentException;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver;
-use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
-use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
+use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
+use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

@@ -5,7 +5,7 @@ namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
-use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
+use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Ratchet\App;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;

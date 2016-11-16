@@ -1,6 +1,9 @@
 <?php
 
-namespace FreeElephants\RestDaemon\Middleware;
+namespace FreeElephants\RestDaemon\Middleware\Collection;
+
+use FreeElephants\RestDaemon\Middleware\ContentTypeSetter;
+use FreeElephants\RestDaemon\Middleware\MiddlewareRole;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

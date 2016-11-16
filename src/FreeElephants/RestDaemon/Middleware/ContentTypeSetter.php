@@ -2,8 +2,8 @@
 
 namespace FreeElephants\RestDaemon\Middleware;
 
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -20,7 +20,11 @@ class ContentTypeSetter
         $this->contentType = $contentType;
     }
 
-    public function __invoke(RequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        callable $next
+    ): ResponseInterface
     {
         return $next($request, $response->withHeader('Content-Type', $this->getContentType()));
     }

@@ -7,7 +7,7 @@ use Aerys\Router;
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
-use FreeElephants\RestDaemon\Middleware\EndpointMiddlewareCollectionInterface;
+use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

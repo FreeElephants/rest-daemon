@@ -3,7 +3,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use FreeElephants\RestDaemon\Endpoint\BaseEndpoint;
 use FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper;
-use FreeElephants\RestDaemon\Middleware\DefaultEndpointMiddlewareCollection;
+use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\RestServer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

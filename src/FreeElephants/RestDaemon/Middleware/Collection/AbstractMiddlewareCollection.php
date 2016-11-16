@@ -1,6 +1,6 @@
 <?php
 
-namespace FreeElephants\RestDaemon\Middleware;
+namespace FreeElephants\RestDaemon\Middleware\Collection;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

@@ -4,12 +4,12 @@ namespace FreeElephants\RestDaemon\Middleware\Collection;
 
 use FreeElephants\RestDaemon\Middleware\AcceptHeaderChecker;
 use FreeElephants\RestDaemon\Middleware\ContentTypeSetter;
-use FreeElephants\RestDaemon\Middleware\Json\BodyParser;
 use FreeElephants\RestDaemon\Middleware\Json\ErrorHandler;
 use FreeElephants\RestDaemon\Middleware\MiddlewareRole;
 use FreeElephants\RestDaemon\Middleware\SuitableBodyParser;
 
 /**
+ *
  * @author samizdam <samizdam@inbox.ru>
  */
 class DefaultBeforeMiddlewareCollection extends AbstractMiddlewareCollection

@@ -381,12 +381,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FreeElephants/Ratchet.git",
-                "reference": "5eb1dfa98db73f7b6c40abf705c19ba472f9f369"
+                "reference": "7215ffe9e630978b73fe5d9f9bba47b29b14334b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FreeElephants/Ratchet/zipball/5eb1dfa98db73f7b6c40abf705c19ba472f9f369",
-                "reference": "5eb1dfa98db73f7b6c40abf705c19ba472f9f369",
+                "url": "https://api.github.com/repos/FreeElephants/Ratchet/zipball/7215ffe9e630978b73fe5d9f9bba47b29b14334b",
+                "reference": "7215ffe9e630978b73fe5d9f9bba47b29b14334b",
                 "shasum": ""
             },
             "require": {
@@ -426,7 +426,7 @@
                 "irc": "irc://irc.freenode.org/reactphp",
                 "source": "https://github.com/FreeElephants/Ratchet/tree/master"
             },
-            "time": "2016-11-10 18:05:00"
+            "time": "2016-11-17 16:48:29"
         },
         {
             "name": "container-interop/container-interop",
@@ -3095,16 +3095,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "937efb279bd37a375bcadf584dec0726f84dbf22"
+                "reference": "ce2bda23a56456f19e35d98241446b581f648c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/937efb279bd37a375bcadf584dec0726f84dbf22",
-                "reference": "937efb279bd37a375bcadf584dec0726f84dbf22",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/ce2bda23a56456f19e35d98241446b581f648c14",
+                "reference": "ce2bda23a56456f19e35d98241446b581f648c14",
                 "shasum": ""
             },
             "require": {
@@ -3155,7 +3155,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2015-07-26 15:48:44"
+            "time": "2016-11-17 14:39:37"
         },
         {
             "name": "sebastian/diff",

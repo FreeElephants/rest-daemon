@@ -23,9 +23,12 @@ class HandlerWrapper
         $this->handler = $handler;
     }
 
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response, array $routeParams)
     {
         $psrServerRequest = new ServerRequest($request);
+        foreach ($routeParams as $name => $value) {
+            $psrServerRequest = $psrServerRequest->withAttribute($name, $value);
+        }
         $requestBody = yield $request->getBody();
         $psrServerRequest->getBody()->write($requestBody);
         $psrServerRequest->getBody()->rewind();

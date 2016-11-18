@@ -29,7 +29,16 @@ class ServerRequest extends ZendServerRequest
         $queryParams = $request->getQuery()->getAll();
         $protocol = $request->getProtocolVersion();
 
-        parent::__construct($serverParams, $uploadedFiles, $uri, $method, $body, $headers, $cookies,
-            $queryParams, $parsedBody, $protocol);
+        parent::__construct(
+            $serverParams,
+            $uploadedFiles,
+            $uri,
+            $method,
+            $body,
+            $headers,
+            $cookies,
+            $queryParams,
+            $parsedBody,
+            $protocol);
     }
 }

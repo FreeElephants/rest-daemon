@@ -7,6 +7,7 @@ use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareColl
 use FreeElephants\RestDaemon\RestServer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use RestDeamon\Example\Endpoint\Greeting\GetAttributeHandler;
 use RestDeamon\Example\Endpoint\Greeting\GetHandler as GreetingGetHandler;
 use RestDeamon\Example\Endpoint\Greeting\PostHandler;
 use RestDeamon\Example\Endpoint\Index\GetHandler;
@@ -30,9 +31,11 @@ $server->setMiddlewareCollection($extendedDefaultMiddlewareCollection);
 $indexEndpoint = new BaseEndpoint('/', 'Index Endpoint');
 $indexEndpoint->setMethodHandler('GET', new GetHandler());
 
-$greetingEndpoint = new BaseEndpoint('/greeting', 'Some Resource');
+$greetingEndpoint = new BaseEndpoint('/greeting', 'Greeting by name in params');
 $greetingEndpoint->setMethodHandler('GET', new GreetingGetHandler());
 $greetingEndpoint->setMethodHandler('POST', new PostHandler());
+$greetingAttributeEndpoint = new BaseEndpoint('/greeting/{name}', 'Greeting by name in path');
+$greetingAttributeEndpoint->setMethodHandler('GET', new GetAttributeHandler());
 
 $exceptionThrowsEndpoint = new BaseEndpoint('/exception');
 $exceptionThrowsEndpoint->setMethodHandler('GET',
@@ -43,6 +46,7 @@ $exceptionThrowsEndpoint->setMethodHandler('GET',
 
 $server->addEndpoint($indexEndpoint);
 $server->addEndpoint($greetingEndpoint);
+$server->addEndpoint($greetingAttributeEndpoint);
 $server->addEndpoint($exceptionThrowsEndpoint);
 /**
  * Note: after server will be run, php script going to loop and code after this line not be executed.

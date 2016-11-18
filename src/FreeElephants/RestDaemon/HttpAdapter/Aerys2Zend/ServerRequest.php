@@ -3,9 +3,7 @@
 namespace FreeElephants\RestDaemon\HttpAdapter\Aerys2Zend;
 
 use Aerys\Request;
-use Zend\Diactoros\CallbackStream;
 use Zend\Diactoros\ServerRequest as ZendServerRequest;
-use Zend\Diactoros\Stream;
 use Zend\Diactoros\Uri;
 
 
@@ -25,7 +23,6 @@ class ServerRequest extends ZendServerRequest
         $queryParams = $request->getAllParams();
         $parsedBody = [];
         $protocol = $request->getProtocolVersion();
-        parent::__construct($serverParams, $uploadedFiles, $uri, $method, 'php://memory', $headers, $cookies, $queryParams,
-            $parsedBody, $protocol);
+        parent::__construct($serverParams, $uploadedFiles, $uri, $method, 'php://memory', $headers, $cookies, $queryParams, $parsedBody, $protocol);
     }
 }

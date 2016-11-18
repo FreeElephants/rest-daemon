@@ -52,6 +52,9 @@ class BaseHttpServer implements HttpServerInterface
     {
         /**@var $request EntityEnclosingRequest */
         $psrRequest = new ServerRequest($request);
+        foreach ($request->getUrl(true)->getQuery()->getAll() as $name => $value) {
+            $psrRequest = $psrRequest->withAttribute($name, $value);
+        }
         $response = $this->handler->handle($psrRequest);
         $conn->send(new Response($response));
         $conn->close();

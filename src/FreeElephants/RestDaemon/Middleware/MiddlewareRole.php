@@ -11,4 +11,5 @@ class MiddlewareRole
     const ERROR_HANDLER = 'error-handler';
     const ACCEPT_TYPE_CHECKER = 'accept-type-checker';
     const BODY_PARSER = 'body-parser';
+    const NO_CONTENT_STATUS_SETTER = 'no-content-status-setter';
 }

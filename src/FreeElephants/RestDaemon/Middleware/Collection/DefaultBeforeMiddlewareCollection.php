@@ -4,6 +4,7 @@ namespace FreeElephants\RestDaemon\Middleware\Collection;
 
 use FreeElephants\RestDaemon\Middleware\AcceptHeaderChecker;
 use FreeElephants\RestDaemon\Middleware\ContentTypeSetter;
+use FreeElephants\RestDaemon\Middleware\CORSHeaderSetter;
 use FreeElephants\RestDaemon\Middleware\Json\ErrorHandler;
 use FreeElephants\RestDaemon\Middleware\MiddlewareRole;
 use FreeElephants\RestDaemon\Middleware\SuitableBodyParser;
@@ -22,6 +23,7 @@ class DefaultBeforeMiddlewareCollection extends AbstractMiddlewareCollection
             MiddlewareRole::ERROR_HANDLER => new ErrorHandler(),
             MiddlewareRole::ACCEPT_TYPE_CHECKER => new AcceptHeaderChecker('application/json'),
             MiddlewareRole::BODY_PARSER => new SuitableBodyParser(),
+            MiddlewareRole::CORS_HEADER_SETTER => new CORSHeaderSetter(),
         ];
     }
 }

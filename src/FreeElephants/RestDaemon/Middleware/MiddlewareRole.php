@@ -12,4 +12,5 @@ class MiddlewareRole
     const ACCEPT_TYPE_CHECKER = 'accept-type-checker';
     const BODY_PARSER = 'body-parser';
     const NO_CONTENT_STATUS_SETTER = 'no-content-status-setter';
+    const CORS_HEADER_SETTER = 'CORS-header-setter';
 }

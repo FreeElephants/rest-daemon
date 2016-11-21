@@ -51,9 +51,10 @@ class SuitableBodyParser implements MiddlewareInterface
     ): ResponseInterface
     {
         if (in_array($request->getMethod(), $this->suitableMethods)) {
-            if ($parser = $this->getMatchedParser($request)) {
+            try {
+                $parser = $this->getMatchedParser($request);
                 return $parser($request, $response, $next);
-            } else {
+            } catch (\OutOfBoundsException $e) {
                 return $response->withStatus(415);
             }
         } else {
@@ -71,8 +72,7 @@ class SuitableBodyParser implements MiddlewareInterface
                 }
             }
         }
-
-        return null;
+        throw new \OutOfBoundsException();
     }
 
     private function initParsers($parsersMatchMap)

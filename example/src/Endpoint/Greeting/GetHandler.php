@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class GetHandler extends AbstractEndpointMethodHandler
 {
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         parse_str($request->getUri()->getQuery(), $params);
         $name = array_key_exists('name', $params) ? $params['name'] : 'World';

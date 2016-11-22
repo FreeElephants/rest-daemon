@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class PostHandler extends AbstractEndpointMethodHandler
 {
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $name = $request->getParsedBody()->get('name', 'World');
         $response->getBody()->write('{

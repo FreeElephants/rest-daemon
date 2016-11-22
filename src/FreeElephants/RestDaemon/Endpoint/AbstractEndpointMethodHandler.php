@@ -25,7 +25,11 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
         return $this->relay->__invoke($request, new Response());
     }
 
-    abstract public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next);
+    abstract public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        callable $next
+    ): ResponseInterface;
 
     public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $endpointMiddlewareCollection)
     {

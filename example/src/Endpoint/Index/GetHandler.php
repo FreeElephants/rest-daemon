@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class GetHandler extends AbstractEndpointMethodHandler
 {
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $response = $response->withStatus(200);
         return $next($request, $response);

@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class GetAttributeHandler extends AbstractEndpointMethodHandler
 {
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next): ResponseInterface
     {
         $name = $request->getAttribute('name', 'World');
         $response->getBody()->write('{

@@ -17,7 +17,11 @@ interface HttpDriverInterface
      * @param EndpointMiddlewareCollectionInterface $middlewareCollection
      * @return mixed - configured original http server: aerys or ratchet app
      */
-    public function configure(HttpServerConfig $config, array $endpoints, EndpointMiddlewareCollectionInterface $middlewareCollection);
+    public function configure(
+        HttpServerConfig $config,
+        array $endpoints,
+        EndpointMiddlewareCollectionInterface $middlewareCollection
+    );
 
     public function run();
 }

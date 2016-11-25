@@ -9,7 +9,7 @@ abstract class AbstractMiddlewareCollection extends \ArrayObject implements Midd
 {
 
     protected $defaultBeforeMiddlewareMap;
-    
+
     public function __construct($additionalMiddleware = [])
     {
         $middleware = array_merge($this->getDefaultMiddleware(), $additionalMiddleware);

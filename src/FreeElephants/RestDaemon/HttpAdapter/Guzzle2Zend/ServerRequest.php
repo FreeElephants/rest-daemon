@@ -21,7 +21,7 @@ class ServerRequest extends ZendServerRequest
         $body = $request->getBody()->getStream();
         $parsedBody = [];
         $headers = [];
-        /**@var $header Header*/
+        /**@var $header Header */
         foreach ($request->getHeaders()->getAll() as $header) {
             $headers[$header->getName()] = $header->toArray();
         }

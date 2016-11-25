@@ -27,6 +27,7 @@ class CORSHeaderSetter implements MiddlewareInterface
         callable $next
     ): ResponseInterface
     {
-        return $next($request, $response->withAddedHeader('Access-Control-Allow-Origin', $this->accessControlAllowOrigins));
+        return $next($request,
+            $response->withAddedHeader('Access-Control-Allow-Origin', $this->accessControlAllowOrigins));
     }
 }

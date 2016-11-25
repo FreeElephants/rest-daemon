@@ -7,7 +7,7 @@ use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-interface ModuleInterface
+interface ApiModuleInterface
 {
 
     public function addEndpoint(EndpointInterface $endpoint);
@@ -15,4 +15,9 @@ interface ModuleInterface
     public function getPath(): string;
 
     public function getName(): string;
+
+    /**
+     * @return array|EndpointInterface[]
+     */
+    public function getEndpoints(): array;
 }

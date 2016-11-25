@@ -2,7 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
-use FreeElephants\RestDaemon\Module\ModuleInterface;
+use FreeElephants\RestDaemon\Module\ApiModuleInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -26,7 +26,7 @@ class BaseEndpoint implements EndpointInterface
      */
     private $handlers = [];
     /**
-     * @var ModuleInterface
+     * @var ApiModuleInterface
      */
     private $module;
 
@@ -48,6 +48,7 @@ class BaseEndpoint implements EndpointInterface
 
     public function setMethodHandler(string $method, EndpointMethodHandlerInterface $handler)
     {
+        $handler->setEndpoint($this);
         $this->handlers[$method] = $handler;
     }
 
@@ -56,7 +57,10 @@ class BaseEndpoint implements EndpointInterface
      */
     public function setMethodHandlers(array $handlers)
     {
-        $this->handlers = $handlers;
+        $this->handlers = [];
+        foreach ($handlers as $methodName => $handler) {
+            $this->setMethodHandler($methodName, $handler);
+        }
     }
 
     /**
@@ -72,12 +76,12 @@ class BaseEndpoint implements EndpointInterface
         return array_key_exists($method, $this->handlers);
     }
 
-    public function getModule(): ModuleInterface
+    public function getModule(): ApiModuleInterface
     {
         return $this->module;
     }
 
-    public function setModule(ModuleInterface $module)
+    public function setModule(ApiModuleInterface $module)
     {
         $this->path = $module->getPath() . $this->path;
         $this->name = $module->getName() . ': ' . $this->name;

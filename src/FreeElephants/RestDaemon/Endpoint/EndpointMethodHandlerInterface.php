@@ -20,4 +20,6 @@ interface EndpointMethodHandlerInterface
     public function getBaseServerUri(ServerRequestInterface $request): UriInterface;
 
     public function getEndpoint(): EndpointInterface;
+
+    public function setEndpoint(EndpointInterface $endpoint);
 }

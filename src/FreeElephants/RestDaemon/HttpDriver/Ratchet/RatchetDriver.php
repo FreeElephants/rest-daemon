@@ -41,6 +41,7 @@ class RatchetDriver implements HttpDriverInterface
     /**
      * @param array|EndpointInterface[] $endpoints
      * @param EndpointMiddlewareCollectionInterface $middlewareCollection
+     * @param string $httpHost
      * @return RouteCollection
      */
     private function buildEndpointsRouteCollection(

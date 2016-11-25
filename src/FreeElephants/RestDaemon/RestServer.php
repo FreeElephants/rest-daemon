@@ -9,6 +9,7 @@ use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver;
 use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
+use FreeElephants\RestDaemon\Module\ApiModuleInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -34,6 +35,10 @@ class RestServer
      * @var HttpServerConfig
      */
     private $config;
+    /**
+     * @var array $modules
+     */
+    private $modules;
 
     public function __construct(
         string $httpHost = HttpServerConfig::DEFAULT_HTTP_HOST,
@@ -74,5 +79,13 @@ class RestServer
     public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
     {
         return $this->middlewareCollection ?: $this->middlewareCollection = new DefaultEndpointMiddlewareCollection();
+    }
+
+    public function addModule(ApiModuleInterface $module)
+    {
+        $this->modules[] = $module;
+        foreach ($module->getEndpoints() as $endpoint) {
+            $this->addEndpoint($endpoint);
+        }
     }
 }

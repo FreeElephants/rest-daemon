@@ -2,7 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
-use FreeElephants\RestDaemon\Module\ModuleInterface;
+use FreeElephants\RestDaemon\Module\ApiModuleInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -14,9 +14,9 @@ interface EndpointInterface
 
     public function getName(): string;
 
-    public function getModule(): ModuleInterface;
+    public function getModule(): ApiModuleInterface;
 
-    public function setModule(ModuleInterface $module);
+    public function setModule(ApiModuleInterface $module);
 
     public function setMethodHandler(string $method, EndpointMethodHandlerInterface $handler);
 

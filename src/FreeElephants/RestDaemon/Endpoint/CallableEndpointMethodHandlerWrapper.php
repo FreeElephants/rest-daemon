@@ -2,13 +2,8 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
-use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\UriInterface;
-use Relay\Relay;
-use Relay\RelayBuilder;
-use Zend\Diactoros\Response;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

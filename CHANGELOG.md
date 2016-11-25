@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Api Modules. 
 - Method `EndpointMethodHandlerInterface::getBaseServerUri()` 
 
+### Changed
+- EndpointMethodHandlerInterface extend MiddlewareInterface. 
+
+### Deprecated
+- EndpointMethodHandlerInterface::handle() turned to final and should be changed to private.  
+
 ### Fixed
 - Request scheme and host now available in handlers and middleware (see Ratchet fix https://github.com/ratchetphp/Ratchet/pull/471) 
 

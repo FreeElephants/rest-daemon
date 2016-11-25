@@ -26,7 +26,7 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
      */
     private $endpoint;
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    final public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return $this->relay->__invoke($request, new Response());
     }

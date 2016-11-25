@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 0.3.0 - 2016-11-25
 ### Added
 - Api Modules. 
+- Method `EndpointMethodHandlerInterface::getBaseServerUri()` 
 
 ### Fixed
 - Request scheme and host now available in handlers and middleware (see Ratchet fix https://github.com/ratchetphp/Ratchet/pull/471) 

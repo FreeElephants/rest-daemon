@@ -56,7 +56,10 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
     public function getBaseServerUri(ServerRequestInterface $request): UriInterface
     {
         $uri = $request->getUri();
-        $portPart = $uri->getPort() ? $uri->getPort() . ':' : '';
+        $portPart = '';
+        if ($uri->getPort() !== null) {
+            $portPart = ':' . $uri->getPort();
+        }
         $uriString = $uri->getScheme() . '://' . $uri->getHost() . $portPart . '/';
 
         return new Uri($uriString);

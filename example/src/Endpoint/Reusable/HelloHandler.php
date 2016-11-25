@@ -19,7 +19,9 @@ class HelloHandler extends AbstractEndpointMethodHandler
     ): ResponseInterface
     {
         $response->getBody()->write('{
-        "message": "Hello from ' . $this->getEndpoint()->getName() . '"
+        "message": "Hello from ' . $this->getEndpoint()->getName() . '",
+        "baseServerUri": "' . $this->getBaseServerUri($request) . '",
+        "baseEndpointPath": "' . $this->getEndpoint()->getPath() . '"
     }');
         return $next($request, $response);
     }

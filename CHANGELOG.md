@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.3.0 - 2016-11-22
+### Added
+- Api Modules. 
+
+### Fixed
+- Request scheme and host now available in handlers and middleware (see Ratchet fix https://github.com/ratchetphp/Ratchet/pull/471) 
+
 ## 0.2.0 - 2016-11-22
 ### Changed
 - AbstractEndpointMethodHandler::__invoke() must return PSR RequestInterface now. 

@@ -5,6 +5,7 @@ namespace FreeElephants\RestDaemon\Endpoint;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
 use Relay\Relay;
 use Relay\RelayBuilder;
 use Zend\Diactoros\Response;
@@ -12,17 +13,12 @@ use Zend\Diactoros\Response;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInterface
+class CallableEndpointMethodHandlerWrapper extends AbstractEndpointMethodHandler
 {
     /**
      * @var callable
      */
     private $func;
-
-    /**
-     * @var Relay
-     */
-    private $relay;
 
     /**
      * CallableEndpointMethodHandlerWrapper constructor.
@@ -36,14 +32,12 @@ class CallableEndpointMethodHandlerWrapper implements EndpointMethodHandlerInter
         $this->func = $func;
     }
 
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        callable $next
+    ): ResponseInterface
     {
-        return $this->relay->__invoke($request, new Response());
-    }
-
-    public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $endpointMiddlewareCollection)
-    {
-        $relayBuilder = new RelayBuilder();
-        $this->relay = $relayBuilder->newInstance($endpointMiddlewareCollection->wrapInto($this->func));
+        return call_user_func($this->func, $request, $response, $next);
     }
 }

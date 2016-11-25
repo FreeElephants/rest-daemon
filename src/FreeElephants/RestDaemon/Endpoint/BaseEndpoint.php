@@ -2,6 +2,8 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
+use FreeElephants\RestDaemon\Module\ModuleInterface;
+
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
@@ -23,6 +25,10 @@ class BaseEndpoint implements EndpointInterface
      * @var array|EndpointMethodHandlerInterface[]
      */
     private $handlers = [];
+    /**
+     * @var ModuleInterface
+     */
+    private $module;
 
     public function __construct(string $path, string $name = null)
     {
@@ -64,5 +70,17 @@ class BaseEndpoint implements EndpointInterface
     public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->handlers);
+    }
+
+    public function getModule(): ModuleInterface
+    {
+        return $this->module;
+    }
+
+    public function setModule(ModuleInterface $module)
+    {
+        $this->path = $module->getPath() . $this->path;
+        $this->name = $module->getName() . ': ' . $this->name;
+        $this->module = $module;
     }
 }

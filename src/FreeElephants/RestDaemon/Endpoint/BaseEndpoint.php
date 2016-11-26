@@ -83,7 +83,7 @@ class BaseEndpoint implements EndpointInterface
 
     public function setModule(ApiModuleInterface $module)
     {
-        $this->path = $module->getPath() . $this->path;
+        $this->path = str_replace('//', '/', $module->getPath() . $this->path);
         $this->name = $module->getName() . ': ' . $this->name;
         $this->module = $module;
     }

@@ -10,6 +10,7 @@ use FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver;
 use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use FreeElephants\RestDaemon\Module\ApiModuleInterface;
+use FreeElephants\RestDaemon\Module\BaseApiModule;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -36,7 +37,7 @@ class RestServer
      */
     private $config;
     /**
-     * @var array $modules
+     * @var array|ApiModuleInterface[] $modules
      */
     private $modules;
 
@@ -49,16 +50,21 @@ class RestServer
     ) {
         $this->config = new HttpServerConfig($httpHost, $port, $address, $allowedOrigins);
         $this->httpDriver = $this->buildHttpDriver($httpDriverClass);
+        $this->modules[0] = new BaseApiModule('/', 'Default Api Module');
     }
 
     public function addEndpoint(EndpointInterface $endpoint)
     {
-        $this->endpoints[] = $endpoint;
+        $this->modules[0]->addEndpoint($endpoint);
     }
 
     public function run()
     {
-        $this->httpDriver->configure($this->config, $this->endpoints, $this->getMiddlewareCollection());
+        $endpoints = [];
+        foreach ($this->modules as $module) {
+            $endpoints = array_merge($module->getEndpoints(), $endpoints);
+        }
+        $this->httpDriver->configure($this->config, $endpoints, $this->getMiddlewareCollection());
         cli_set_process_title('rest-deamon');
         $this->httpDriver->run();
     }
@@ -84,8 +90,5 @@ class RestServer
     public function addModule(ApiModuleInterface $module)
     {
         $this->modules[] = $module;
-        foreach ($module->getEndpoints() as $endpoint) {
-            $this->addEndpoint($endpoint);
-        }
     }
 }

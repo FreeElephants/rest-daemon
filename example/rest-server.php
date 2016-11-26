@@ -77,6 +77,13 @@ $helloEndpoint_v2->setMethodHandler('GET', new HelloHandler());
 $module_v2 = new BaseApiModule('/api/v2', 'Api ver.2');
 $module_v2->addEndpoint($helloEndpoint_v2);
 $server->addModule($module_v2);
+/*
+ * By default, rest server contain root module for directly added endpoints.
+ */
+$helloEndpointInTheRoot = new BaseEndpoint('/hello', 'Hello World');
+$helloEndpointInTheRoot->setMethodHandler('GET', new HelloHandler());
+$server->addEndpoint($helloEndpointInTheRoot);
+
 /**
  * Note: after server will be run, php script going to loop and code after this line not be executed.
  */

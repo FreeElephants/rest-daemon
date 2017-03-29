@@ -23,7 +23,7 @@ before_script:
   -  php example/rest-server.php 2> /dev/null > /dev/null &
 
 script:
-  - vendor/bin/codeception run
+  - vendor/bin/codecept run
 
 after_script:
   - kill %1

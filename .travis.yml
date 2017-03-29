@@ -20,7 +20,7 @@ install:
   - composer install
 
 before_script:
-  -  php example/rest-server.php 2> /dev/null > /dev/null &
+  -  php example/rest-server.php &
 
 script:
   - vendor/bin/codecept run

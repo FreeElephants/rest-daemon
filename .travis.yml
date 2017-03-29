@@ -8,8 +8,8 @@ php:
   - nightly
 
 env:
-  - DRIVER_CLASS=\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver::class
-  - DRIVER_CLASS=\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver::class
+  - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+  - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
 
 matrix:
   allow_failures:

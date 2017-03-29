@@ -62,4 +62,13 @@ class AerysDriver implements HttpDriverInterface
 
         return $router;
     }
+
+    /**
+     * @internal be careful: it's strong dependency without cross-vendor adapting: pre-configured Ratchet or Aerys instance
+     * @return Host
+     */
+    public function getRawInstance()
+    {
+        return $this->aerysHost;
+    }
 }

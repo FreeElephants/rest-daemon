@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Added 
+- $rawInstanceBeforeRunHool callable argument to RestServer.run() for low level vendor specific manipilation (Ratchet or Aerys). 
+
+### Internal
+- Update vendors, use Ratchet v0.3.6.  
+
 ## 0.4.0 - 2016-12-06
 ### Changed
 - All not modules endpoints associated with default module in Rest Server.

@@ -69,4 +69,13 @@ class RatchetDriver implements HttpDriverInterface
 
         return $routeCollection;
     }
+
+    /**
+     * @internal be careful: it's strong dependency without cross-vendor adapting: pre-configured Ratchet or Aerys instance
+     * @return App
+     */
+    public function getRawInstance()
+    {
+        return $this->server;
+    }
 }

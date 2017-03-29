@@ -20,11 +20,6 @@ class RestServer
     const DEFAULT_HTTP_DRIVER = RatchetDriver::class;
 
     /**
-     * @var array|EndpointInterface[]
-     */
-    private $endpoints = [];
-
-    /**
      * @var EndpointMiddlewareCollectionInterface
      */
     private $middlewareCollection;
@@ -58,21 +53,35 @@ class RestServer
         $this->modules[0]->addEndpoint($endpoint);
     }
 
-    public function run()
+    /**
+     * Use $rawDriverBeforeRunHook function for low level vendor specific driver manipulation:
+     *  - function(Ratchet\App|Aerys\Host $rawInstance, RestServer $restServer)
+     * @param callable|null $rawDriverBeforeRunHook
+     */
+    public function run(callable $rawDriverBeforeRunHook = null)
     {
         $endpoints = [];
         foreach ($this->modules as $module) {
             $endpoints = array_merge($module->getEndpoints(), $endpoints);
         }
         $this->httpDriver->configure($this->config, $endpoints, $this->getMiddlewareCollection());
-        cli_set_process_title('rest-deamon');
+        if($rawDriverBeforeRunHook) {
+            $rawDriverBeforeRunHook($this->httpDriver->getRawInstance(), $this);
+        }
+        cli_set_process_title('rest-daemon');
         $this->httpDriver->run();
+    }
+
+    public function getDriver(): HttpDriverInterface
+    {
+        return $this->httpDriver;
     }
 
     protected function buildHttpDriver(string $httpDriverClass): HttpDriverInterface
     {
         if (!class_exists($httpDriverClass)) {
-            throw new InvalidArgumentException();
+            $exceptionMessage = sprintf('Driver class `%s` not found. ', $httpDriverClass);
+            throw new InvalidArgumentException($exceptionMessage);
         }
         return new $httpDriverClass;
     }

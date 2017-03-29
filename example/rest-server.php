@@ -24,8 +24,8 @@ use RestDeamon\Example\Endpoint\Greeting\PostHandler;
 use RestDeamon\Example\Endpoint\Index\GetHandler;
 use RestDeamon\Example\Endpoint\Reusable\HelloHandler;
 
-$httpDriverClass = \FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver::class;
-$server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*']);
+$httpDriverClass = getenv('DRIVER_CLASS') ?? null;
+$server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*'], $httpDriverClass);
 
 $requestCounter = function (
     ServerRequestInterface $request,

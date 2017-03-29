@@ -1,0 +1,37 @@
+sudo: false
+
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - nightly
+
+env:
+  - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+  - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+install:
+  - composer self-update
+  - composer install
+
+before_script:
+  -  php example/rest-server.php 2> /dev/null > /dev/null &
+
+script:
+  - vendor/bin/codecept run
+
+after_script:
+  - kill %1
+
+#after_success:
+  # Coverage reporting
+#  - bash <(curl -s https://codecov.io/bash)
+
+cache:
+  directories:
+    - $HOME/.composer/cache

@@ -31,5 +31,8 @@
       "name": "samizdam",
       "email": "samizdam@inbox.ru"
     }
-  ]
+  ],
+  "suggest": {
+    "free-elephants/di": "Simplest PHP Dependency Injector. "
+  }
 }

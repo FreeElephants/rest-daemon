@@ -1,6 +1,6 @@
 # Rest-Daemon
 
-**Nota Bene:** 
+**Note Bene:** 
 This project use semver and [changelog](CHANGELOG.md) . 
 But it's not stable major version. 
 Any minor update (f.e.: 0.5.* -> 0.6.*) can break backward compatibility!    
@@ -30,7 +30,7 @@ See example in example/rest-server.php.
 ```
 # your rest-server.php script
 $server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*']); // <- it's default arguments values
-$server->run()
+$server->run();
 
 # can be runned as
 $ php ./rest-server.php 

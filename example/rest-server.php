@@ -24,7 +24,8 @@ use RestDeamon\Example\Endpoint\Greeting\PostHandler;
 use RestDeamon\Example\Endpoint\Index\GetHandler;
 use RestDeamon\Example\Endpoint\Reusable\HelloHandler;
 
-$httpDriverClass = getenv('DRIVER_CLASS') ?? null;
+$httpDriverClass = getenv('DRIVER_CLASS') ?: RestServer::DEFAULT_HTTP_DRIVER;
+
 $server = new RestServer('127.0.0.1', 8080, '0.0.0.0', ['*'], $httpDriverClass);
 
 $requestCounter = function (

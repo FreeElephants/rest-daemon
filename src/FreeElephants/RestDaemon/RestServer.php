@@ -72,11 +72,6 @@ class RestServer
         $this->httpDriver->run();
     }
 
-    public function getDriver(): HttpDriverInterface
-    {
-        return $this->httpDriver;
-    }
-
     protected function buildHttpDriver(string $httpDriverClass): HttpDriverInterface
     {
         if (!class_exists($httpDriverClass)) {

@@ -1,7 +1,7 @@
 # Rest-Daemon
 
-**Note Bene:** 
-This project use semver and [changelog](CHANGELOG.md) . 
+**Nota Bene:** 
+This project use semver and [changelog](CHANGELOG.md). 
 But it's not stable major version. 
 Any minor update (f.e.: 0.5.* -> 0.6.*) can break backward compatibility!    
 

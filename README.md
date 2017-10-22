@@ -57,6 +57,10 @@ $greetingAttributeEndpoint->setMethodHandler('GET', new GetAttributeHandler());
 $server->addEndpoint($greetingAttributeEndpoint);
 ```
 
+### Routing
+You can link with every method in route a handler, and optionally organize routes by modules.  By default server contain 1 default module for all endpoints. 
+See example: [routes.php](/example/routes.php)
+
 ### Configure Common Application Middleware
 
 By default server instance provide collection with some useful middleware. 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "13d484a8845bb6839e550c848d38da09",
-    "content-hash": "b2c3e4a909d99e36029d8af754b9de62",
+    "hash": "c9aa9d0ef21f2aa11d3370f45fc335d5",
+    "content-hash": "63f804353b43c5977d07db7d028b6d8e",
     "packages": [
         {
             "name": "amphp/aerys",
@@ -617,6 +617,45 @@
                 "event-emitter"
             ],
             "time": "2017-07-17 17:39:19"
+        },
+        {
+            "name": "free-elephants/di",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FreeElephants/php-di.git",
+                "reference": "6bcb10bad77eb7e701f94bed7709fad470e03cf1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FreeElephants/php-di/zipball/6bcb10bad77eb7e701f94bed7709fad470e03cf1",
+                "reference": "6bcb10bad77eb7e701f94bed7709fad470e03cf1",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FreeElephants\\DI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2"
+            ],
+            "authors": [
+                {
+                    "name": "samizdam",
+                    "email": "samizdam@inbox.ru"
+                }
+            ],
+            "description": "IoC, constructor dependency injection",
+            "time": "2017-10-18 16:32:04"
         },
         {
             "name": "guzzle/common",

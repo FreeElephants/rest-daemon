@@ -41,11 +41,17 @@ class RestServer
         int $port = HttpServerConfig::DEFAULT_HTTP_PORT,
         string $address = HttpServerConfig::DEFAULT_ADDRESS,
         $allowedOrigins = HttpServerConfig::DEFAULT_ALLOWED_ORIGINS,
-        string $httpDriverClass = self::DEFAULT_HTTP_DRIVER
+        string $httpDriverClass = self::DEFAULT_HTTP_DRIVER,
+        ApiModuleInterface $baseModule = null
     ) {
         $this->config = new HttpServerConfig($httpHost, $port, $address, $allowedOrigins);
         $this->httpDriver = $this->buildHttpDriver($httpDriverClass);
-        $this->modules[0] = new BaseApiModule('/', 'Default Api Module');
+        $this->modules[0] = $baseModule ?: new BaseApiModule('/', 'Default Api Module');
+    }
+
+    public function setBaseModule(ApiModuleInterface $baseModule)
+    {
+        $this->modules[0] = $baseModule;
     }
 
     public function addEndpoint(EndpointInterface $endpoint)
@@ -65,7 +71,7 @@ class RestServer
             $endpoints = array_merge($module->getEndpoints(), $endpoints);
         }
         $this->httpDriver->configure($this->config, $endpoints, $this->getMiddlewareCollection());
-        if($rawDriverBeforeRunHook) {
+        if ($rawDriverBeforeRunHook) {
             $rawDriverBeforeRunHook($this->httpDriver->getRawInstance(), $this);
         }
         cli_set_process_title('rest-daemon');

@@ -10,7 +10,7 @@ Simple PHP7 framework for fast building REST services based on middleware, PSR-7
 ## Features: 
 
 - Middleware oriented request/response handling
-- Priority PSR's support: PSR-2, -3, -4, -7, -15 and other. 
+- Priority PSR's support: PSR-2, -3, -4, -7, -11, -15 and other. 
 - Built-in Middleware to support usual REST features, like HTTP based semantics, content types, request parsing, headers. 
 - Choose one of two available http-daemon drivers: Ratchet (ReactPHP) or Aerys (amphp). 
 
@@ -56,6 +56,18 @@ $greetingAttributeEndpoint->setMethodHandler('GET', new GetAttributeHandler());
 
 $server->addEndpoint($greetingAttributeEndpoint);
 ```
+
+See how to [build server for step by step in one script](/example/rest-server-script-example.php)
+
+### RestServerBuilder
+
+You can use [php-di](https://github.com/free-elephants/php-di) (or another PSR-11 container implementation) and routing file configuration with RestServerBuilder for more configuring and coding less. 
+
+See example with file based [routing](/example/routes.php) and [dependencies](/example/components.php) configuration: [rest-server.php](/example/rest-server.php)  
+
+### Routing
+You can link with every method in route a handler, and optionally organize routes by modules.  By default server contain 1 default module for all endpoints. 
+See example: [routes.php](/example/routes.php)
 
 ### Configure Common Application Middleware
 

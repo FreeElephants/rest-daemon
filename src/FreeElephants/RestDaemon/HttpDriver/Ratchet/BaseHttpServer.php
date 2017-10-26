@@ -5,13 +5,10 @@ namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
 use FreeElephants\RestDaemon\HttpAdapter\Guzzle2Zend\ServerRequest;
-use FreeElephants\RestDaemon\HttpAdapter\Psr2Guzzle\Response;
-use Guzzle\Http\Message\EntityEnclosingRequest;
-use Guzzle\Http\Message\RequestInterface as GuzzleRequestInterface;
-use function GuzzleHttp\Psr7\str;
 use Psr\Http\Message\RequestInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Http\HttpServerInterface;
+use function GuzzleHttp\Psr7\str;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
@@ -40,35 +37,26 @@ class BaseHttpServer implements HttpServerInterface
      */
     function onError(ConnectionInterface $conn, \Exception $e)
     {
-        echo "======================\nERROR\n==================\n";
-        var_dump($e->getMessage());
-        exit;
         $response = $this->exceptionHandler->handleException($e);
-        $conn->send(new Response($response));
+        $conn->send(str($response));
         $conn->close();
     }
 
     /**
-     * @param \Ratchet\ConnectionInterface $conn
-     * @param \Guzzle\Http\Message\RequestInterface $request null is default because PHP won't let me overload; don't pass null!!!
-     * @throws \UnexpectedValueException if a RequestInterface is not passed
+     * @param ConnectionInterface $conn
+     * @param RequestInterface $request
      */
     public function onOpen(ConnectionInterface $conn, RequestInterface $request = null)
     {
         /**@var $request RequestInterface */
-        var_dump(__METHOD__ . 'in');
         $psrRequest = new ServerRequest($request);
-        var_dump('request builded');
         parse_str($request->getUri()->getQuery(), $queryParams);
         foreach ($queryParams as $name => $value) {
             $psrRequest = $psrRequest->withAttribute($name, $value);
         }
         $response = $this->handler->handle($psrRequest);
         $data = str($response);
-        var_dump($data);
-//        $conn->send($data);
         $conn->send($data);
-//        var_dump('response sended');
         $conn->close();
     }
 

@@ -2,12 +2,8 @@
 
 namespace FreeElephants\RestDaemon\HttpAdapter\Guzzle2Zend;
 
-use Guzzle\Http\Message\EntityEnclosingRequest;
-use Guzzle\Http\Message\Header;
 use Psr\Http\Message\RequestInterface;
-use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Zend\Diactoros\ServerRequest as ZendServerRequest;
-use Zend\Diactoros\Uri;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

@@ -2,17 +2,31 @@
 
 namespace FreeElephants\RestDaemon\HttpAdapter\Psr2Guzzle;
 
-use Guzzle\Http\Message\Response as GuzzleResponse;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class Response extends GuzzleResponse
+class Response extends \Zend\Diactoros\Response
 {
 
     public function __construct(ResponseInterface $response)
     {
-        parent::__construct($response->getStatusCode(), $response->getHeaders(), $response->getBody());
+        parent::__construct($response->getBody(), $response->getStatusCode(), $response->getHeaders());
+    }
+
+    public function __toString()
+    {
+        $this->getBody()->rewind();
+        $output = 'HTTP/' . $this->getProtocolVersion() . ' ' . $this->getStatusCode() . ' ' . $this->getReasonPhrase() . "\r\n";
+
+        foreach ($this->getHeaders() as $name => $values) {
+            $output .= $name . ": " . implode(", ", $values) . "\r\n";
+        }
+//        foreach ($this->getHeaders() as $name => $values) {
+//            $output .= $this->getHeaderLine($name) . "\r\n";
+//        }
+        $output .= $this->getBody()->getContents();
+        return $output;
     }
 }

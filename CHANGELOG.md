@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased] 
+### Internal
+- Update Ratchet to v0.4  
+
 ## 0.6.0 - 2017-10-26
 ### Added
 - RestServerBuilder, array based configuration building.  

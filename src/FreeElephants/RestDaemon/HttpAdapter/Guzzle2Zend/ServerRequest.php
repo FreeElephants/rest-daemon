@@ -2,33 +2,29 @@
 
 namespace FreeElephants\RestDaemon\HttpAdapter\Guzzle2Zend;
 
-use Guzzle\Http\Message\EntityEnclosingRequest;
-use Guzzle\Http\Message\Header;
+use Psr\Http\Message\RequestInterface;
 use Zend\Diactoros\ServerRequest as ZendServerRequest;
-use Zend\Diactoros\Uri;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
 class ServerRequest extends ZendServerRequest
 {
-    public function __construct(EntityEnclosingRequest $request)
+    public function __construct(RequestInterface $request)
     {
         $serverParams = $_SERVER;
         $uploadedFiles = [];
-        $uri = new Uri($request->getUrl());
+        $uri = $request->getUri();
         $method = $request->getMethod();
-        $body = $request->getBody()->getStream();
+        $body = $request->getBody();
         $parsedBody = [];
         $headers = [];
-        /**@var $header Header */
-        foreach ($request->getHeaders()->getAll() as $header) {
-            $headers[$header->getName()] = $header->toArray();
+        foreach ($request->getHeaders() as $name => $values) {
+            $headers[$name] = $values;
         }
         $cookies = [];
-        $queryParams = $request->getQuery()->getAll();
+        parse_str($request->getUri()->getQuery(), $queryParams);
         $protocol = $request->getProtocolVersion();
-
         parent::__construct(
             $serverParams,
             $uploadedFiles,

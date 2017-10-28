@@ -23,12 +23,8 @@ class RestServerBuilderTest extends AbstractTestCase
 
         $server = $builder->buildServer([
             'modules' => [
-                '/api/module1' => [
-                    'name' => 'module1',
-                ],
-                '/api/module2' => [
-                    'name' => 'module2',
-                ],
+                '/api/module1' => [],
+                '/api/module2' => [],
             ],
         ]);
 

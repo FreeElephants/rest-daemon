@@ -4,6 +4,7 @@ namespace FreeElephants\RestDaemon;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\Exception\InvalidArgumentException;
+use FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver;
@@ -17,7 +18,9 @@ use FreeElephants\RestDaemon\Module\BaseApiModule;
  */
 class RestServer
 {
-    const DEFAULT_HTTP_DRIVER = RatchetDriver::class;
+    const DEFAULT_HTTP_DRIVER = self::RATCHET_HTTP_DRIVER;
+    const RATCHET_HTTP_DRIVER = RatchetDriver::class;
+    const AERYS_HTTP_DRIVER = AerysDriver::class;
 
     /**
      * @var EndpointMiddlewareCollectionInterface

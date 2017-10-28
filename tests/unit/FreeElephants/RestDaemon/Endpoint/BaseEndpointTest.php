@@ -1,10 +1,8 @@
 <?php
 
-namespace FreeElephants\RestDaemon;
+namespace FreeElephants\RestDaemon\Endpoint;
 
 use FreeElephants\AbstractTestCase;
-use FreeElephants\RestDaemon\Endpoint\BaseEndpoint;
-use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER
 ### Internal
 - Update aerys to v0.7.1
+- Update codeception to v2.3
 
 ## 0.6.1 - 2017-10-27 
 ### Internal

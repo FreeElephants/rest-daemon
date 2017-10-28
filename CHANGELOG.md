@@ -74,15 +74,15 @@ Items with *BC!* note about backwards compatibility breaks!
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
 
-[Unreleased]: https://github.com/free-elephants/compare/0.6.1...HEAD
-[0.6.1]: https://github.com/free-elephants/compare/0.6.0...0.6.1
-[0.6.0]: https://github.com/free-elephants/compare/0.5.0...0.6.0
-[0.5.0]: https://github.com/free-elephants/compare/0.4.0...0.5.0
-[0.4.0]: https://github.com/free-elephants/compare/0.3.0...0.4.0
-[0.3.0]: https://github.com/free-elephants/compare/0.2.0...0.3.0
-[0.2.0]: https://github.com/free-elephants/compare/0.1.1...0.2.0
-[0.1.1]: https://github.com/free-elephants/compare/0.1.0...0.1.1
-[0.1.0]: https://github.com/free-elephants/compare/0.0.1...0.1.0
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.6.1...HEAD
+[0.6.1]: https://github.com/FreeElephants/rest-daemon/compare/0.6.0...0.6.1
+[0.6.0]: https://github.com/FreeElephants/rest-daemon/compare/0.5.0...0.6.0
+[0.5.0]: https://github.com/FreeElephants/rest-daemon/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/FreeElephants/rest-daemon/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/FreeElephants/rest-daemon/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/FreeElephants/rest-daemon/compare/0.1.1...0.2.0
+[0.1.1]: https://github.com/FreeElephants/rest-daemon/compare/0.1.0...0.1.1
+[0.1.0]: https://github.com/FreeElephants/rest-daemon/compare/0.0.1...0.1.0
 
 
 

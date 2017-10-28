@@ -2,13 +2,14 @@
 
 namespace FreeElephants\RestDaemon\Middleware\Collection;
 
+use FreeElephants\AbstractTestCase;
 use FreeElephants\RestDaemon\Middleware\ContentTypeSetter;
 use FreeElephants\RestDaemon\Middleware\MiddlewareRole;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class DefaultBeforeMiddlewareCollectionTest extends \PHPUnit_Framework_TestCase
+class DefaultBeforeMiddlewareCollectionTest extends AbstractTestCase
 {
 
     public function testDefaultMiddlewareInstances()

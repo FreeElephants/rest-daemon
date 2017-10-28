@@ -1,14 +1,13 @@
 <?php
 
-namespace FreeElephants\RestDaemon;
+namespace FreeElephants\RestDaemon\Endpoint;
 
-use FreeElephants\RestDaemon\Endpoint\BaseEndpoint;
-use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
+use FreeElephants\AbstractTestCase;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class BaseEndpointTest extends \PHPUnit_Framework_TestCase
+class BaseEndpointTest extends AbstractTestCase
 {
 
     public function testGetMethodHandlers()

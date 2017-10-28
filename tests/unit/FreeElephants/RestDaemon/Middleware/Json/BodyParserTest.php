@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Middleware\Json;
 
+use FreeElephants\AbstractTestCase;
 use FreeElephants\RestDaemon\Util\ParamsContainer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,7 +13,7 @@ use Zend\Diactoros\Stream;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class BodyParserTest extends \PHPUnit_Framework_TestCase
+class BodyParserTest extends AbstractTestCase
 {
 
     public function testParseToDefaultParamsContainer()

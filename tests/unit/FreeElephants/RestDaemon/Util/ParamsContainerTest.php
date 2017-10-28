@@ -2,10 +2,12 @@
 
 namespace FreeElephants\RestDaemon\Util;
 
+use FreeElephants\AbstractTestCase;
+
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class ParamsContainerTest extends \PHPUnit_Framework_TestCase
+class ParamsContainerTest extends AbstractTestCase
 {
 
     public function testGet()

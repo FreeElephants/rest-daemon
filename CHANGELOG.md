@@ -2,14 +2,21 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+and this project adheres to [Semantic Versioning](http://semver.org/). 
 
-## Unreleased
+Items with *BC!* note about backwards compatibility breaks!     
+
+## [Unreleased]
 ### Added
-- Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER
+- Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER. 
+- Method RestServer::getModules().  
+
 ### Internal
-- Update aerys to v0.7.1
-- Update codeception to v2.3
+- Update aerys to v0.7.1. 
+- Update codeception to v2.3. 
+
+### Changed
+- *BC!*: RestServerBuilder costructor accept all required dependencies.   
 
 ## 0.6.1 - 2017-10-27 
 ### Internal

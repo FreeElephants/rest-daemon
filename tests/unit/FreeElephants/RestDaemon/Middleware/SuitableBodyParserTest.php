@@ -2,13 +2,14 @@
 
 namespace FreeElephants\RestDaemon\Middleware;
 
+use FreeElephants\AbstractTestCase;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class SuitableBodyParserTest extends \PHPUnit_Framework_TestCase
+class SuitableBodyParserTest extends AbstractTestCase
 {
 
     public function testUnsupportedMediaType()

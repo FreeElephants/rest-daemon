@@ -12,10 +12,10 @@
     "free-elephants/di": "^1.5",
     "guzzlehttp/psr7": "^1.0",
     "cboden/ratchet": "0.4",
-    "amphp/aerys": "^0.7.1"
+    "amphp/aerys": "^0.7.1",
+    "codeception/codeception": "^2.3"
   },
   "require-dev": {
-    "codeception/codeception": "^2.2"
   },
   "autoload": {
     "psr-4": {
@@ -25,7 +25,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FreeElephants\\RestDaemon\\": "tests/FreeElephants/RestDaemon/",
+      "FreeElephants\\": "tests/unit/FreeElephants/",
       "RestDeamon\\Example\\": "example/src/"
     }
   },

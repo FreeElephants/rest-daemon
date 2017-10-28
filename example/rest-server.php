@@ -11,9 +11,9 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use FreeElephants\RestDaemon\Endpoint\EndpointFactory;
+use FreeElephants\DI\InjectorBuilder;
+use FreeElephants\DI\PsrContainterAdapter;
 use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
-use FreeElephants\RestDaemon\Module\ModuleFactory;
 use FreeElephants\RestDaemon\RestServer;
 use FreeElephants\RestDaemon\RestServerBuilder;
 use Psr\Http\Message\ResponseInterface;
@@ -28,13 +28,10 @@ $origin = ['*'];
 
 $routes = require __DIR__ . '/routes.php';
 $components = require __DIR__ . '/components.php';
-$injector = (new \FreeElephants\DI\InjectorBuilder())->buildFromArray($components);
-$di = new \FreeElephants\DI\PsrContainterAdapter($injector);
+$injector = (new InjectorBuilder())->buildFromArray($components);
+$di = new PsrContainterAdapter($injector);
 $server = new RestServer($httpHost, $port, $address, $origin);
-$restServerBuilder = new RestServerBuilder();
-$restServerBuilder->setModuleFactory(new ModuleFactory());
-$restServerBuilder->setEndpointFactory(new EndpointFactory($di));
-$restServerBuilder->setHandlerFactory(new \FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactory($di));
+$restServerBuilder = new RestServerBuilder($di);
 $restServerBuilder->setServer($server);
 $restServerBuilder->buildServer($routes);
 

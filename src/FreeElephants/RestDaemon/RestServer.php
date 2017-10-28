@@ -37,7 +37,9 @@ class RestServer
     /**
      * @var array|ApiModuleInterface[] $modules
      */
-    private $modules;
+    private $modules = [];
+
+    private $baseModule;
 
     public function __construct(
         string $httpHost = HttpServerConfig::DEFAULT_HTTP_HOST,
@@ -49,17 +51,18 @@ class RestServer
     ) {
         $this->config = new HttpServerConfig($httpHost, $port, $address, $allowedOrigins);
         $this->httpDriver = $this->buildHttpDriver($httpDriverClass);
-        $this->modules[0] = $baseModule ?: new BaseApiModule('/', 'Default Api Module');
+        $this->setBaseModule($baseModule ?: new BaseApiModule('/', 'Default Api Module'));
     }
 
     public function setBaseModule(ApiModuleInterface $baseModule)
     {
-        $this->modules[0] = $baseModule;
+        $this->baseModule = $baseModule;
+        $this->addModule($baseModule);
     }
 
     public function addEndpoint(EndpointInterface $endpoint)
     {
-        $this->modules[0]->addEndpoint($endpoint);
+        $this->baseModule->addEndpoint($endpoint);
     }
 
     /**
@@ -102,6 +105,14 @@ class RestServer
 
     public function addModule(ApiModuleInterface $module)
     {
-        $this->modules[] = $module;
+        $this->modules[$module->getPath()] = $module;
+    }
+
+    /**
+     * @return array|ApiModuleInterface[]
+     */
+    public function getModules(): array
+    {
+        return $this->modules;
     }
 }

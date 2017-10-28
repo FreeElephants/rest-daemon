@@ -2,38 +2,46 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+and this project adheres to [Semantic Versioning](http://semver.org/). 
 
-## Unreleased
+Items with *BC!* note about backwards compatibility breaks!     
+
+## [Unreleased]
 ### Added
-- Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER
-### Internal
-- Update aerys to v0.7.1
-- Update codeception to v2.3
+- Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER. 
+- Method RestServer::getModules().  
 
-## 0.6.1 - 2017-10-27 
+### Internal
+- Update aerys to v0.7.1. 
+- Update codeception to v2.3. 
+
+### Changed
+- *BC!*: RestServerBuilder costructor accept all required dependencies. 
+- ModuleFactory use `path` as `name` if last not present in configuration properties. 
+
+## [0.6.1] - 2017-10-27 
 ### Internal
 - Update Ratchet to v0.4  
 
-## 0.6.0 - 2017-10-26
+## [0.6.0] - 2017-10-26
 ### Added
 - RestServerBuilder, array based configuration building.  
 
-## 0.5.0 - 2017-03-30
+## [0.5.0] - 2017-03-30
 ### Added 
 - $rawInstanceBeforeRunHool callable argument to RestServer.run() for low level vendor specific manipilation (Ratchet or Aerys). 
 
 ### Internal
 - Update vendors, use Ratchet v0.3.6.  
 
-## 0.4.0 - 2016-12-06
+## [0.4.0] - 2016-12-06
 ### Changed
 - All not modules endpoints associated with default module in Rest Server.
 
 ### Internal 
 - Remove unused dependency for FreeElephants/(php-)di
 
-## 0.3.0 - 2016-11-25
+## [0.3.0] - 2016-11-25
 ### Added
 - Api Modules. 
 - Method `EndpointMethodHandlerInterface::getBaseServerUri()` 
@@ -50,18 +58,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Internal
 - Extend CallableEndpointMethodHandlerWrapper from AbstractEndpointMethodHandler. 
 
-## 0.2.0 - 2016-11-22
+## [0.2.0] - 2016-11-22
 ### Changed
 - AbstractEndpointMethodHandler::__invoke() must return PSR RequestInterface now. 
 
-## 0.1.1 - 2016-11-21
+## [0.1.1] - 2016-11-21
 - Fix SuitableBodyParser behavior when matched parser not found: send response with 415 status code.   
 
-## 0.1.0 - 2016-11-19
+## [0.1.0] - 2016-11-19
 ### Added 
 - Send Access-Control-Allow-Origin header with wildcard by default.  
 
-## 0.0.1 - 2016-11-19
+## [0.0.1] - 2016-11-19
 ### Added
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
+
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.6.1...HEAD
+[0.6.1]: https://github.com/FreeElephants/rest-daemon/compare/0.6.0...0.6.1
+[0.6.0]: https://github.com/FreeElephants/rest-daemon/compare/0.5.0...0.6.0
+[0.5.0]: https://github.com/FreeElephants/rest-daemon/compare/0.4.0...0.5.0
+[0.4.0]: https://github.com/FreeElephants/rest-daemon/compare/0.3.0...0.4.0
+[0.3.0]: https://github.com/FreeElephants/rest-daemon/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/FreeElephants/rest-daemon/compare/0.1.1...0.2.0
+[0.1.1]: https://github.com/FreeElephants/rest-daemon/compare/0.1.0...0.1.1
+[0.1.0]: https://github.com/FreeElephants/rest-daemon/compare/0.0.1...0.1.0
+
+
+

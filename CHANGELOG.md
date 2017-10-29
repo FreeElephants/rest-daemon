@@ -9,11 +9,12 @@ Items with *BC!* note about backwards compatibility breaks!
 ## [Unreleased]
 ### Added
 - Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER. 
-- Method RestServer::getModules().  
+- Method RestServer::getModules(). 
 
 ### Internal
 - Update aerys to v0.7.1. 
 - Update codeception to v2.3. 
+- Update php-di to v1.6. 
 
 ### Changed
 - *BC!*: RestServerBuilder costructor accept all required dependencies. 

@@ -19,8 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/",
-      "FreeElephants\\DI\\": "src/FreeElephants/DI/"
+      "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/"
     }
   },
   "autoload-dev": {

@@ -16,6 +16,9 @@ Items with *BC!* note about backwards compatibility breaks!
 - Update codeception to v2.3. 
 - Update php-di to v1.6. 
 
+### Removed
+- PsrContainerAdapter, php-di implement it now. 
+
 ### Changed
 - *BC!*: RestServerBuilder costructor accept all required dependencies. 
 - ModuleFactory use `path` as `name` if last not present in configuration properties. 

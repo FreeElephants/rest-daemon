@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Added
+- HttpServerConfig getter and setter to RestServer. 
+- Getters and setters for all fields in HttpServerConfig. 
+- Second argument for HttpServerConfig to RestServerBuilder::buildServer() method. 
+
+### Changed
+- `array` type hinting for $allowedOrigins argument in HttpServerConfig and RestServer.
+
 ### Internal
 - Add the .gitattributes file. 
 

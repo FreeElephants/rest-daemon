@@ -8,6 +8,7 @@ use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactory;
 use FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactoryInterface;
 use FreeElephants\RestDaemon\Exception\MissingDependencyException;
+use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Module\ModuleFactory;
 use FreeElephants\RestDaemon\Module\ModuleFactoryInterface;
 use Psr\Container\ContainerInterface;
@@ -73,8 +74,11 @@ class RestServerBuilder
         $this->moduleFactory = $moduleFactory;
     }
 
-    public function buildServer(array $routerConfig): RestServer
+    public function buildServer(array $routerConfig, HttpServerConfig $httpServerConfig = null): RestServer
     {
+        if ($httpServerConfig) {
+            $this->restServer->setConfig($httpServerConfig);
+        }
         foreach ($this->getModulesConfig($routerConfig) as $basePath => $moduleConfig) {
             $module = $this->moduleFactory->buildModule($basePath, $moduleConfig);
             foreach ($this->getEndpointsConfig($moduleConfig) as $endpointBasePath => $endpointConfig) {

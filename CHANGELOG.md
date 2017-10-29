@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Fixed
+- Aerys driver. 
+
 ### Added
 - HttpServerConfig getter and setter to RestServer. 
 - Getters and setters for all fields in HttpServerConfig. 

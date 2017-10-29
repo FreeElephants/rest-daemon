@@ -9,7 +9,7 @@
     "oscarotero/psr7-middlewares": "^3.18",
     "zendframework/zend-http": "^2.5",
     "psr/container": "^1.0",
-    "free-elephants/di": "^1.5",
+    "free-elephants/di": "^1.6.0",
     "guzzlehttp/psr7": "^1.0",
     "cboden/ratchet": "0.4",
     "amphp/aerys": "^0.7.1",
@@ -19,8 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/",
-      "FreeElephants\\DI\\": "src/FreeElephants/DI/"
+      "FreeElephants\\RestDaemon\\": "src/FreeElephants/RestDaemon/"
     }
   },
   "autoload-dev": {

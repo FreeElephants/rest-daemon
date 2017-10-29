@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "26d3e9883099a15cdb67754660517a34",
+    "content-hash": "077c5dc8769ccab96c68c306f3c4771c",
     "packages": [
         {
             "name": "amphp/aerys",
@@ -1152,20 +1152,25 @@
         },
         {
             "name": "free-elephants/di",
-            "version": "1.5.1",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FreeElephants/php-di.git",
-                "reference": "6bcb10bad77eb7e701f94bed7709fad470e03cf1"
+                "reference": "d552f4f1e2f84dc6f19100a6d9810f33c078f536"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FreeElephants/php-di/zipball/6bcb10bad77eb7e701f94bed7709fad470e03cf1",
-                "reference": "6bcb10bad77eb7e701f94bed7709fad470e03cf1",
+                "url": "https://api.github.com/repos/FreeElephants/php-di/zipball/d552f4f1e2f84dc6f19100a6d9810f33c078f536",
+                "reference": "d552f4f1e2f84dc6f19100a6d9810f33c078f536",
                 "shasum": ""
             },
             "require": {
+                "php": "^7.0",
+                "psr/container": "^1.0",
                 "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/container-implementation": "1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.6"
@@ -1187,7 +1192,7 @@
                 }
             ],
             "description": "IoC, constructor dependency injection",
-            "time": "2017-10-18T16:32:04+00:00"
+            "time": "2017-10-28T22:08:11+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

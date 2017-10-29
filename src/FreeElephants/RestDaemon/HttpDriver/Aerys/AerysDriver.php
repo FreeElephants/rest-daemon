@@ -8,12 +8,16 @@ use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
+use function Aerys\initServer;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
 class AerysDriver implements HttpDriverInterface
 {
+    /**
+     * @var Host
+     */
     private $aerysHost;
 
     public function configure(
@@ -32,15 +36,12 @@ class AerysDriver implements HttpDriverInterface
 
     public function run()
     {
-        \Amp\run(function () {
+        \Amp\Loop::run(function () {
             $arrayOfAerysHostInstances = [$this->aerysHost]; // see Aerys\Host documentation
             $arrayOfAerysOptions = []; // see Aerys\Options documentation
             $logger = new StdoutLogger();
-            $server = (new \Aerys\Bootstrapper(function () use ($arrayOfAerysHostInstances) {
-                return $arrayOfAerysHostInstances;
-            }))->init($logger, $arrayOfAerysOptions);
-
-            $server->start(); // returns a Promise which gets resolved after complete startup
+            $server = initServer($logger, $arrayOfAerysHostInstances, $arrayOfAerysOptions);
+            $server->start();
         });
     }
 

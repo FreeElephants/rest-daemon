@@ -33,12 +33,12 @@ class HttpServerConfig
         string $httpHost = self::DEFAULT_HTTP_HOST,
         int $port = self::DEFAULT_HTTP_PORT,
         string $address = self::DEFAULT_ADDRESS,
-        $allowedOrigins = self::DEFAULT_ALLOWED_ORIGINS
+        array $allowedOrigins = self::DEFAULT_ALLOWED_ORIGINS
     ) {
-        $this->httpHost = $httpHost;
-        $this->port = $port;
-        $this->address = $address;
-        $this->allowedOrigins = $allowedOrigins;
+        $this->setHttpHost($httpHost);
+        $this->setPort($port);
+        $this->setAddress($address);
+        $this->setAllowedOrigins($allowedOrigins);
     }
 
     public function getHttpHost(): string
@@ -59,5 +59,37 @@ class HttpServerConfig
     public function getAllowedOrigins(): array
     {
         return $this->allowedOrigins;
+    }
+
+    /**
+     * @param string $httpHost
+     */
+    public function setHttpHost(string $httpHost)
+    {
+        $this->httpHost = $httpHost;
+    }
+
+    /**
+     * @param int $port
+     */
+    public function setPort(int $port)
+    {
+        $this->port = $port;
+    }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress(string $address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @param array $allowedOrigins
+     */
+    public function setAllowedOrigins(array $allowedOrigins)
+    {
+        $this->allowedOrigins = $allowedOrigins;
     }
 }

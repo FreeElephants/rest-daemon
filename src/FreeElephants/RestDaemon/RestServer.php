@@ -39,13 +39,16 @@ class RestServer
      */
     private $modules = [];
 
+    /**
+     * @var ApiModuleInterface
+     */
     private $baseModule;
 
     public function __construct(
         string $httpHost = HttpServerConfig::DEFAULT_HTTP_HOST,
         int $port = HttpServerConfig::DEFAULT_HTTP_PORT,
         string $address = HttpServerConfig::DEFAULT_ADDRESS,
-        $allowedOrigins = HttpServerConfig::DEFAULT_ALLOWED_ORIGINS,
+        array $allowedOrigins = HttpServerConfig::DEFAULT_ALLOWED_ORIGINS,
         string $httpDriverClass = self::DEFAULT_HTTP_DRIVER,
         ApiModuleInterface $baseModule = null
     ) {
@@ -115,4 +118,15 @@ class RestServer
     {
         return $this->modules;
     }
+
+    public function getConfig(): HttpServerConfig
+    {
+        return $this->config;
+    }
+
+    public function setConfig(HttpServerConfig $config)
+    {
+        $this->config = $config;
+    }
+
 }

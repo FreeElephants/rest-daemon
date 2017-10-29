@@ -28,7 +28,7 @@ $origin = ['*'];
 $routes = require __DIR__ . '/routes.php';
 $components = require __DIR__ . '/components.php';
 $injector = (new InjectorBuilder())->buildFromArray($components);
-$server = new RestServer($httpHost, $port, $address, $origin);
+$server = new RestServer($httpHost, $port, $address, $origin, $httpDriverClass);
 $restServerBuilder = new RestServerBuilder($injector);
 $restServerBuilder->setServer($server);
 $restServerBuilder->buildServer($routes);

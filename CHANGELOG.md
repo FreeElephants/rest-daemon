@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Internal
+- Add the .gitattributes file. 
 
 ## [0.7.0] - 2017-10-29
 ### Added

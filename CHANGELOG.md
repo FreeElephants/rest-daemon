@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+
+## [0.7.0] - 2017-10-29
 ### Added
 - Constants: RestServer::RATCHET_HTTP_DRIVER & RestServer::AERYS_HTTP_DRIVER. 
 - Method RestServer::getModules(). 
@@ -78,7 +80,8 @@ Items with *BC!* note about backwards compatibility breaks!
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
 
-[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.6.1...HEAD
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.7.0...HEAD
+[0.6.1]: https://github.com/FreeElephants/rest-daemon/compare/0.6.1...0.7.0
 [0.6.1]: https://github.com/FreeElephants/rest-daemon/compare/0.6.0...0.6.1
 [0.6.0]: https://github.com/FreeElephants/rest-daemon/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/FreeElephants/rest-daemon/compare/0.4.0...0.5.0

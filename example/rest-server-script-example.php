@@ -12,7 +12,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use FreeElephants\RestDaemon\Endpoint\BaseEndpoint;
-use FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper;
+use FreeElephants\RestDaemon\Endpoint\Handler\CallableEndpointMethodHandlerWrapper;
 use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Module\BaseApiModule;
 use FreeElephants\RestDaemon\RestServer;

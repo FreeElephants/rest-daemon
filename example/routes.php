@@ -1,6 +1,6 @@
 <?php
 
-use FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper;
+use FreeElephants\RestDaemon\Endpoint\Handler\CallableEndpointMethodHandlerWrapper;
 use RestDeamon\Example\Endpoint\Greeting\GetAttributeHandler;
 use RestDeamon\Example\Endpoint\Greeting\GetHandler as GreetingGetHandler;
 use RestDeamon\Example\Endpoint\Greeting\PostHandler;

@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
+use FreeElephants\RestDaemon\Endpoint\Handler\AbstractEndpointMethodHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

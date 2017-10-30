@@ -5,7 +5,7 @@ namespace FreeElephants\RestDaemon;
 use FreeElephants\RestDaemon\Endpoint\EndpointFactory;
 use FreeElephants\RestDaemon\Endpoint\EndpointFactoryInterface;
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
-use FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactory;
+use FreeElephants\RestDaemon\Endpoint\Handler\CloningHandlerFactory;
 use FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactoryInterface;
 use FreeElephants\RestDaemon\Exception\MissingDependencyException;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
@@ -49,7 +49,7 @@ class RestServerBuilder
     ) {
         $this->assertDependenciesAdequacy($endpointFactory, $handlerFactory, $container);
         $this->setEndpointFactory($endpointFactory ?: new EndpointFactory($container));
-        $this->setHandlerFactory($handlerFactory ?: new HandlerFactory($container));
+        $this->setHandlerFactory($handlerFactory ?: new CloningHandlerFactory($container));
         $this->setModuleFactory($moduleFactory ?: new ModuleFactory());
         $this->setServer($restServer ?: new RestServer());
     }

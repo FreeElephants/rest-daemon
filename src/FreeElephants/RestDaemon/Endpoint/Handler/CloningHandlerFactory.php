@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class HandlerFactory implements HandlerFactoryInterface
+class CloningHandlerFactory implements HandlerFactoryInterface
 {
 
     /**
@@ -23,6 +23,6 @@ class HandlerFactory implements HandlerFactoryInterface
 
     public function buildHandler(string $className): EndpointMethodHandlerInterface
     {
-        return new $className;
+        return clone $this->di->get($className);
     }
 }

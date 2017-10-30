@@ -1,7 +1,9 @@
 <?php
 
-namespace FreeElephants\RestDaemon\Endpoint;
+namespace FreeElephants\RestDaemon\Endpoint\Handler;
 
+use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
+use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

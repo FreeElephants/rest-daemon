@@ -4,7 +4,7 @@ namespace FreeElephants\RestDaemon\HttpDriver\Aerys;
 
 use Aerys\Request;
 use Aerys\Response;
-use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
+use FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\HttpAdapter\Aerys2Zend\ServerRequest;
 
 /**

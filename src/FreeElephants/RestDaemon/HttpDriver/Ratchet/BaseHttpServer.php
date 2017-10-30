@@ -2,7 +2,7 @@
 
 namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 
-use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
+use FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\ExceptionHandler\JsonExceptionHandler;
 use FreeElephants\RestDaemon\HttpAdapter\Guzzle2Zend\ServerRequest;
 use Psr\Http\Message\RequestInterface;

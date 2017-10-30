@@ -2,7 +2,6 @@
 
 namespace FreeElephants\RestDaemon\Endpoint\Handler;
 
-use FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface;
 use Psr\Container\ContainerInterface;
 
 /**

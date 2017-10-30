@@ -10,6 +10,8 @@ Items with *BC!* note about backwards compatibility breaks!
 ## Renamed
 - *BC!*: HandlerFactory -> DefaultHandlerFactory. 
 - *BC!*: FreeElephants\RestDaemon\Endpoint\AbstractEndpointMethodHandler -> FreeElephants\RestDaemon\Endpoint\Handler\AbstractEndpointMethodHandler
+- *BC!*: FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper -> FreeElephants\RestDaemon\Endpoint\Handler\CallableEndpointMethodHandlerWrapper
+- *BC!*: FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface -> FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface
 
 ## Changed
 - DefaultHandlerFactory not require PSR-11 ContainerInterface and just call constructor.

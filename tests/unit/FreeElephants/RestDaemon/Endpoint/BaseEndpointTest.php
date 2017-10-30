@@ -3,6 +3,7 @@
 namespace FreeElephants\RestDaemon\Endpoint;
 
 use FreeElephants\AbstractTestCase;
+use FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface;
 
 /**
  * @author samizdam <samizdam@inbox.ru>

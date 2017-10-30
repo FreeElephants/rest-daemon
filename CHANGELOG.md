@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+## Renamed
+- *BC!*: HandlerFactory -> DefaultHandlerFactory. 
+- *BC!*: FreeElephants\RestDaemon\Endpoint\AbstractEndpointMethodHandler -> FreeElephants\RestDaemon\Endpoint\Handler\AbstractEndpointMethodHandler
+- *BC!*: FreeElephants\RestDaemon\Endpoint\CallableEndpointMethodHandlerWrapper -> FreeElephants\RestDaemon\Endpoint\Handler\CallableEndpointMethodHandlerWrapper
+- *BC!*: FreeElephants\RestDaemon\Endpoint\EndpointMethodHandlerInterface -> FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface
+
+## Changed
+- DefaultHandlerFactory not require PSR-11 ContainerInterface and just call constructor.
+
+## Added 
+- InjectingHandlerFactory - use FreeElephants/di Injector. 
+- CloningHandlerFactory - use PSR-11 ContainerInterface and return clone of getting instance. 
 
 ## [0.7.1] - 2017-10-30
 ### Fixed

@@ -5,7 +5,7 @@ namespace FreeElephants\RestDaemon;
 use FreeElephants\RestDaemon\Endpoint\EndpointFactory;
 use FreeElephants\RestDaemon\Endpoint\EndpointFactoryInterface;
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
-use FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactory;
+use FreeElephants\RestDaemon\Endpoint\Handler\DefaultHandlerFactory;
 use FreeElephants\RestDaemon\Endpoint\Handler\HandlerFactoryInterface;
 use FreeElephants\RestDaemon\Exception\MissingDependencyException;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
@@ -47,9 +47,9 @@ class RestServerBuilder
         ModuleFactoryInterface $moduleFactory = null,
         RestServer $restServer = null
     ) {
-        $this->assertDependenciesAdequacy($endpointFactory, $handlerFactory, $container);
+        $this->assertDependenciesAdequacy($endpointFactory, $container);
         $this->setEndpointFactory($endpointFactory ?: new EndpointFactory($container));
-        $this->setHandlerFactory($handlerFactory ?: new HandlerFactory($container));
+        $this->setHandlerFactory($handlerFactory ?: new DefaultHandlerFactory());
         $this->setModuleFactory($moduleFactory ?: new ModuleFactory());
         $this->setServer($restServer ?: new RestServer());
     }
@@ -133,11 +133,10 @@ class RestServerBuilder
 
     private function assertDependenciesAdequacy(
         EndpointFactoryInterface $endpointFactory = null,
-        HandlerFactoryInterface $handlerFactory = null,
         ContainerInterface $container = null
     ) {
-        if ((!$endpointFactory || !$handlerFactory) && !$container) {
-            throw new MissingDependencyException('For instantiate endpoint or handler factory container is required. ');
+        if (!$endpointFactory && !$container) {
+            throw new MissingDependencyException('For instantiate EndpointFactory PSR-11 container instance is required. ');
         }
     }
 }

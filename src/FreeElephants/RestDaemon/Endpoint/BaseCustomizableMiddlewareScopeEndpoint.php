@@ -3,6 +3,7 @@
 namespace FreeElephants\RestDaemon\Endpoint;
 
 use FreeElephants\RestDaemon\Endpoint\Handler\AbstractSerializerAwareHandler;
+use FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\Middleware\MiddlewareInterface;
 
 /**

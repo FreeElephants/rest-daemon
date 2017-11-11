@@ -3,6 +3,7 @@
 namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
+use FreeElephants\RestDaemon\Endpoint\Handler\OptionsMethodHandler;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
@@ -52,7 +53,8 @@ class RatchetDriver implements HttpDriverInterface
     {
         $routeCollection = new RouteCollection();
         foreach ($endpoints as $endpoint) {
-            foreach ($endpoint->getMethodHandlers() as $method => $handler) {
+            $endpointMethodHandlers = $endpoint->getMethodHandlers();
+            foreach ($endpointMethodHandlers as $method => $handler) {
                 $handler->setMiddlewareCollection($middlewareCollection);
                 $path = $endpoint->getPath();
                 $controller = new BaseHttpServer($handler);

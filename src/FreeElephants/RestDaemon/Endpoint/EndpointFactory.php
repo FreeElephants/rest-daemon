@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
+use FreeElephants\RestDaemon\Endpoint\Handler\OptionsMethodHandler;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -14,6 +15,8 @@ class EndpointFactory implements EndpointFactoryInterface
      * @var ContainerInterface
      */
     private $di;
+
+    private $addOptionsHandler = true;
 
     public function __construct(ContainerInterface $di)
     {
@@ -29,6 +32,21 @@ class EndpointFactory implements EndpointFactoryInterface
             $middleware = $this->di->get($middlewareClassName);
             $endpoint->addEndpointScopeBeforeMiddleware($middleware);
         }
+
+        if ($this->addOptionsHandler) {
+            $options = array_keys($endpointConfig['handlers']);
+            if (empty($options['OPTIONS'])) {
+                $options[] = 'OPTIONS';
+                sort($options);
+                $endpoint->setMethodHandler('OPTIONS', new OptionsMethodHandler($options));
+            }
+        }
+
         return $endpoint;
+    }
+
+    public function setAddOptionsHandler(bool $addOptionsHandler)
+    {
+        $this->addOptionsHandler = $addOptionsHandler;
     }
 }

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Added
+- [#14]: OPTIONS HTTP method supports enabling by default. 
+- FreeElephants\RestDaemon\Endpoint\OptionsMethodHandler class.  
+
+### Changed
+- EndpointFactory mixin OptionsMethodHandler by default if another not present in endpoint configuration. 
 
 ## [0.8.0] - 2017-10-31
 ## Renamed

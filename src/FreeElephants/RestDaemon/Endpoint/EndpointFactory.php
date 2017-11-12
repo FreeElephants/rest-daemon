@@ -2,6 +2,7 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
+use FreeElephants\RestDaemon\Endpoint\Exception\InvalidCongurationValueException;
 use FreeElephants\RestDaemon\Endpoint\Handler\OptionsMethodHandler;
 use Psr\Container\ContainerInterface;
 
@@ -25,8 +26,19 @@ class EndpointFactory implements EndpointFactoryInterface
 
     public function buildEndpoint(string $endpointPath, array $endpointConfig): EndpointInterface
     {
-        $name = $endpointConfig['name'];
-        $endpoint = new BaseCustomizableMiddlewareScopeEndpoint($endpointPath, $name);
+        $name = $endpointConfig['name'] ?? null;
+        $allowHeaders = [];
+        $reflectRequestAllowHeader = false;
+        if (isset($endpointConfig['allowHeaders'])) {
+            if (is_array($endpointConfig['allowHeaders'])) {
+                $allowHeaders = $endpointConfig['allowHeaders'];
+            } elseif (is_string($endpointConfig['allowHeaders']) && $endpointConfig['allowHeaders'] === '*') {
+                $reflectRequestAllowHeader = true;
+            } else {
+                throw new InvalidCongurationValueException('`allowHeaders` field must be array of specified values or `*` for reflecting request header. ');
+            }
+        }
+        $endpoint = new BaseCustomizableMiddlewareScopeEndpoint($endpointPath, $name, $allowHeaders);
         $middlewareClasses = isset($endpointConfig['middleware']) ? $endpointConfig['middleware'] : [];
         foreach ($middlewareClasses as $middlewareClassName) {
             $middleware = $this->di->get($middlewareClassName);
@@ -34,11 +46,12 @@ class EndpointFactory implements EndpointFactoryInterface
         }
 
         if ($this->addOptionsHandler) {
-            $options = array_keys($endpointConfig['handlers']);
-            if (empty($options['OPTIONS'])) {
-                $options[] = 'OPTIONS';
-                sort($options);
-                $endpoint->setMethodHandler('OPTIONS', new OptionsMethodHandler($options));
+            $allowMethods = array_keys($endpointConfig['handlers']);
+            if (empty($allowMethods['OPTIONS'])) {
+                $allowMethods[] = 'OPTIONS';
+                sort($allowMethods);
+                $endpoint->setMethodHandler('OPTIONS',
+                    new OptionsMethodHandler($allowMethods, $reflectRequestAllowHeader));
             }
         }
 

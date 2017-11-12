@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Added
+- `Access-Control-Request-Headers` and `Access-Control-Request-Method` support. 
+
+### Changed
+- Make field `name` in endpoint configuration optional for EndpointFactory. 
 
 ## [0.9.0] - 2017-11-12
 ### Added

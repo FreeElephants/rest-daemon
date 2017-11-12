@@ -11,11 +11,16 @@ class OptionsMethodHandler extends AbstractEndpointMethodHandler
     /**
      * @var array
      */
-    private $options;
+    private $allowMethods;
+    /**
+     * @var bool
+     */
+    private $reflectRequestAllowHeaders;
 
-    public function __construct(array $options)
+    public function __construct(array $allowMethods, bool $reflectRequestAllowHeaders = false)
     {
-        $this->options = $options;
+        $this->allowMethods = $allowMethods;
+        $this->reflectRequestAllowHeaders = $reflectRequestAllowHeaders;
     }
 
     public function __invoke(
@@ -23,7 +28,23 @@ class OptionsMethodHandler extends AbstractEndpointMethodHandler
         ResponseInterface $response,
         callable $next
     ): ResponseInterface {
-        $response = $response->withAddedHeader('Allow', join(', ', $this->options));
+        $allowMethodsHeaderValue = join(', ', $this->allowMethods);
+        $response = $response->withAddedHeader('Allow', $allowMethodsHeaderValue);
+
+        if ($request->hasHeader('Access-Control-Request-Method')) {
+            $response = $response->withAddedHeader('Access-Control-Allow-Methods', $allowMethodsHeaderValue);
+        }
+
+        if ($request->hasHeader('Access-Control-Request-Headers')) {
+            if ($this->reflectRequestAllowHeaders) {
+                $response = $response->withAddedHeader('Access-Control-Allow-Headers',
+                    $request->getHeader('Access-Control-Request-Headers'));
+            } else {
+                $response = $response->withAddedHeader('Access-Control-Allow-Headers',
+                    join(', ', $this->getEndpoint()->getAllowHeaders()));
+            }
+        }
+
         return $next($request, $response);
     }
 }

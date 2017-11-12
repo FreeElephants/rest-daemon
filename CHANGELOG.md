@@ -9,9 +9,12 @@ Items with *BC!* note about backwards compatibility breaks!
 ## [Unreleased]
 ### Added
 - `Access-Control-Request-Headers` and `Access-Control-Request-Method` support. 
+- allowGlobalRequestAllowHeaderReflecting option for EndpointFactory (default true). 
+- RestServerBuilder::getEndpointFactory() method. 
 
 ### Changed
 - Make field `name` in endpoint configuration optional for EndpointFactory. 
+- EndpointFactoryInterface declare methods for options setting too. 
 
 ## [0.9.0] - 2017-11-12
 ### Added

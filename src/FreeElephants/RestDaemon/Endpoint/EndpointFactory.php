@@ -18,6 +18,7 @@ class EndpointFactory implements EndpointFactoryInterface
     private $di;
 
     private $addOptionsHandler = true;
+    private $allowGlobalRequestAllowHeaderReflecting = true;
 
     public function __construct(ContainerInterface $di)
     {
@@ -28,14 +29,18 @@ class EndpointFactory implements EndpointFactoryInterface
     {
         $name = $endpointConfig['name'] ?? null;
         $allowHeaders = [];
-        $reflectRequestAllowHeader = false;
-        if (isset($endpointConfig['allowHeaders'])) {
-            if (is_array($endpointConfig['allowHeaders'])) {
-                $allowHeaders = $endpointConfig['allowHeaders'];
-            } elseif (is_string($endpointConfig['allowHeaders']) && $endpointConfig['allowHeaders'] === '*') {
-                $reflectRequestAllowHeader = true;
-            } else {
-                throw new InvalidCongurationValueException('`allowHeaders` field must be array of specified values or `*` for reflecting request header. ');
+        if ($this->allowGlobalRequestAllowHeaderReflecting) {
+            $reflectRequestAllowHeader = true;
+        } else {
+            $reflectRequestAllowHeader = false;
+            if (isset($endpointConfig['allowHeaders'])) {
+                if (is_array($endpointConfig['allowHeaders'])) {
+                    $allowHeaders = $endpointConfig['allowHeaders'];
+                } elseif (is_string($endpointConfig['allowHeaders']) && $endpointConfig['allowHeaders'] === '*') {
+                    $reflectRequestAllowHeader = true;
+                } else {
+                    throw new InvalidCongurationValueException('`allowHeaders` field must be array of specified values or `*` for reflecting request header. ');
+                }
             }
         }
         $endpoint = new BaseCustomizableMiddlewareScopeEndpoint($endpointPath, $name, $allowHeaders);
@@ -61,5 +66,10 @@ class EndpointFactory implements EndpointFactoryInterface
     public function setAddOptionsHandler(bool $addOptionsHandler)
     {
         $this->addOptionsHandler = $addOptionsHandler;
+    }
+
+    public function allowGlobalRequestAllowHeaderReflecting(bool $allowGlobalRequestAllowHeaderReflecting)
+    {
+        $this->allowGlobalRequestAllowHeaderReflecting = $allowGlobalRequestAllowHeaderReflecting;
     }
 }

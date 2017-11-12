@@ -2,36 +2,52 @@ sudo: false
 
 language: php
 
-php:
-  - 7.0
-  - 7.1
-  - 7.2
-  - nightly
-
-env:
-  - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
-  - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
-
 matrix:
+  include:
+    - php: 7.0
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+    - php: 7.0
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
+    - php: 7.1
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+    - php: 7.1
+      env:
+        - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+        - COVERAGE='--coverage-xml'
+
+    - php: 7.2
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+    - php: 7.2
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
+    - php: nightly
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+    - php: nightly
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
   allow_failures:
     - php: nightly
 
 install:
   - composer self-update
-  - composer install
+  - composer install --prefer-dist
 
 before_script:
   -  php example/rest-server.php 2> /dev/null > /dev/null &
 
 script:
-  - vendor/bin/codecept run
+  - vendor/bin/codecept run $COVERAGE
 
 after_script:
   - kill %1
 
-#after_success:
-  # Coverage reporting
-#  - bash <(curl -s https://codecov.io/bash)
+after_success:
+#   Coverage reporting
+  - if [[ "$COVERAGE" ]]; then
+    mv tests/_output/coverage.xml ./coverage.xml;
+    bash <(curl -s https://codecov.io/bash);
+    fi
 
 cache:
   directories:

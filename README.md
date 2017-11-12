@@ -1,5 +1,11 @@
 # Rest-Daemon
 
+[![Build Status](https://travis-ci.org/FreeElephants/rest-daemon.svg?branch=master)](https://travis-ci.org/FreeElephants/rest-daemon)
+
+[![Installs](https://img.shields.io/packagist/dt/free-elephants/rest-daemon.svg)](https://packagist.org/packages/free-elephants/rest-daemon)
+
+[![Releases](https://img.shields.io/packagist/v/free-elephants/rest-daemon.svg)](https://github.com/FreeElephants/rest-daemon/releases)
+
 **Nota Bene:** 
 This project use semver and [changelog](CHANGELOG.md). 
 But it's not stable major version. 
@@ -12,7 +18,7 @@ Simple PHP7 framework for fast building REST services based on middleware, PSR-7
 - Middleware oriented request/response handling
 - Priority PSR's support: PSR-2, -3, -4, -7, -11, -15 and other. 
 - Built-in Middleware to support usual REST features, like HTTP based semantics, content types, request parsing, headers. 
-- Choose one of two available http-daemon drivers: Ratchet (ReactPHP) or Aerys (amphp). 
+- Choose one of two available http-daemon drivers: Ratchet [ReactPHP](https://github.com/ratchetphp/Ratchet) or [Aerys](https://github.com/amphp/aerys). 
 
 ## Installation 
 

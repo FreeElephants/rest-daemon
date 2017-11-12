@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+
+## [0.9.0] - 2017-11-12
 ### Added
 - [#14]: OPTIONS HTTP method supports enabling by default. 
 - FreeElephants\RestDaemon\Endpoint\OptionsMethodHandler class.  
@@ -120,7 +122,8 @@ Items with *BC!* note about backwards compatibility breaks!
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
 
-[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.8.0...HEAD
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.9.0...HEAD
+[0.9.0]: https://github.com/FreeElephants/rest-daemon/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/FreeElephants/rest-daemon/compare/0.7.1...0.8.0
 [0.7.1]: https://github.com/FreeElephants/rest-daemon/compare/0.7.0...0.7.1
 [0.7.0]: https://github.com/FreeElephants/rest-daemon/compare/0.6.1...0.7.0

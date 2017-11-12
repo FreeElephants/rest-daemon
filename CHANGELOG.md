@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Added
+- [#14]: OPTIONS HTTP method supports enabling by default. 
+- FreeElephants\RestDaemon\Endpoint\OptionsMethodHandler class.  
+- MiddlewareRole::X_POWERED_HEADER_SETTER. 
+- XPoweredBySetter middleware: now response headers contains actual X-Powered-By Header with vendor versions.
+- HttpDriverInterface::getVendorName() method. 
+- setServer() method in MiddlewareCollectionInterface and EndpointMiddlewareCollectionInterface. 
+
+### Changed
+- EndpointFactory mixin OptionsMethodHandler by default if another not present in endpoint configuration. 
+- *BC!*: MiddlewareCollections accept RestServer instance in first costructor argument. 
 
 ## [0.8.0] - 2017-10-31
 ## Renamed

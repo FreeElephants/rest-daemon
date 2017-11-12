@@ -98,12 +98,17 @@ class RestServer
 
     public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $middlewareCollection)
     {
+        $middlewareCollection->setServer($this);
         $this->middlewareCollection = $middlewareCollection;
     }
 
     public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
     {
-        return $this->middlewareCollection ?: $this->middlewareCollection = new DefaultEndpointMiddlewareCollection();
+        if (empty($this->middlewareCollection)) {
+            $middlewareCollection = new DefaultEndpointMiddlewareCollection($this);
+            $this->middlewareCollection = $middlewareCollection;
+        }
+        return $this->middlewareCollection;
     }
 
     public function addModule(ApiModuleInterface $module)
@@ -127,6 +132,14 @@ class RestServer
     public function setConfig(HttpServerConfig $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * @return HttpDriverInterface|RatchetDriver|AerysDriver
+     */
+    public function getHttpDriver(): HttpDriverInterface
+    {
+        return $this->httpDriver;
     }
 
 }

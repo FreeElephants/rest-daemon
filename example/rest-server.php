@@ -1,6 +1,11 @@
 <?php
 /**
- * Example of rest daemon server usage.
+ * Example of rest daemon server usage:
+ * - use routes config file and builder
+ * - DI for resolve components dependencies
+ *
+ * @see ./src for handlers code
+ * @see ./routes.php for routing configuration
  *
  * Run this script: `php rest-server.php`
  *
@@ -40,10 +45,10 @@ $requestCounter = function (
 ) {
     static $requestNumber = 0;
     printf('[%s] request number #%d handled' . PHP_EOL, date(DATE_ISO8601), ++$requestNumber);
-
+    
     return $next($request, $response);
 };
-$extendedDefaultMiddlewareCollection = new DefaultEndpointMiddlewareCollection([], [$requestCounter]);
+$extendedDefaultMiddlewareCollection = new DefaultEndpointMiddlewareCollection($server, [], [$requestCounter]);
 $server->setMiddlewareCollection($extendedDefaultMiddlewareCollection);
 
 $server->run();

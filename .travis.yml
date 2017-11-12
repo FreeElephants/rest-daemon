@@ -24,14 +24,15 @@ before_script:
   -  php example/rest-server.php 2> /dev/null > /dev/null &
 
 script:
-  - vendor/bin/codecept run
+  - vendor/bin/codecept run --coverage-xml
 
 after_script:
   - kill %1
 
-#after_success:
-  # Coverage reporting
-#  - bash <(curl -s https://codecov.io/bash)
+after_success:
+#   Coverage reporting
+  - mv tests/_output/coverage.xml ./coverage.xml
+  - bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:

@@ -13,6 +13,8 @@ use Ratchet\App;
 interface HttpDriverInterface
 {
 
+    public function getVendorName(): string;
+
     /**
      * @internal be careful: it's strong dependency without cross-vendor adapting: pre-configured Ratchet or Aerys instance
      * @return App|Host

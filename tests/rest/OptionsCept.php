@@ -5,7 +5,9 @@ $I->wantToTest('OPTIONS on routes ');
 
 $I->sendOPTIONS('/hello');
 $I->seeResponseCodeIs(200);
+
 $I->seeHttpHeader('Allow', 'GET, OPTIONS');
+
 $I->seeResponseEquals('');
 
 $I->sendOPTIONS('/greeting');

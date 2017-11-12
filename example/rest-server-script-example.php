@@ -1,10 +1,12 @@
 <?php
 /**
- * Example of rest daemon server usage.
+ * Example of rest daemon server low-level usage:
+ * - manual instantiate endpoints
+ * - directly adding all entities to server
+ * - without factories usage
+ * - without routes config file based building.
  *
- * Run this script: `php rest-server.php`
- *
- * This scrip uses for acceptance testing with codeception.
+ * Run this script: `php rest-server-script-example.php`
  *
  * @author samizdam <samizdam@inbox.ru>
  */
@@ -38,7 +40,7 @@ $requestCounter = function (
 
     return $next($request, $response);
 };
-$extendedDefaultMiddlewareCollection = new DefaultEndpointMiddlewareCollection([], [$requestCounter]);
+$extendedDefaultMiddlewareCollection = new DefaultEndpointMiddlewareCollection($server, [], [$requestCounter]);
 $server->setMiddlewareCollection($extendedDefaultMiddlewareCollection);
 
 $indexEndpoint = new BaseEndpoint('/', 'Index Endpoint');

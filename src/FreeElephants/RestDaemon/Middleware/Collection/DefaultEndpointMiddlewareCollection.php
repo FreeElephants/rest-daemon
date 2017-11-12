@@ -2,6 +2,8 @@
 
 namespace FreeElephants\RestDaemon\Middleware\Collection;
 
+use FreeElephants\RestDaemon\RestServer;
+
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
@@ -11,11 +13,16 @@ class DefaultEndpointMiddlewareCollection implements EndpointMiddlewareCollectio
     protected $before;
 
     protected $after;
+    /**
+     * @var RestServer
+     */
+    private $restServer;
 
-    public function __construct(array $before = [], array $after = [])
+    public function __construct(RestServer $restServer, array $before = [], array $after = [])
     {
-        $this->before = new DefaultBeforeMiddlewareCollection($before);
-        $this->after = new DefaultAfterMiddlewareCollection($after);
+        $this->before = new DefaultBeforeMiddlewareCollection($restServer, $before);
+        $this->after = new DefaultAfterMiddlewareCollection($restServer, $after);
+        $this->restServer = $restServer;
     }
 
     public function getBefore(): MiddlewareCollectionInterface
@@ -35,5 +42,10 @@ class DefaultEndpointMiddlewareCollection implements EndpointMiddlewareCollectio
             [$middle],
             $this->getAfter()->getArrayCopy()
         );
+    }
+
+    public function setServer(RestServer $restServer)
+    {
+        $this->restServer = $restServer;
     }
 }

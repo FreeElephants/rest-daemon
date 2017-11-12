@@ -3,11 +3,11 @@
 namespace FreeElephants\RestDaemon\HttpDriver\Ratchet;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
-use FreeElephants\RestDaemon\Endpoint\Handler\OptionsMethodHandler;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Ratchet\App;
+use Ratchet\ConnectionInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -49,8 +49,7 @@ class RatchetDriver implements HttpDriverInterface
         array $endpoints,
         EndpointMiddlewareCollectionInterface $middlewareCollection,
         string $httpHost
-    ): RouteCollection
-    {
+    ): RouteCollection {
         $routeCollection = new RouteCollection();
         foreach ($endpoints as $endpoint) {
             $endpointMethodHandlers = $endpoint->getMethodHandlers();
@@ -79,5 +78,14 @@ class RatchetDriver implements HttpDriverInterface
     public function getRawInstance()
     {
         return $this->server;
+    }
+
+    public function getVendorName(): string
+    {
+        if (interface_exists(ConnectionInterface::class)) {
+            // FIXME
+            // call autoload for get constant defined in it namespace!
+        }
+        return \Ratchet\VERSION;
     }
 }

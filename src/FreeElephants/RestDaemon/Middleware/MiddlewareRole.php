@@ -13,5 +13,5 @@ class MiddlewareRole
     const BODY_PARSER = 'body-parser';
     const NO_CONTENT_STATUS_SETTER = 'no-content-status-setter';
     const CORS_HEADER_SETTER = 'CORS-header-setter';
-    const OPTIONS_HANDLER = 'options-handler';
+    const X_POWERED_HEADER_SETTER = 'x-powered-header-setter';
 }

@@ -72,4 +72,9 @@ class AerysDriver implements HttpDriverInterface
     {
         return $this->aerysHost;
     }
+
+    public function getVendorName(): string
+    {
+        return \Aerys\SERVER_TOKEN;
+    }
 }

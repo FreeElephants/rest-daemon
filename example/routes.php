@@ -23,6 +23,10 @@ return [
                 'GET' => GreetingGetHandler::class,
                 'POST' => PostHandler::class,
             ],
+            'allowHeaders' => [
+                'X-Greeting',
+                'X-Some-Not-Simple',
+            ],
         ],
         // Symfony routes patterns are supported
         '/greeting/{name}' => [
@@ -36,6 +40,7 @@ return [
             'handlers' => [
                 'GET' => HelloHandler::class
             ],
+            'allowHeaders' => '*',
         ],
         '/exception' => [
             'name' => '',

@@ -31,10 +31,13 @@ class BaseEndpoint implements EndpointInterface
      */
     private $module;
 
-    public function __construct(string $path, string $name = null)
+    private $allowHeaders = [];
+
+    public function __construct(string $path, string $name = null, array $allowHeaders = [])
     {
         $this->path = $path;
         $this->name = $name ?: $path . ' Endpoint';
+        $this->allowHeaders = $allowHeaders;
     }
 
     public function getPath(): string
@@ -87,5 +90,10 @@ class BaseEndpoint implements EndpointInterface
         $this->path = str_replace('//', '/', $module->getPath() . $this->path);
         $this->name = $module->getName() . ': ' . $this->name;
         $this->module = $module;
+    }
+
+    public function getAllowHeaders(): array
+    {
+        return $this->allowHeaders;
     }
 }

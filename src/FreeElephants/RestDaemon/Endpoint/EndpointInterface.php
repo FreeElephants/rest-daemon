@@ -32,4 +32,6 @@ interface EndpointInterface
     public function getMethodHandlers(): array;
 
     public function hasMethod(string $method): bool;
+
+    public function getAllowHeaders(): array;
 }

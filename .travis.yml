@@ -8,26 +8,30 @@ matrix:
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.0
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
     - php: 7.1
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.1
       env:
         - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
         - COVERAGE='--coverage-xml'
+
     - php: 7.2
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.2
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
     - php: nightly
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: nightly
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
   allow_failures:
     - php: nightly
 
 install:
   - composer self-update
-  - composer install
+  - composer install --prefer-dist
 
 before_script:
   -  php example/rest-server.php 2> /dev/null > /dev/null &

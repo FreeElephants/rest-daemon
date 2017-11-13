@@ -15,7 +15,7 @@ class EndpointFactoryTest extends AbstractTestCase
     {
         $di = $this->createMock(ContainerInterface::class);
         $factory = new EndpointFactory($di);
-
+        $factory->allowGlobalRequestAllowHeaderReflecting(false);
         $this->expectException(InvalidCongurationValueException::class);
 
         $factory->buildEndpoint('/', [

@@ -9,4 +9,8 @@ interface EndpointFactoryInterface
 {
 
     public function buildEndpoint(string $endpointPath, array $endpointConfig): EndpointInterface;
+
+    public function setAddOptionsHandler(bool $addOptionsHandler);
+
+    public function allowGlobalRequestAllowHeaderReflecting(bool $allowGlobalRequestAllowHeaderReflecting);
 }

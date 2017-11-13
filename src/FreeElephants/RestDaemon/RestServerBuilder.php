@@ -139,4 +139,9 @@ class RestServerBuilder
             throw new MissingDependencyException('For instantiate EndpointFactory PSR-11 container instance is required. ');
         }
     }
+
+    public function getEndpointFactory(): EndpointFactoryInterface
+    {
+        return $this->endpointFactory;
+    }
 }

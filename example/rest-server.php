@@ -35,6 +35,7 @@ $components = require __DIR__ . '/components.php';
 $injector = (new InjectorBuilder())->buildFromArray($components);
 $server = new RestServer($httpHost, $port, $address, $origin, $httpDriverClass);
 $restServerBuilder = new RestServerBuilder($injector);
+$restServerBuilder->getEndpointFactory()->allowGlobalRequestAllowHeaderReflecting(false);
 $restServerBuilder->setServer($server);
 $restServerBuilder->buildServer($routes);
 
@@ -45,7 +46,7 @@ $requestCounter = function (
 ) {
     static $requestNumber = 0;
     printf('[%s] request number #%d handled' . PHP_EOL, date(DATE_ISO8601), ++$requestNumber);
-    
+
     return $next($request, $response);
 };
 $extendedDefaultMiddlewareCollection = new DefaultEndpointMiddlewareCollection($server, [], [$requestCounter]);

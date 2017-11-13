@@ -8,6 +8,7 @@ use FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver;
+use FreeElephants\RestDaemon\HttpDriver\ReactHttp\ReactDriver;
 use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use FreeElephants\RestDaemon\Module\ApiModuleInterface;
@@ -18,7 +19,8 @@ use FreeElephants\RestDaemon\Module\BaseApiModule;
  */
 class RestServer
 {
-    const DEFAULT_HTTP_DRIVER = self::RATCHET_HTTP_DRIVER;
+    const DEFAULT_HTTP_DRIVER = self::REACT_HTTP_DRIVER;
+    const REACT_HTTP_DRIVER = ReactDriver::class;
     const RATCHET_HTTP_DRIVER = RatchetDriver::class;
     const AERYS_HTTP_DRIVER = AerysDriver::class;
 

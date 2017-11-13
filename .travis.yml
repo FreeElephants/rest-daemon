@@ -3,24 +3,29 @@ sudo: false
 language: php
 
 matrix:
+  # matrix include all actual php versions with every driver (first - omitted - is default - react/http)
   include:
+    - php: 7.0
     - php: 7.0
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.0
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
 
+    - php: 7.1
+        - COVERAGE='--coverage-xml'
     - php: 7.1
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.1
       env:
         - DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
-        - COVERAGE='--coverage-xml'
 
+    - php: 7.2
     - php: 7.2
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.2
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
 
+    - php: nightly
     - php: nightly
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: nightly

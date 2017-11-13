@@ -21,9 +21,13 @@ class Router
 
     public function getHandler(RequestInterface $request): EndpointMethodHandlerInterface
     {
-        $routeName = $request->getMethod() . ':' . $request->getUri()->getPath();
-        var_dump($this->routeCollection->all());
-        var_dump($routeName);
+        $method = $request->getMethod();
+        $path = $request->getUri()->getPath();
+        if ($method === 'HEAD') {
+            $method = 'GET';
+        }
+        $routeName = $method . ':' . $path;
+        
         return $this->routeCollection->get($routeName)->getDefault('handler');
     }
 }

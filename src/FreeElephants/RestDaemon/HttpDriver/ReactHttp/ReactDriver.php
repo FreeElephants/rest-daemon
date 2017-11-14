@@ -3,6 +3,7 @@
 namespace FreeElephants\RestDaemon\HttpDriver\ReactHttp;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
+use FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpDriverInterface;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
@@ -52,10 +53,16 @@ class ReactDriver implements HttpDriverInterface
             $middlewareCollection, $config->getHttpHost());
         $router = new \FreeElephants\RestDaemon\HttpDriver\ReactHttp\Router($routeCollection);
         $this->server = new Server(function (ServerRequestInterface $request) use ($router) {
-            return $router->getHandler($request)->handle($request);
+            $handler = $router->getHandler($request);
+            if ($handler instanceof EndpointMethodHandlerInterface) {
+                return $handler->handle($request);
+            } else {
+                return $handler($request);
+            }
         });
         $this->server->on('error', function (\Exception $e) {
             echo 'Error: ' . $e->getMessage() . PHP_EOL;
+            echo $e->getPrevious()->getMessage() . PHP_EOL;
         });
     }
 

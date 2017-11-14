@@ -5,6 +5,7 @@ namespace FreeElephants\RestDaemon\HttpDriver\ReactHttp;
 use FreeElephants\RestDaemon\Endpoint\Handler\EndpointMethodHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Symfony\Component\Routing\RouteCollection;
+use Zend\Diactoros\Response;
 
 class Router
 {
@@ -19,7 +20,7 @@ class Router
         $this->routeCollection = $routeCollection;
     }
 
-    public function getHandler(RequestInterface $request): EndpointMethodHandlerInterface
+    public function getHandler(RequestInterface $request): callable
     {
         $method = $request->getMethod();
         $path = $request->getUri()->getPath();
@@ -27,7 +28,19 @@ class Router
             $method = 'GET';
         }
         $routeName = $method . ':' . $path;
-        
-        return $this->routeCollection->get($routeName)->getDefault('handler');
+
+        if ($handler = $this->routeCollection->get($routeName)) {
+            $handler = $handler->getDefault('handler');
+            /**@var EndpointMethodHandlerInterface $handler */
+            return $handler;
+        } else {
+            /**@var EndpointMethodHandlerInterface $optionsHandler */
+            $optionsHandler = $this->routeCollection->get('OPTIONS:' . $path)->getDefault('handler');
+            $methods = array_keys($optionsHandler->getEndpoint()->getMethodHandlers());
+            return function () use ($methods) {
+                return (new Response())->withStatus(405)->withHeader('Allow', $methods);
+            };
+
+        }
     }
 }

@@ -28,13 +28,19 @@ class RestTester extends \Codeception\Actor
      */
     public function isPoweredByAerys(): bool
     {
-        return !$this->isPoweredByRatchet();
+        return !$this->isPoweredByRatchet() && !$this->isPoweredByReact();
     }
 
     public function isPoweredByRatchet(): bool
     {
         $xPoweredByHeader = $this->grabHttpHeader('X-Powered-By', true);
         return strpos($xPoweredByHeader, 'Ratchet') !== false;
+    }
+
+    public function isPoweredByReact(): bool
+    {
+        $xPoweredByHeader = $this->grabHttpHeader('X-Powered-By', true);
+        return strpos($xPoweredByHeader, 'React') !== false;
     }
 
 }

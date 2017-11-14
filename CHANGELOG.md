@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Added
+- react/http driver implementation
+
+### Changed
+- *BC!* use react/http as default driver. 
 
 ## [0.10.0] - 2017-11-13
 ### Added

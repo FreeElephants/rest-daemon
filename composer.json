@@ -12,7 +12,8 @@
     "free-elephants/di": "^1.6.0",
     "guzzlehttp/psr7": "^1.0",
     "cboden/ratchet": "0.4",
-    "amphp/aerys": "^0.7.1"
+    "amphp/aerys": "^0.7.1",
+    "zircote/swagger-php": "^2.0"
   },
   "require-dev": {
     "codeception/codeception": "^2.3"

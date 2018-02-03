@@ -21,7 +21,7 @@ class RouteCollectionBuilderTest extends AbstractTestCase
         $middlewareCollection = $this->createMock(EndpointMiddlewareCollectionInterface::class);
         $collection = $builder->buildEndpointsRouteCollection([$endpoint], $middlewareCollection, 'localhost');
         $route = $collection->get('GET:Root');
-        codecept_debug($collection);
+
         $this->assertSame('/', $route->getPath());
         $this->assertSame('localhost', $route->getHost());
         $this->assertSame(['GET'], $route->getMethods());

@@ -1,5 +1,6 @@
 {
   "name": "free-elephants/rest-daemon",
+  "bin": ["bin/rest-deamon.php"],
   "require": {
     "monolog/monolog": "^1.21",
     "symfony/routing": "^3.1",
@@ -13,7 +14,8 @@
     "guzzlehttp/psr7": "^1.0",
     "cboden/ratchet": "0.4",
     "amphp/aerys": "^0.7.1",
-    "zircote/swagger-php": "^2.0"
+    "zircote/swagger-php": "^2.0",
+    "zendframework/zend-code": "^3.1"
   },
   "require-dev": {
     "codeception/codeception": "^2.3"

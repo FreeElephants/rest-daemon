@@ -42,6 +42,5 @@ class RouteCollectionBuilder
         }
 
         return $routeCollection;
-
     }
 }

@@ -8,6 +8,16 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ## [Unreleased]
 
+## [0.11.0] - 2018-02-XX
+### Added
+- `bin/rest-daemon.php` with useful tools: `generation:router:swagger`. 
+- `docs` directory. 
+- Swagger based routers generation. 
+
+### Internal
+- Require `zircote/swagger-php`, `zendframework/zend-code` dependencies. 
+- Remove `composer.lock` file from git for best testable and usage.
+
 ## [0.10.0] - 2017-11-13
 ### Added
 - `Access-Control-Request-Headers` and `Access-Control-Request-Method` support. 

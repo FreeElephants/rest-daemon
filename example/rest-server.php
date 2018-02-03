@@ -23,7 +23,8 @@ use FreeElephants\RestDaemon\RestServerBuilder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-$httpDriverClass = getenv('DRIVER_CLASS') ?: RestServer::DEFAULT_HTTP_DRIVER;
+//$httpDriverClass = getenv('DRIVER_CLASS') ?: RestServer::DEFAULT_HTTP_DRIVER;
+$httpDriverClass = getenv('DRIVER_CLASS') ?: RestServer::AERYS_HTTP_DRIVER;
 
 $httpHost = '127.0.0.1';
 $port = 8080;

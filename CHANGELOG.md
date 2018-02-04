@@ -8,6 +8,9 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ## [Unreleased]
 
+### Fixed
+- `bin/rest-daemon` script permissions and naming. 
+
 ## [0.11.0] - 2018-02-XX
 
 ### Added

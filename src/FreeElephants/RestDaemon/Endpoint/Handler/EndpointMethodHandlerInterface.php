@@ -16,7 +16,7 @@ interface EndpointMethodHandlerInterface extends MiddlewareInterface
 {
 
     /**
-     * @deprecated will be make protected or private.
+     * @deprecated will be make protected or private. __invoke will be used.
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */

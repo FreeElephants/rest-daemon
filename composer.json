@@ -1,5 +1,6 @@
 {
   "name": "free-elephants/rest-daemon",
+  "description": "PHP http socket REST server",
   "bin": ["bin/rest-deamon.php"],
   "require": {
     "monolog/monolog": "^1.21",
@@ -31,7 +32,7 @@
       "RestDeamon\\Example\\": "example/src/"
     }
   },
-  "license": "BSD-2",
+  "license": "BSD-2-Clause",
   "authors": [
     {
       "name": "samizdam",

@@ -13,6 +13,20 @@ Items with *BC!* note about backwards compatibility breaks!
 ### Changed
 - *BC!* use react/http as default driver. 
 
+## [0.11.0] - 2018-02-XX
+
+### Added
+- `bin/rest-daemon.php` with useful tools: `generation:router:swagger`. 
+- `docs` directory. 
+- Swagger based routers generation. 
+
+### Changed
+- Use correct license value `BSD-2-Clause` 
+
+### Internal
+- Require `zircote/swagger-php`, `zendframework/zend-code` dependencies. 
+- Remove `composer.lock` file from git for best testable and usage.
+
 ## [0.10.0] - 2017-11-13
 ### Added
 - `Access-Control-Request-Headers` and `Access-Control-Request-Method` support. 
@@ -137,7 +151,8 @@ Items with *BC!* note about backwards compatibility breaks!
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
 
-[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.10.0...HEAD
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.11.0...HEAD
+[0.11.0]: https://github.com/FreeElephants/rest-daemon/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/FreeElephants/rest-daemon/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/FreeElephants/rest-daemon/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/FreeElephants/rest-daemon/compare/0.7.1...0.8.0

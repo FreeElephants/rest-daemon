@@ -1,5 +1,7 @@
 {
   "name": "free-elephants/rest-daemon",
+  "description": "PHP http socket REST server",
+  "bin": ["bin/rest-deamon.php"],
   "require": {
     "monolog/monolog": "^1.21",
     "symfony/routing": "^3.1",
@@ -12,6 +14,9 @@
     "free-elephants/di": "^1.6.0",
     "guzzlehttp/psr7": "^1.0",
     "cboden/ratchet": "0.4",
+    "amphp/aerys": "^0.7.1",
+    "zircote/swagger-php": "^2.0",
+    "zendframework/zend-code": "^3.1",
     "amphp/aerys": "^0.7.1",
     "react/http": "^0.7.4"
   },
@@ -29,7 +34,7 @@
       "RestDeamon\\Example\\": "example/src/"
     }
   },
-  "license": "BSD-2",
+  "license": "BSD-2-Clause",
   "authors": [
     {
       "name": "samizdam",

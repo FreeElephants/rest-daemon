@@ -9,7 +9,8 @@ Items with *BC!* note about backwards compatibility breaks!
 ## [Unreleased]
 
 ### Fixed
-- `bin/rest-daemon` script permissions and naming. 
+- Set `::class` suffix in generation tool instead `Generator\Swagger` method.
+- `bin/rest-daemon` script permissions, naming and output. 
 
 ## [0.11.0] - 2018-02-XX
 

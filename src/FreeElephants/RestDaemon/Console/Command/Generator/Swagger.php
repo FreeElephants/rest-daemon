@@ -46,14 +46,24 @@ PHP;
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $dir = $input->getArgument('dir');
-        if(!is_dir($dir)) {
+        if (!is_dir($dir)) {
             $message = sprintf('Directory `%s` not is directory', $dir);
             throw new \InvalidArgumentException($message);
         }
         $routes = $this->routerGenerator->getRouterConfig($dir);
+        if (array_key_exists('endpoints', $routes)) {
+            foreach ($routes['endpoints'] as $route => $endpoint) {
+                if (array_key_exists('handlers', $endpoint)) {
+                    foreach ($endpoint['handlers'] as $method => $handlerClassName) {
+                        $handlerClassName .= '::class';
+                        $routes['endpoints'][$route]['handlers'][$method] = $handlerClassName;
+                    }
+                }
+            }
+        }
         $generator = new ValueGenerator($routes, ValueGenerator::TYPE_ARRAY_SHORT);
         $indentations = $input->getOption('indent');
-        if(!is_integer($indentations) || $indentations < 1) {
+        if (!is_integer($indentations) || $indentations < 1) {
             $message = sprintf('Indent size must be positive integer');
             throw new \RuntimeException($message);
         }

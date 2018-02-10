@@ -15,7 +15,7 @@ class RouterGeneratorTest extends AbstractTestCase
                 '/' => [
                     'name' => 'Root Resource',
                     'handlers' => [
-                        'GET' => 'Example\Swagger\RootResourceHandler::class',
+                        'GET' => 'Example\Swagger\RootResourceHandler',
                     ],
                 ],
             ],

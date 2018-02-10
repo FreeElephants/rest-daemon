@@ -8,8 +8,16 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ## [Unreleased]
 
-## [0.11.0] - 2018-02-XX
+## [0.12.0] - 2018-02-11
+### Added
+- New cli routes generation options. 
+- New docs. 
 
+### Fixed
+- Set `::class` suffix in generation tool instead `Generator\Swagger` method.
+- *BC!*: `bin/rest-daemon` script permissions, naming and output. 
+
+## [0.11.0] - 2018-02-04
 ### Added
 - `bin/rest-daemon.php` with useful tools: `generation:router:swagger`. 
 - `docs` directory. 
@@ -146,7 +154,8 @@ Items with *BC!* note about backwards compatibility breaks!
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
 
-[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.11.0...HEAD
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.12.0...HEAD
+[0.12.0]: https://github.com/FreeElephants/rest-daemon/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/FreeElephants/rest-daemon/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/FreeElephants/rest-daemon/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/FreeElephants/rest-daemon/compare/0.8.0...0.9.0

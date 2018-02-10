@@ -25,9 +25,7 @@ Simple PHP7 framework for fast building REST services based on middleware, PSR-7
 
 ## Installation 
 
-```
-composer require free-elephants/rest-daemon
-```
+    $ composer require free-elephants/rest-daemon
 
 ## Usage
 
@@ -43,10 +41,12 @@ $server->run();
 # can be runned as
 $ php ./rest-server.php 
 ```
+
 ### Add Your RESTful API Endpoints
 
 Any endpoint method handler can be Middleware-like callable implementation: function or class with __invoke() method.  
-```
+```php
+<?php
 class GetAttributeHandler extends AbstractEndpointMethodHandler
 {
 
@@ -82,7 +82,8 @@ See example: [routes.php](/example/routes.php)
 
 By default server instance provide collection with some useful middleware. 
 You can extend or override it: 
-```
+```php
+<?php
 $requestCounter = function (
     ServerRequestInterface $request,
     ResponseInterface $response,
@@ -99,7 +100,8 @@ $server->setMiddlewareCollection($extendedDefaultMiddlewareCollection);
 
 Every endpoint's method handler will be wrapped to this collection and called between defined as `after` and `before` middleware. 
 Also you can configure default middleware collection with access to every built-in middleware by key: this collection implements ArrayAccess interface. 
-```
+```php
+<?php
 $server->getMiddlewareCollection()->getBefore()->offsetUnset(\FreeElephants\RestDaemon\Middleware\MiddlewareRole::NO_CONTENT_STATUS_SETTER);
 ```
 

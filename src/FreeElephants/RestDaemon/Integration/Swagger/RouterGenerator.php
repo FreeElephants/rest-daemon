@@ -31,7 +31,7 @@ class RouterGenerator
                 $operation = $this->getOperationByMethodName($path, $methodName);
                 if (!$operation instanceof UndefinedOperation) {
                     $context = $operation->_context;
-                    $fullHandlerClassName = sprintf('%s\\%s::class', $context->namespace, $context->class);
+                    $fullHandlerClassName = sprintf('%s\\%s', $context->namespace, $context->class);
                     $handlers[$methodName] = $fullHandlerClassName;
                 }
             }

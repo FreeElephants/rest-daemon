@@ -1,7 +1,7 @@
 {
   "name": "free-elephants/rest-daemon",
   "description": "PHP http socket REST server",
-  "bin": ["bin/rest-deamon.php"],
+  "bin": ["bin/rest-deamon"],
   "require": {
     "amphp/aerys": "^0.7.1",
     "cboden/ratchet": "0.4",

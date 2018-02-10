@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+
+use FreeElephants\RestDaemon\Console\Command\Generator\Swagger;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+$autoloads = [
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php',
+];
+foreach ($autoloads as $autoload) {
+    if (file_exists($autoload)) {
+        require_once $autoload;
+        $autoloadDetected = true;
+    }
+}
+
+if (empty($autoloadDetected)) {
+    throw new RuntimeException('Can not detect autoload. ');
+}
+
+$app = new Application();
+$command = new Swagger();
+$app->add($command);
+$input = new ArgvInput();
+$output = new ConsoleOutput();
+try {
+    $app->run($input, $output);
+} catch (Throwable $e) {
+    $message = sprintf('<error>%s</error>', $e->getMessage());
+    $output->writeln($message);
+    exit(1);
+}

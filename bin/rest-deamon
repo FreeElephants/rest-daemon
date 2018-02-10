@@ -29,7 +29,7 @@ $output = new ConsoleOutput();
 try {
     $app->run($input, $output);
 } catch (Throwable $e) {
-    $message = sprintf('<red>%s</red>', $message);
+    $message = sprintf('<red>%s</red>', $e->getMessage());
     $output->writeln($message);
     exit(1);
 }

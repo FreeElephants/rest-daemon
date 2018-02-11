@@ -9,7 +9,7 @@ Items with *BC!* note about backwards compatibility breaks!
 ## [Unreleased]
 
 ### Added
-- PSR-3 logging support. 
+- PSR-3 logging support and RequestLogger middleware. 
 
 ## [0.12.0] - 2018-02-11
 ### Added

@@ -8,6 +8,7 @@ use FreeElephants\RestDaemon\Middleware\CORSHeaderSetter;
 use FreeElephants\RestDaemon\Middleware\Json\ErrorHandler;
 use FreeElephants\RestDaemon\Middleware\MiddlewareRole;
 use FreeElephants\RestDaemon\Middleware\OptionsHandler;
+use FreeElephants\RestDaemon\Middleware\RequestLogger;
 use FreeElephants\RestDaemon\Middleware\SuitableBodyParser;
 use FreeElephants\RestDaemon\Middleware\XPoweredBySetter;
 use Naneau\SemVer\Parser;
@@ -31,6 +32,7 @@ class DefaultBeforeMiddlewareCollection extends AbstractMiddlewareCollection
             MiddlewareRole::ERROR_HANDLER => new ErrorHandler(),
             MiddlewareRole::ACCEPT_TYPE_CHECKER => new AcceptHeaderChecker('application/json'),
             MiddlewareRole::BODY_PARSER => new SuitableBodyParser(),
+            MiddlewareRole::REQUEST_LOGGER => new RequestLogger(),
         ];
     }
 }

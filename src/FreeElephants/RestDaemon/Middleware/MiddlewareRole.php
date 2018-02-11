@@ -5,7 +5,7 @@ namespace FreeElephants\RestDaemon\Middleware;
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class MiddlewareRole
+interface MiddlewareRole
 {
     const CONTENT_TYPE_SETTER = 'content-type-setter';
     const ERROR_HANDLER = 'error-handler';
@@ -14,4 +14,5 @@ class MiddlewareRole
     const NO_CONTENT_STATUS_SETTER = 'no-content-status-setter';
     const CORS_HEADER_SETTER = 'CORS-header-setter';
     const X_POWERED_HEADER_SETTER = 'x-powered-header-setter';
+    const REQUEST_LOGGER = 'request-logger';
 }

@@ -39,6 +39,4 @@ $server->run();
 ```
 ## CLI Tool
 
-Use `vendor/bin/rest-daemon generate:routes:swagger` for generator routing configuration from annotations in your sources. 
-
-
+Use `vendor/bin/rest-daemon generate:routes:swagger` to generate routing configuration from annotations in your sources. 

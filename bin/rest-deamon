@@ -18,7 +18,7 @@ foreach ($autoloads as $autoload) {
 }
 
 if (empty($autoloadDetected)) {
-    throw new RuntimeException('Can not detect autoload. ');
+    throw new RuntimeException('Can not detect autoload.');
 }
 
 $app = new Application();

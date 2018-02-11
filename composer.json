@@ -1,7 +1,7 @@
 {
   "name": "free-elephants/rest-daemon",
   "description": "PHP http socket REST server",
-  "bin": ["bin/rest-deamon"],
+  "bin": ["bin/rest-daemon"],
   "require": {
     "amphp/aerys": "^0.7.1",
     "cboden/ratchet": "0.4",
@@ -30,7 +30,7 @@
   "autoload-dev": {
     "psr-4": {
       "FreeElephants\\": "tests/unit/FreeElephants/",
-      "RestDeamon\\Example\\": "example/src/"
+      "RestDaemon\\Example\\": "example/src/"
     }
   },
   "license": "BSD-2-Clause",

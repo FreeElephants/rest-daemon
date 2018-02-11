@@ -1,6 +1,6 @@
 <?php
 
-namespace RestDeamon\Example\Endpoint\Greeting;
+namespace RestDaemon\Example\Endpoint\Greeting;
 
 use FreeElephants\RestDaemon\Endpoint\Handler\AbstractEndpointMethodHandler;
 use Psr\Http\Message\ResponseInterface;

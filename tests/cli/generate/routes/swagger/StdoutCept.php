@@ -1,7 +1,7 @@
 <?php 
 $I = new CliTester($scenario);
 
-$I->runShellCommand('bin/rest-deamon  generate:routes:swagger example');
+$I->runShellCommand('bin/rest-daemon  generate:routes:swagger example');
 
 $I->seeInShellOutput("<?php");
 $I->seeInShellOutput("return [");

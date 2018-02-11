@@ -6,6 +6,6 @@ if (file_exists('tests/_output/routes.php')) {
     unlink('tests/_output/routes.php');
 }
 
-$I->runShellCommand('bin/rest-deamon  generate:routes:swagger example tests/_output/routes.php');
+$I->runShellCommand('bin/rest-daemon  generate:routes:swagger example tests/_output/routes.php');
 
 \PHPUnit\Framework\Assert::assertFileEquals('tests/_fixtures/routes.php', $outputFile);

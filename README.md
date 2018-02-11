@@ -8,14 +8,14 @@
 
 [![Releases](https://img.shields.io/packagist/v/free-elephants/rest-daemon.svg)](https://github.com/FreeElephants/rest-daemon/releases)
 
-**Nota Bene:** 
-This project use semver and [changelog](CHANGELOG.md). 
-But it's not stable major version. 
-Any minor update (f.e.: 0.5.* -> 0.6.*) can break backward compatibility!    
+**Nota Bene:**
+This project uses semver and [changelog](CHANGELOG.md).
+But it's not a stable major version.
+Any minor update (f.e. 0.5.* -> 0.6.*) can break backward compatibility!
 
-Simple PHP7 framework for fast building REST services based on middleware, PSR-7 and react.      
+Simple PHP7 framework for fast building REST services based on middleware, PSR-7 and react.
 
-## Features: 
+## Features:
 
 - Middleware oriented request/response handling
 - Priority PSR's support: PSR-2, -3, -4, -7, -11, -15 and other. 

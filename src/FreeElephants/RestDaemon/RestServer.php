@@ -12,12 +12,18 @@ use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareColl
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use FreeElephants\RestDaemon\Module\ApiModuleInterface;
 use FreeElephants\RestDaemon\Module\BaseApiModule;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class RestServer
+class RestServer implements LoggerAwareInterface
 {
+
+    use LoggerAwareTrait;
+
     const DEFAULT_HTTP_DRIVER = self::RATCHET_HTTP_DRIVER;
     const RATCHET_HTTP_DRIVER = RatchetDriver::class;
     const AERYS_HTTP_DRIVER = AerysDriver::class;
@@ -52,6 +58,7 @@ class RestServer
         string $httpDriverClass = self::DEFAULT_HTTP_DRIVER,
         ApiModuleInterface $baseModule = null
     ) {
+        $this->logger = new NullLogger();
         $this->config = new HttpServerConfig($httpHost, $port, $address, $allowedOrigins);
         $this->httpDriver = $this->buildHttpDriver($httpDriverClass);
         $this->setBaseModule($baseModule ?: new BaseApiModule('/', 'Default Api Module'));
@@ -75,6 +82,7 @@ class RestServer
      */
     public function run(callable $rawDriverBeforeRunHook = null)
     {
+        $this->logger->debug('Rest Daemon Server is running');
         $endpoints = [];
         foreach ($this->modules as $module) {
             $endpoints = array_merge($module->getEndpoints(), $endpoints);

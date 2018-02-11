@@ -8,6 +8,9 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ## [Unreleased]
 
+### Added
+- PSR-3 logging support. 
+
 ## [0.12.0] - 2018-02-11
 ### Added
 - New cli routes generation options. 

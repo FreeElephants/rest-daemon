@@ -1,9 +1,9 @@
 # Index RestDaemon of Documentation
 
 ## Table of Contents:
-- [Concepts][CONCEPTS.md]
+- [Concepts](CONCEPTS.md)
 - [Swagger based routers generation](SWAGGER.md)
-- WIP: [Use with Docker](DOCKER.md)
+- WIP: [Use with Docker](DOCKER.md) 
 
 ## Road Map for v1
 
@@ -13,4 +13,4 @@
 - Docker distribution
 - Scalable configuration example with nginx proxying
 - Examples with non-blocking working (https://github.com/elazar/asynchronous-php)
-- Benchmarking with blocking and non-blocking code examples 
+- Benchmarking with blocking and non-blocking code examples

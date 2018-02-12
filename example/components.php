@@ -2,10 +2,10 @@
 
 return [
     'register' => [
-        RestDeamon\Example\Endpoint\Index\GetHandler::class,
-        RestDeamon\Example\Endpoint\Greeting\GetHandler::class,
-        RestDeamon\Example\Endpoint\Greeting\PostHandler::class,
-        RestDeamon\Example\Endpoint\Greeting\GetAttributeHandler::class,
-        RestDeamon\Example\Endpoint\Reusable\HelloHandler::class,
+        RestDaemon\Example\Endpoint\Index\GetHandler::class,
+        RestDaemon\Example\Endpoint\Greeting\GetHandler::class,
+        RestDaemon\Example\Endpoint\Greeting\PostHandler::class,
+        RestDaemon\Example\Endpoint\Greeting\GetAttributeHandler::class,
+        RestDaemon\Example\Endpoint\Reusable\HelloHandler::class,
     ],
 ];

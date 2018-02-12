@@ -20,11 +20,11 @@ use FreeElephants\RestDaemon\Module\BaseApiModule;
 use FreeElephants\RestDaemon\RestServer;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use RestDeamon\Example\Endpoint\Greeting\GetAttributeHandler;
-use RestDeamon\Example\Endpoint\Greeting\GetHandler as GreetingGetHandler;
-use RestDeamon\Example\Endpoint\Greeting\PostHandler;
-use RestDeamon\Example\Endpoint\Index\GetHandler;
-use RestDeamon\Example\Endpoint\Reusable\HelloHandler;
+use RestDaemon\Example\Endpoint\Greeting\GetAttributeHandler;
+use RestDaemon\Example\Endpoint\Greeting\GetHandler as GreetingGetHandler;
+use RestDaemon\Example\Endpoint\Greeting\PostHandler;
+use RestDaemon\Example\Endpoint\Index\GetHandler;
+use RestDaemon\Example\Endpoint\Reusable\HelloHandler;
 
 $httpDriverClass = getenv('DRIVER_CLASS') ?: RestServer::DEFAULT_HTTP_DRIVER;
 

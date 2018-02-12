@@ -2,10 +2,12 @@
 
 namespace FreeElephants\RestDaemon\Endpoint;
 
+use Psr\Log\LoggerAwareInterface;
+
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-interface EndpointFactoryInterface
+interface EndpointFactoryInterface extends LoggerAwareInterface
 {
 
     public function buildEndpoint(string $endpointPath, array $endpointConfig): EndpointInterface;

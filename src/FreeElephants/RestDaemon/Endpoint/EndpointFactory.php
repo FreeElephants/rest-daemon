@@ -5,12 +5,16 @@ namespace FreeElephants\RestDaemon\Endpoint;
 use FreeElephants\RestDaemon\Endpoint\Exception\InvalidCongurationValueException;
 use FreeElephants\RestDaemon\Endpoint\Handler\OptionsMethodHandler;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
 class EndpointFactory implements EndpointFactoryInterface
 {
+
+    use LoggerAwareTrait;
 
     /**
      * @var ContainerInterface
@@ -22,11 +26,14 @@ class EndpointFactory implements EndpointFactoryInterface
 
     public function __construct(ContainerInterface $di)
     {
+        $this->logger = new NullLogger();
         $this->di = $di;
     }
 
     public function buildEndpoint(string $endpointPath, array $endpointConfig): EndpointInterface
     {
+        $this->logger->debug(sprintf('Build endpoint %s', $endpointPath), $endpointConfig);
+
         $name = $endpointConfig['name'] ?? null;
         $allowHeaders = [];
         if ($this->allowGlobalRequestAllowHeaderReflecting) {

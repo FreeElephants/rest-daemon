@@ -12,12 +12,17 @@ use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Module\ModuleFactory;
 use FreeElephants\RestDaemon\Module\ModuleFactoryInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\NullLogger;
 
 /**
  * @author samizdam <samizdam@inbox.ru>
  */
-class RestServerBuilder
+class RestServerBuilder implements LoggerAwareInterface
 {
+
+    use LoggerAwareTrait;
 
     /**
      * @var ModuleFactoryInterface
@@ -36,7 +41,6 @@ class RestServerBuilder
      */
     private $handlerFactory;
 
-
     /**
      * @throws MissingDependencyException
      */
@@ -47,6 +51,7 @@ class RestServerBuilder
         ModuleFactoryInterface $moduleFactory = null,
         RestServer $restServer = null
     ) {
+        $this->logger = new NullLogger();
         $this->assertDependenciesAdequacy($endpointFactory, $container);
         $this->setEndpointFactory($endpointFactory ?: new EndpointFactory($container));
         $this->setHandlerFactory($handlerFactory ?: new DefaultHandlerFactory());
@@ -76,9 +81,15 @@ class RestServerBuilder
 
     public function buildServer(array $routerConfig, HttpServerConfig $httpServerConfig = null): RestServer
     {
+        $this->logger->debug('Build server', $routerConfig);
+        $this->restServer->setLogger($this->logger);
+        $this->handlerFactory->setLogger($this->logger);
+        $this->endpointFactory->setLogger($this->logger);
+
         if ($httpServerConfig) {
             $this->restServer->setConfig($httpServerConfig);
         }
+
         foreach ($this->getModulesConfig($routerConfig) as $basePath => $moduleConfig) {
             $module = $this->moduleFactory->buildModule($basePath, $moduleConfig);
             foreach ($this->getEndpointsConfig($moduleConfig) as $endpointBasePath => $endpointConfig) {

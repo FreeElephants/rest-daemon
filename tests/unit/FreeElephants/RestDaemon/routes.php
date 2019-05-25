@@ -6,6 +6,7 @@ use RestDaemon\Example\Endpoint\Greeting\GetHandler as GreetingGetHandler;
 use RestDaemon\Example\Endpoint\Greeting\PostHandler;
 use RestDaemon\Example\Endpoint\Index\GetHandler;
 use RestDaemon\Example\Endpoint\Reusable\HelloHandler;
+use RestDaemon\Example\Middleware\EchoFooMiddleware;
 
 return [
     // Endpoints in base (default or root) module:
@@ -61,6 +62,9 @@ return [
                     'name' => 'Hello World',
                     'handlers' => [
                         'GET' => HelloHandler::class
+                    ],
+                    'middleware' => [
+                        EchoFooMiddleware::class,
                     ],
                 ],
             ],

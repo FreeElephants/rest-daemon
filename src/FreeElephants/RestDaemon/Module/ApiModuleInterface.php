@@ -17,6 +17,8 @@ interface ApiModuleInterface
     public function getName(): string;
 
     /**
+     * Indexed by path
+     *
      * @return array|EndpointInterface[]
      */
     public function getEndpoints(): array;

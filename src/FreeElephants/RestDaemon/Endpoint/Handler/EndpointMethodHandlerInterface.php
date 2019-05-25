@@ -24,6 +24,8 @@ interface EndpointMethodHandlerInterface extends MiddlewareInterface
 
     public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $endpointMiddlewareCollection);
 
+    public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface;
+
     public function getBaseServerUri(ServerRequestInterface $request): UriInterface;
 
     public function getEndpoint(): EndpointInterface;

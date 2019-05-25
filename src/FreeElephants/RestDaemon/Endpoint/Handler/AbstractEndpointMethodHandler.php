@@ -3,6 +3,7 @@
 namespace FreeElephants\RestDaemon\Endpoint\Handler;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
+use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,6 +27,10 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
      * @var EndpointInterface
      */
     private $endpoint;
+    /**
+     * @var EndpointMiddlewareCollectionInterface
+     */
+    private $middlewareCollection;
 
     final public function handle(ServerRequestInterface $request): ResponseInterface
     {
@@ -50,6 +55,7 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
 
     public function setMiddlewareCollection(EndpointMiddlewareCollectionInterface $endpointMiddlewareCollection)
     {
+        $this->middlewareCollection = $endpointMiddlewareCollection;
         $relayBuilder = new RelayBuilder();
         $this->relay = $relayBuilder->newInstance($endpointMiddlewareCollection->wrapInto([$this, '__invoke']));
     }
@@ -64,6 +70,14 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
         $uriString = $uri->getScheme() . '://' . $uri->getHost() . $portPart . '/';
 
         return new Uri($uriString);
+    }
+
+    public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
+    {
+        if(empty($this->middlewareCollection)) {
+            $this->middlewareCollection = new EmptyEndpointMiddlewareCollection();
+        }
+        return $this->middlewareCollection;
     }
 
 }

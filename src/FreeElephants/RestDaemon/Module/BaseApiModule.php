@@ -33,7 +33,7 @@ class BaseApiModule implements ApiModuleInterface
     public function addEndpoint(EndpointInterface $endpoint)
     {
         $endpoint->setModule($this);
-        $this->endpoints[] = $endpoint;
+        $this->endpoints[$endpoint->getPath()] = $endpoint;
     }
 
     public function getPath(): string

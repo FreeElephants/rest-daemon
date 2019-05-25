@@ -11,6 +11,9 @@ Items with *BC!* note about backwards compatibility breaks!
 ### Added
 - PSR-3 logging support and RequestLogger middleware.
 
+### Changed
+- Endpoints in Module indexed by its paths. 
+
 ### Fixed
 - *BC!* deamon -> daemon mass typo in namespace and binary names. 
 

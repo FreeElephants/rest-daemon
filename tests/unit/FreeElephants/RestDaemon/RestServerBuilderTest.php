@@ -6,6 +6,7 @@ use FreeElephants\AbstractTestCase;
 use FreeElephants\RestDaemon\HttpDriver\HttpServerConfig;
 use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use Psr\Container\ContainerInterface;
+use RestDaemon\Example\Middleware\EchoFooMiddleware;
 
 class RestServerBuilderTest extends AbstractTestCase
 {
@@ -36,12 +37,15 @@ class RestServerBuilderTest extends AbstractTestCase
 
     public function testBuildWithFullConfig()
     {
-        $builder = new RestServerBuilder($this->createMock(ContainerInterface::class));
+        $diContainer = $this->createMock(ContainerInterface::class);
+        $diContainer->method('get')->with(EchoFooMiddleware::class)->willReturn($this->createMock(EchoFooMiddleware::class));
+        $builder = new RestServerBuilder($diContainer);
 
         $server = $builder->buildServer(require_once __DIR__ . '/routes.php');
         $this->assertCount(3, $server->getModules());
         $this->assertEquals(new HttpServerConfig(), $server->getConfig());
         $this->assertInstanceOf(RestServer::DEFAULT_HTTP_DRIVER, $server->getHttpDriver());
         $this->assertEquals(new DefaultEndpointMiddlewareCollection($server), $server->getMiddlewareCollection());
+        var_dump($server->getModules()['/api/v1']->getEndpoints()['/api/v1/hello']->getMethodHandlers()['GET']->getMiddlewareCollection());
     }
 }

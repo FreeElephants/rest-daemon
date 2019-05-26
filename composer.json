@@ -2,6 +2,11 @@
   "name": "free-elephants/rest-daemon",
   "description": "PHP http socket REST server",
   "bin": ["bin/rest-daemon"],
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
+  },
   "require": {
     "amphp/aerys": "^0.7.1",
     "cboden/ratchet": "0.4",

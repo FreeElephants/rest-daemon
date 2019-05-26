@@ -10,7 +10,7 @@
   "require": {
     "amphp/aerys": "^0.7.1",
     "cboden/ratchet": "0.4",
-    "free-elephants/di": "^2.0",
+    "free-elephants/di": "*",
     "guzzlehttp/psr7": "^1.0",
     "monolog/monolog": "^1.21",
     "oscarotero/psr7-middlewares": "^3.18",

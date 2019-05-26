@@ -4,11 +4,6 @@ language: php
 
 matrix:
   include:
-    - php: 7.0
-      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
-    - php: 7.0
-      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
-
     - php: 7.1
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.1
@@ -19,6 +14,16 @@ matrix:
     - php: 7.2
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
     - php: 7.2
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
+    - php: 7.3
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+    - php: 7.3
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
+
+    - php: 7.4snapshot
+      env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Ratchet\RatchetDriver'
+    - php: 7.4snapshot
       env: DRIVER_CLASS='\FreeElephants\RestDaemon\HttpDriver\Aerys\AerysDriver'
 
     - php: nightly

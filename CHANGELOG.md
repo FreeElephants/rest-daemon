@@ -8,6 +8,10 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ## [Unreleased]
 
+## [0.13.0] 2019-05-26
+### Removed
+- PHP 7.0 support
+
 ### Added
 - PSR-3 logging support and RequestLogger middleware.
 
@@ -16,6 +20,7 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ### Fixed
 - *BC!* deamon -> daemon mass typo in namespace and binary names. 
+- Error on cli usage (added missing symfony/console dependency)
 
 ## [0.12.0] - 2018-02-11
 ### Added
@@ -163,7 +168,8 @@ Items with *BC!* note about backwards compatibility breaks!
 - Adopt to use with one of two http-daemon drivers: Ratchet (ReactPHP) and Aerys (amphp). 
 - All features. 
 
-[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.12.0...HEAD
+[Unreleased]: https://github.com/FreeElephants/rest-daemon/compare/0.13.0...HEAD
+[0.13.0]: https://github.com/FreeElephants/rest-daemon/compare/0.12.0...0.13.0
 [0.12.0]: https://github.com/FreeElephants/rest-daemon/compare/0.11.0...0.12.0
 [0.11.0]: https://github.com/FreeElephants/rest-daemon/compare/0.10.0...0.11.0
 [0.10.0]: https://github.com/FreeElephants/rest-daemon/compare/0.9.0...0.10.0

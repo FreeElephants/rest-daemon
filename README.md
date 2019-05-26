@@ -15,7 +15,7 @@ Any minor update (f.e. 0.5.* -> 0.6.*) can break backward compatibility!
 
 Simple PHP7 framework for fast building REST services based on middleware, PSR-7 and react.
 
-Runned instance can be found by [link](rest-daemon-example.samizdam.net:8080), also see [example repo](https://github.com/FreeElephants/rest-daemon-example).
+Runned instance can be found by [link](http://rest-daemon-example.samizdam.net:8080/uptime), also see [example repo](https://github.com/FreeElephants/rest-daemon-example).
 
 ## Features:
 

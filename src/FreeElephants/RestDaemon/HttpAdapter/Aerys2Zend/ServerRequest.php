@@ -7,7 +7,6 @@ use Psr\Http\Message\UriInterface;
 use Zend\Diactoros\ServerRequest as ZendServerRequest;
 use Zend\Diactoros\Uri;
 
-
 /**
  * @author samizdam <samizdam@inbox.ru>
  */

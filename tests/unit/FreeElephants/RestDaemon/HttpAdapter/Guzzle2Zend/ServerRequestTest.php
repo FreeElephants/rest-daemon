@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ServerRequestTest extends AbstractTestCase
 {
     private const HEADER_ACCEPT = 'Accept';
+    private const PROTOCOL_VERSION = '1.1';
 
     /** @test */
     public function construct_GuzzleRequest_ZendServerRequestCreated(): void
@@ -23,14 +24,13 @@ class ServerRequestTest extends AbstractTestCase
         $guzzleRequest->method('getHeaders')->willReturn([self::HEADER_ACCEPT => 'application/json']);
         $guzzleRequest->method('getUri')->willReturn($uri);
         $guzzleRequest->method('getBody')->willReturn('php://temp');
-        $guzzleRequest->method('getProtocolVersion')->willReturn('1.1');
+        $guzzleRequest->method('getProtocolVersion')->willReturn(self::PROTOCOL_VERSION);
 
         $zendRequest = new ServerRequest($guzzleRequest);
 
-        $this->assertEquals('', $zendRequest->getUri());
         $this->assertEquals(Request::METHOD_GET, $zendRequest->getMethod());
         $this->assertEquals('', $zendRequest->getBody()->getContents());
         $this->assertTrue($zendRequest->hasHeader(self::HEADER_ACCEPT));
-        $this->assertEquals('1.1', $zendRequest->getProtocolVersion());
+        $this->assertEquals(self::PROTOCOL_VERSION, $zendRequest->getProtocolVersion());
     }
 }

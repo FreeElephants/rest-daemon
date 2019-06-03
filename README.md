@@ -1,12 +1,6 @@
 # Rest-Daemon
 
-[![Build Status](https://travis-ci.org/FreeElephants/rest-daemon.svg?branch=master)](https://travis-ci.org/FreeElephants/rest-daemon)
-
-[![codecov](https://codecov.io/gh/FreeElephants/rest-daemon/branch/master/graph/badge.svg)](https://codecov.io/gh/FreeElephants/rest-daemon)
-
-[![Installs](https://img.shields.io/packagist/dt/free-elephants/rest-daemon.svg)](https://packagist.org/packages/free-elephants/rest-daemon)
-
-[![Releases](https://img.shields.io/packagist/v/free-elephants/rest-daemon.svg)](https://github.com/FreeElephants/rest-daemon/releases)
+[![Build Status](https://travis-ci.org/FreeElephants/rest-daemon.svg?branch=master)](https://travis-ci.org/FreeElephants/rest-daemon) [![codecov](https://codecov.io/gh/FreeElephants/rest-daemon/branch/master/graph/badge.svg)](https://codecov.io/gh/FreeElephants/rest-daemon) [![Installs](https://img.shields.io/packagist/dt/free-elephants/rest-daemon.svg)](https://packagist.org/packages/free-elephants/rest-daemon) [![Releases](https://img.shields.io/packagist/v/free-elephants/rest-daemon.svg)](https://github.com/FreeElephants/rest-daemon/releases)
 
 **Nota Bene:**
 This project uses semver and [changelog](CHANGELOG.md).

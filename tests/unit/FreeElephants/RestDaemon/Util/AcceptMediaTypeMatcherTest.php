@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace FreeElephants\RestDaemon\Util;
 
@@ -10,7 +10,7 @@ class AcceptMediaTypeMatcherTest extends AbstractTestCase
      * @dataProvider provideValidMediaTypes
      * @test
      */
-    public function match_sameMediaTypes_returnTrue(string $firstType, string $secondType): void
+    public function match_AcceptHeaderAndValidMediaTypes_returnTrue(string $firstType, string $secondType): void
     {
         $matched = AcceptMediaTypeMatcher::match($firstType, $secondType);
 
@@ -21,7 +21,7 @@ class AcceptMediaTypeMatcherTest extends AbstractTestCase
      * @dataProvider provideInvalidMediaTypes
      * @test
      */
-    public function match_differentMediaTypes_returnFalse(string $firstType, string $secondType): void
+    public function match_AcceptHeaderAndInvalidMediaTypes_returnFalse(string $firstType, string $secondType): void
     {
         $matched = AcceptMediaTypeMatcher::match($firstType, $secondType);
 

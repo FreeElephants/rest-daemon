@@ -31,14 +31,17 @@ class RestServerBuilderTest extends AbstractTestCase
             ],
         ]);
 
-        $this->assertCount(3, $server->getModules(),
+        $this->assertCount(3,
+            $server->getModules(),
             'Application should contains 1 base (default) and 2 added modules. ');
     }
 
     public function testBuildWithFullConfig()
     {
         $diContainer = $this->createMock(ContainerInterface::class);
-        $diContainer->method('get')->with(EchoFooMiddleware::class)->willReturn($this->createMock(EchoFooMiddleware::class));
+        $diContainer->method('get')
+                    ->with(EchoFooMiddleware::class)
+                    ->willReturn($this->createMock(EchoFooMiddleware::class));
         $builder = new RestServerBuilder($diContainer);
 
         $server = $builder->buildServer(require_once __DIR__ . '/routes.php');
@@ -46,6 +49,5 @@ class RestServerBuilderTest extends AbstractTestCase
         $this->assertEquals(new HttpServerConfig(), $server->getConfig());
         $this->assertInstanceOf(RestServer::DEFAULT_HTTP_DRIVER, $server->getHttpDriver());
         $this->assertEquals(new DefaultEndpointMiddlewareCollection($server), $server->getMiddlewareCollection());
-        var_dump($server->getModules()['/api/v1']->getEndpoints()['/api/v1/hello']->getMethodHandlers()['GET']->getMiddlewareCollection());
     }
 }

@@ -12,7 +12,6 @@ use FreeElephants\RestDaemon\HttpAdapter\Aerys2Zend\ServerRequest;
  */
 class HandlerWrapper
 {
-
     /**
      * @var EndpointMethodHandlerInterface
      */

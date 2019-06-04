@@ -47,6 +47,6 @@
     }
   ],
   "suggest": {
-    "free-elephants/di": "Simplest PHP Dependency Injector. "
+    "free-elephants/di": "Simplest PHP Dependency Injector."
   }
 }

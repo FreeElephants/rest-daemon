@@ -3,7 +3,6 @@
 namespace FreeElephants\RestDaemon\Endpoint\Handler;
 
 use FreeElephants\RestDaemon\Endpoint\EndpointInterface;
-use FreeElephants\RestDaemon\Middleware\Collection\DefaultEndpointMiddlewareCollection;
 use FreeElephants\RestDaemon\Middleware\Collection\EndpointMiddlewareCollectionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -74,7 +73,7 @@ abstract class AbstractEndpointMethodHandler implements EndpointMethodHandlerInt
 
     public function getMiddlewareCollection(): EndpointMiddlewareCollectionInterface
     {
-        if(empty($this->middlewareCollection)) {
+        if (empty($this->middlewareCollection)) {
             $this->middlewareCollection = new EmptyEndpointMiddlewareCollection();
         }
         return $this->middlewareCollection;

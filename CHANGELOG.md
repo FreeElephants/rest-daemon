@@ -8,6 +8,9 @@ Items with *BC!* note about backwards compatibility breaks!
 
 ## [Unreleased]
 
+### Changed
+- PSR-15 support: EndpointMethodHandlerInterface now extend PSR provided RequestHandlerInterface. 
+
 ## [0.13.0] 2019-05-26
 ### Removed
 - PHP 7.0 support

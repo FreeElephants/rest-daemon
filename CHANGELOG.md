@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 Items with *BC!* note about backwards compatibility breaks!     
 
 ## [Unreleased]
+### Changed
+- require symfony/console new version.
 
 ## [0.13.0] 2019-05-26
 ### Removed
